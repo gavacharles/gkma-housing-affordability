@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "Priced out of the formal market: A housing affordability index and spatial machine-learning analysis for Greater Kampala, Uganda"
+type: software
+authors:
+  - family-names: Gava
+    given-names: Charles
+    affiliation: "University of Johannesburg"
+repository-code: "https://github.com/gavacharles/gkma-housing-affordability"
+license: MIT
+version: 0.1.0
+date-released: 2026-09-24
+keywords:
+  - housing affordability index
+  - hedonic pricing
+  - geographically weighted regression
+  - spatial machine learning
+  - online property listings
+  - Kampala
+  - Uganda
