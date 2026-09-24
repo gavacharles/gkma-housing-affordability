@@ -1,0 +1,56 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:     log_rent_month_ugx   R-squared:                       0.685
+Model:                            OLS   Adj. R-squared:                  0.682
+Method:                 Least Squares   F-statistic:                -3.255e+12
+Date:                Thu, 24 Sep 2026   Prob (F-statistic):               1.00
+Time:                        04:55:55   Log-Likelihood:                -3105.1
+No. Observations:                3205   AIC:                             6270.
+Df Residuals:                    3175   BIC:                             6452.
+Df Model:                          29                                         
+Covariance Type:              cluster                                         
+=============================================================================================================
+                                                coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------------------
+Intercept                                    13.3384      0.697     19.138      0.000      11.972      14.704
+C(ptype, Treatment("house"))[T.apartment]     0.1918      0.063      3.052      0.002       0.069       0.315
+C(ptype, Treatment("house"))[T.land]         -0.2857      0.491     -0.581      0.561      -1.249       0.678
+C(ptype, Treatment("house"))[T.room]         -0.4918      0.142     -3.475      0.001      -0.769      -0.214
+C(source)[T.red]                              0.1063      0.053      2.023      0.043       0.003       0.209
+C(source)[T.upc]                              0.0003      0.095      0.004      0.997      -0.186       0.186
+C(listing_quarter)[T.NaT]                     0.1066      0.074      1.436      0.151      -0.039       0.252
+bedrooms                                      0.7327      0.063     11.562      0.000       0.608       0.857
+I(bedrooms ** 2)                             -0.0461      0.007     -7.054      0.000      -0.059      -0.033
+bathrooms                                     0.1185      0.041      2.919      0.004       0.039       0.198
+f_self_contained                             -0.0220      0.019     -1.136      0.256      -0.060       0.016
+f_boys_quarters                              -0.0937      0.079     -1.188      0.235      -0.248       0.061
+f_gated                                      -0.1617      0.051     -3.186      0.001      -0.261      -0.062
+f_security                                   -0.1638      0.030     -5.388      0.000      -0.223      -0.104
+f_parking                                     0.1711      0.041      4.218      0.000       0.092       0.251
+f_tarmac_access                              -0.0402      0.047     -0.865      0.387      -0.131       0.051
+f_pool                                        0.3219      0.068      4.739      0.000       0.189       0.455
+f_furnished                                   0.4636      0.071      6.550      0.000       0.325       0.602
+f_storeyed                                    0.1208      0.049      2.461      0.014       0.025       0.217
+f_shell_or_incomplete                         0.1890      0.091      2.087      0.037       0.012       0.366
+np.log1p(dist_cbd_km)                        -0.3957      0.163     -2.429      0.015      -0.715      -0.076
+np.log1p(dist_major_road_km)                  0.0929      0.083      1.122      0.262      -0.069       0.255
+np.log1p(dist_northern_bypass_km)             0.0003      0.071      0.004      0.997      -0.138       0.138
+np.log1p(dist_entebbe_expressway_km)         -0.1507      0.134     -1.124      0.261      -0.413       0.112
+np.log1p(dist_school_km)                     -0.0102      0.223     -0.046      0.964      -0.447       0.426
+np.log1p(dist_health_km)                     -0.0586      0.180     -0.325      0.745      -0.411       0.294
+np.log1p(dist_market_km)                      0.3712      0.157      2.361      0.018       0.063       0.679
+np.log1p(dist_taxi_stage_km)                 -0.2628      0.172     -1.529      0.126      -0.600       0.074
+np.log1p(dist_wetland_km)                     0.0034      0.079      0.043      0.966      -0.152       0.158
+np.log1p(ntl_500m)                           -0.0942      0.165     -0.569      0.569      -0.418       0.230
+wealth_index                                  0.2948      0.344      0.857      0.391      -0.379       0.969
+==============================================================================
+Omnibus:                      606.420   Durbin-Watson:                   1.726
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             5948.275
+Skew:                          -0.606   Prob(JB):                         0.00
+Kurtosis:                       9.563   Cond. No.                     6.86e+15
+==============================================================================
+
+Notes:
+[1] Standard Errors are robust to cluster correlation (cluster)
+[2] The smallest eigenvalue is 1.72e-26. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.

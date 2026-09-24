@@ -1,0 +1,6 @@
+cost_class,rate_ugx_per_m2,year,source,description
+bungalow_standard,,,,"single-storey, block walls, iron sheet or tile roof, standard finishes"
+bungalow_high,,,,"single-storey, high-spec finishes (>=2 of: pool, BQ, gated, furnished)"
+storeyed,,,,"storeyed house / duplex / maisonette / mansion"
+apartment,,,,"apartment unit (per m2 of unit floor area)"
+shell,,,,"shell / incomplete / lock-up stage"

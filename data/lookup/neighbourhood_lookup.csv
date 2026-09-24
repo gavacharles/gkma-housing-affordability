@@ -1,0 +1,130 @@
+name,aliases,district,division_or_town,lat,lon,coord_source,verified,note,level,check_status
+Kololo,Kololo Hill;Acacia Avenue;Acacia;Elizabeth Avenue;Elizabethavenue,Kampala,Central,0.33057,32.59247,ubos_parish_2016,0,"placed on UBOS parish Kololo Iii, Kololo Iv, Kololo Ii, Kololo I (moved 0.0 km)",neighbourhood,ubos_official
+Nakasero,Nakasero Hill,Kampala,Central,0.31946,32.57872,ubos_parish_2016,0,"placed on UBOS parish Nakasero Iv, Nakasero Iii, Nakasero Ii, Nakasero I (moved 0.0 km)",neighbourhood,ubos_official
+Old Kampala,,Kampala,Central,0.31756,32.56862,ubos_parish_2016,0,placed on UBOS parish Old Kampala (moved 0.0 km),neighbourhood,ubos_official
+Kamwokya,Kamwokya II,Kampala,Central,0.34341,32.59054,ubos_parish_2016,0,"placed on UBOS parish Kamwokya Ii, Kamwokya I (moved 0.0 km)",neighbourhood,ubos_official
+Kisenyi,,Kampala,Central,0.30732,32.57335,ubos_parish_2016,0,"placed on UBOS parish Kisenyi Ii, Kisenyi  Iii, Kisenyi I (moved 0.0 km)",neighbourhood,ubos_official
+Kampala CBD,Kampala Central;City Centre;Town;CBD,Kampala,Central,0.3136,32.5825,draft_approx,0,not in OSM - please verify,neighbourhood,needs_review
+Mengo,,Kampala,Rubaga,0.30906,32.56648,ubos_parish_2016,0,placed on UBOS parish Mengo (moved 0.0 km),neighbourhood,ubos_official
+Bugolobi,Bugoloobi,Kampala,Nakawa,0.30957,32.62182,ubos_parish_2016,0,placed on UBOS parish Bugolobi (moved 0.0 km),neighbourhood,ubos_official
+Naguru,Naguru Hill;Naguri,Kampala,Nakawa,0.33596,32.60636,ubos_parish_2016,0,"placed on UBOS parish Naguru I, Naguru Ii (moved 0.0 km)",neighbourhood,ubos_official
+Ntinda,Ntinda Kigoowa,Kampala,Nakawa,0.34558,32.61817,ubos_parish_2016,0,placed on UBOS parish Ntinda (moved 0.0 km),neighbourhood,ubos_official
+Kiwatule,Kiwaatule,Kampala,Nakawa,0.3679,32.62721,ubos_parish_2016,0,placed on UBOS parish Kiwatule (moved 0.0 km),neighbourhood,ubos_official
+Kisaasi,Kisasi,Kampala,Nakawa,0.365,32.598,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kyanja,,Kampala,Nakawa,0.38626,32.60105,ubos_parish_2016,0,placed on UBOS parish Kyanja (moved 0.0 km),neighbourhood,ubos_official
+Bukoto,,Kampala,Nakawa,0.35891,32.60473,ubos_parish_2016,0,"placed on UBOS parish Bukoto Ii, Bukoto I (moved 0.0 km)",neighbourhood,ubos_official
+Nakawa,,Kampala,Nakawa,0.32751,32.61227,ubos_parish_2016,0,placed on UBOS parish Nakawa (moved 0.0 km),neighbourhood,ubos_official
+Mbuya,,Kampala,Nakawa,0.32733,32.6295,ubos_parish_2016,0,"placed on UBOS parish Mbuya I, Mbuya Ii (moved 0.0 km)",neighbourhood,ubos_official
+Luzira,,Kampala,Nakawa,0.2864,32.65331,ubos_parish_2016,0,placed on UBOS parish Luzira (moved 0.0 km),neighbourhood,ubos_official
+Kyambogo,,Kampala,Nakawa,0.34234,32.62978,ubos_parish_2016,0,placed on UBOS parish Kyambogo (moved 0.0 km),neighbourhood,ubos_official
+Banda,,Kampala,Nakawa,0.34657,32.63752,ubos_parish_2016,0,placed on UBOS parish Banda (moved 0.0 km),neighbourhood,ubos_official
+Butabika,,Kampala,Nakawa,0.3142,32.66008,ubos_parish_2016,0,placed on UBOS parish Butabika (moved 0.0 km),neighbourhood,ubos_official
+Kulambiro,,Kampala,Nakawa,0.378,32.615,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kigoowa,Kigowa,Kampala,Nakawa,0.365,32.62,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Mutungo,,Kampala,Nakawa,0.31757,32.64194,ubos_parish_2016,0,placed on UBOS parish Mutungo (moved 0.0 km),neighbourhood,ubos_official
+Kitintale,,Kampala,Nakawa,0.31,32.62,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Muyenga,Tank Hill;Muyenga Tank Hill,Kampala,Makindye,0.296,32.61,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kansanga,,Kampala,Makindye,0.288,32.608,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kabalagala,,Kampala,Makindye,0.30145,32.59927,ubos_parish_2016,0,placed on UBOS parish Kabalagala (moved 0.0 km),neighbourhood,ubos_official
+Ggaba,Gaba,Kampala,Makindye,0.26007,32.6403,ubos_parish_2016,0,placed on UBOS parish Ggaba (moved 0.0 km),neighbourhood,ubos_official
+Munyonyo,Muyonyoyo,Kampala,Makindye,0.25,32.62,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Makindye,Makyinde,Kampala,Makindye,0.28419,32.58293,ubos_parish_2016,0,"placed on UBOS parish Makindye I, Makindye Ii (moved 0.0 km)",neighbourhood,ubos_official
+Nsambya,,Kampala,Makindye,0.3006,32.58966,ubos_parish_2016,0,placed on UBOS parish Nsambya Central (moved 0.0 km),neighbourhood,ubos_official
+Kibuye,,Kampala,Makindye,0.29199,32.57498,ubos_parish_2016,0,"placed on UBOS parish Kibuye Ii, Kibuye I (moved 0.0 km)",neighbourhood,ubos_official
+Katwe,,Kampala,Makindye,0.29945,32.57755,ubos_parish_2016,0,"placed on UBOS parish Katwe Ii, Katwe I (moved 0.0 km)",neighbourhood,ubos_official
+Lukuli,,Kampala,Makindye,0.27545,32.60411,ubos_parish_2016,0,placed on UBOS parish Lukuli (moved 0.0 km),neighbourhood,ubos_official
+Kibuli,,Kampala,Makindye,0.30902,32.59572,ubos_parish_2016,0,placed on UBOS parish Kibuli (moved 0.0 km),neighbourhood,ubos_official
+Buziga,,Kampala,Makindye,0.24569,32.62618,ubos_parish_2016,0,placed on UBOS parish Buziga (moved 0.0 km),neighbourhood,ubos_official
+Salaama,Salama,Kampala,Makindye,0.24334,32.61562,ubos_parish_2016,0,placed on UBOS parish Salaama (moved 0.0 km),neighbourhood,ubos_official
+Najjanankumbi,Najjanakumbi;Najja,Kampala,Rubaga,0.278,32.568,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kisugu,,Kampala,Makindye,0.30618,32.60674,ubos_parish_2016,0,placed on UBOS parish Kisugu (moved 0.0 km),neighbourhood,ubos_official
+Bunga,,Kampala,Makindye,0.275,32.62,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Konge,,Kampala,Makindye,0.27,32.605,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Rubaga,Lubaga,Kampala,Rubaga,0.30036,32.55081,ubos_parish_2016,0,placed on UBOS parish Rubaga (moved 0.0 km),neighbourhood,ubos_official
+Namirembe,,Kampala,Rubaga,0.31463,32.55958,ubos_parish_2016,0,placed on UBOS parish Namirembe (moved 0.0 km),neighbourhood,ubos_official
+Nateete,Natete,Kampala,Rubaga,0.30359,32.53561,ubos_parish_2016,0,placed on UBOS parish Natete (moved 0.0 km),neighbourhood,ubos_official
+Ndeeba,Ndeba,Kampala,Rubaga,0.29809,32.56758,ubos_parish_2016,0,placed on UBOS parish Ndeeba (moved 0.0 km),neighbourhood,ubos_official
+Kabowa,,Kampala,Rubaga,0.2829,32.55653,ubos_parish_2016,0,placed on UBOS parish Kabowa (moved 0.0 km),neighbourhood,ubos_official
+Busega,,Kampala,Rubaga,0.311,32.52222,ubos_parish_2016,0,placed on UBOS parish Busega (moved 0.0 km),neighbourhood,ubos_official
+Lungujja,Lungujja Hill;Lungunja,Kampala,Rubaga,0.31244,32.54396,ubos_parish_2016,0,placed on UBOS parish Lungujja (moved 0.0 km),neighbourhood,ubos_official
+Kasubi,,Kampala,Rubaga,0.33925,32.55171,ubos_parish_2016,0,placed on UBOS parish Kasubi (moved 0.0 km),neighbourhood,ubos_official
+Nakulabye,,Kampala,Rubaga,0.32639,32.55436,ubos_parish_2016,0,placed on UBOS parish Nakulabye (moved 0.0 km),neighbourhood,ubos_official
+Mutundwe,,Kampala,Rubaga,0.28419,32.5408,ubos_parish_2016,0,placed on UBOS parish Mutundwe (moved 0.0 km),neighbourhood,ubos_official
+Kawaala,Kawala,Kampala,Rubaga,0.345,32.553,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kawempe,,Kampala,Kawempe,0.38114,32.56756,ubos_parish_2016,0,"placed on UBOS parish Kawempe I, Kawempe Ii (moved 0.0 km)",neighbourhood,ubos_official
+Kanyanya,,Kampala,Kawempe,0.37481,32.57878,ubos_parish_2016,0,placed on UBOS parish Kanyanya (moved 0.0 km),neighbourhood,ubos_official
+Mulago,,Kampala,Kawempe,0.34372,32.57834,ubos_parish_2016,0,"placed on UBOS parish Mulago Iii, Mulago Ii, Mulago I (moved 0.0 km)",neighbourhood,ubos_official
+Wandegeya,,Kampala,Central,0.33499,32.57447,ubos_parish_2016,0,placed on UBOS parish Wandegeya (moved 0.0 km),neighbourhood,ubos_official
+Makerere,Makerere Kikoni;Kikoni,Kampala,Kawempe,0.34573,32.56473,ubos_parish_2016,0,"placed on UBOS parish Makerere Ii, Makerere I, Makerere Iii (moved 0.0 km)",neighbourhood,ubos_official
+Bwaise,Bwayiise,Kampala,Kawempe,0.35468,32.56165,ubos_parish_2016,0,"placed on UBOS parish Bwaise Ii, Bwaise I, Bwaise Iii (moved 0.0 km)",neighbourhood,ubos_official
+Kazo,Kazo Angola,Kampala,Kawempe,0.37121,32.5552,ubos_parish_2016,0,placed on UBOS parish Kazo (moved 0.0 km),neighbourhood,ubos_official
+Komamboga,,Kampala,Kawempe,0.39041,32.58614,ubos_parish_2016,0,placed on UBOS parish Komamboga (moved 0.0 km),neighbourhood,ubos_official
+Kikaaya,Kikaya;Bahai;Bahai Temple,Kampala,Kawempe,0.36908,32.59413,ubos_parish_2016,0,placed on UBOS parish Kikaaya (moved 0.0 km),neighbourhood,ubos_official
+Kalerwe,,Kampala,Kawempe,0.355,32.57,draft_approx,0,"OSM hit 6.6 km away ('Kalerwe, Kampala, Central Region, Uganda') looks like a different place - please verify",neighbourhood,needs_review
+Mpererwe,,Kampala,Kawempe,0.39176,32.57767,ubos_parish_2016,0,placed on UBOS parish Mpererwe (moved 0.0 km),neighbourhood,ubos_official
+Kyebando,,Kampala,Kawempe,0.3587,32.57986,ubos_parish_2016,0,placed on UBOS parish Kyebando (moved 0.0 km),neighbourhood,ubos_official
+Kira,Kira Town,Wakiso,Kira Municipality,0.40873,32.64793,ubos_parish_2016,0,placed on UBOS parish Kira (moved 0.0 km),neighbourhood,ubos_official
+Najjera,Najeera,Wakiso,Kira Municipality,0.38,32.633,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Kyaliwajjala,Kyaliwajala,Wakiso,Kira Municipality,0.38363,32.65196,ubos_parish_2016,0,placed on UBOS parish Kyaliwajala (moved 0.0 km),neighbourhood,ubos_official
+Namugongo,,Wakiso,Kira Municipality,0.396,32.656,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Naalya,Nalya,Wakiso,Kira Municipality,0.37,32.645,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Bweyogerere,,Wakiso,Kira Municipality,0.36413,32.67098,ubos_parish_2016,0,placed on UBOS parish Bweyogerere (moved 0.0 km),neighbourhood,ubos_official
+Kireka,,Wakiso,Kira Municipality,0.3539,32.64529,ubos_parish_2016,0,placed on UBOS parish Kireka (moved 0.0 km),neighbourhood,ubos_official
+Mulawa,,Wakiso,Kira Municipality,0.41439,32.63836,osm_nominatim,0,moved 3.4 km to OSM point,neighbourhood,osm_agrees
+Kungu,,Wakiso,Kira Municipality,0.39,32.615,draft_approx,0,"OSM hit 15.6 km away ('Kungu, Wakiso, Central Region, Uganda') looks like a different place - please verify",neighbourhood,needs_review
+Buwate,,Wakiso,Kira Municipality,0.40675,32.6204,ubos_parish_2016,0,placed on UBOS parish Buwaate (moved 0.0 km),neighbourhood,ubos_official
+Mbalwa,,Wakiso,Kira Municipality,0.36433,32.64957,osm_nominatim,0,moved 3.4 km to OSM point,neighbourhood,osm_agrees
+Kasangati,,Wakiso,Nangabo,0.44,32.6,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Gayaza,,Wakiso,Nangabo,0.46408,32.61142,ubos_parish_2016,0,placed on UBOS parish Gayaza (moved 0.0 km),neighbourhood,ubos_official
+Bulindo,,Wakiso,Kira Municipality,0.42761,32.6418,osm_nominatim,0,moved 2.4 km to OSM point,neighbourhood,osm_agrees
+Kitukutwe,,Wakiso,Kira Municipality,0.44275,32.65742,osm_nominatim,0,moved 2.8 km to OSM point,neighbourhood,osm_agrees
+Nansana,,Wakiso,Nansana Municipality,0.365,32.528,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Nabweru,,Wakiso,Nansana Municipality,0.35107,32.54753,osm_nominatim,0,moved 2.8 km to OSM point,neighbourhood,osm_agrees
+Wakiso Town,Wakiso;Wakiso / Wakiso,Wakiso,Wakiso Town Council,0.4115,32.48641,ubos_subcounty_2017,0,placed on UBOS sub-county Wakiso Town Council,neighbourhood,ubos_official
+Kyengera,,Wakiso,Makindye-Ssabagabo Municipality,0.29749,32.50408,ubos_parish_2016,0,placed on UBOS parish Kyengera (moved 0.0 km),neighbourhood,ubos_official
+Nsangi,,Wakiso,Nsangi,0.27135,32.45486,ubos_parish_2016,0,placed on UBOS parish Nsangi (moved 0.0 km),neighbourhood,ubos_official
+Buloba,,Wakiso,Nsangi,0.33017,32.45014,ubos_parish_2016,0,placed on UBOS parish Buloba (moved 0.0 km),neighbourhood,ubos_official
+Kakiri,,Wakiso,Kakiri,0.41267,32.38577,ubos_parish_2016,0,placed on UBOS parish Kakiri Ward (moved 0.0 km),neighbourhood,ubos_official
+Matugga,Matuga,Wakiso,Gombe,0.45551,32.52054,ubos_parish_2016,0,placed on UBOS parish Matuga (moved 0.0 km),neighbourhood,ubos_official
+Kajjansi,Kajansi,Wakiso,Makindye-Ssabagabo Municipality,0.215,32.547,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Lubowa,,Wakiso,Makindye-Ssabagabo Municipality,0.24619,32.5528,osm_nominatim,0,moved 2.0 km to OSM point,neighbourhood,osm_agrees
+Seguku,,Wakiso,Makindye-Ssabagabo Municipality,0.23307,32.55688,ubos_parish_2016,0,placed on UBOS parish Seguku (moved 0.0 km),neighbourhood,ubos_official
+Zana,,Wakiso,Makindye-Ssabagabo Municipality,0.26,32.558,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Namasuba,,Wakiso,Makindye-Ssabagabo Municipality,0.26708,32.56976,ubos_parish_2016,0,placed on UBOS parish Namasuba (moved 0.0 km),neighbourhood,ubos_official
+Kitende,,Wakiso,Makindye-Ssabagabo Municipality,0.19943,32.52213,ubos_parish_2016,0,placed on UBOS parish Kitende (moved 0.0 km),neighbourhood,ubos_official
+Bwebajja,Bwebaja,Wakiso,Makindye-Ssabagabo Municipality,0.19,32.53,draft_approx,0,not in OSM - please verify,neighbourhood,needs_review
+Abaita Ababiri,Abayita Ababiri,Wakiso,Katabi,0.155,32.508,draft_approx,0,not in OSM - please verify,neighbourhood,needs_review
+Kisubi,,Wakiso,Katabi,0.11698,32.57382,ubos_parish_2016,0,placed on UBOS parish Kisubi (moved 0.0 km),neighbourhood,ubos_official
+Nkumba,,Wakiso,Katabi,0.07347,32.51096,osm_nominatim,0,moved 3.2 km to OSM point; a UBOS parish of this name lies 11 km away - probably a different place; please verify; a UBOS parish of this name lies 11 km away - probably a different place; please verify,neighbourhood,needs_review
+Kigo,,Wakiso,Ssisa,0.188,32.598,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Garuga,,Wakiso,Katabi,0.13,32.55,draft_approx,0,not in OSM - please verify,neighbourhood,needs_review
+Entebbe,Entebbe Municipality,Wakiso,Entebbe Municipality,0.06,32.47,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Mukono Town,Mukono;Mukono Municipality;Mukono TC,Mukono,Mukono Municipality,0.353,32.755,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Seeta,Setta;Seeta-Namuganga;Namuganga,Mukono,Goma,0.35622,32.72245,ubos_parish_2016,0,placed on UBOS parish Seeta Ward (moved 0.0 km),neighbourhood,ubos_official
+Namanve,,Mukono,Goma,0.355,32.695,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Sonde,,Mukono,Goma,0.39486,32.68149,osm_nominatim,0,moved 3.4 km to OSM point,neighbourhood,osm_agrees
+Joggo,Jjogo;Jogo,Mukono,Goma,0.40951,32.71077,osm_nominatim,0,moved 3.3 km to OSM point,neighbourhood,osm_agrees
+Goma,,Mukono,Goma,0.3803,32.70309,ubos_subcounty_2017,0,placed on UBOS sub-county Goma Division,neighbourhood,ubos_official
+Nakisunga,,Mukono,Nakisunga,0.28594,32.78846,osm_nominatim,0,moved 3.8 km to OSM point,neighbourhood,osm_agrees
+Mpigi Town,Mpigi,Mpigi,Mpigi Town Council,0.225,32.315,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Lugazi,,Buikwe,Lugazi Municipality,0.37168,32.94919,ubos_parish_2016,0,placed on UBOS parish Lugazi Central (moved 0.0 km),neighbourhood,ubos_official
+Bombo,,Luweero,Bombo Town Council,0.58,32.535,draft; OSM within 2 km,0,,neighbourhood,osm_agrees
+Lweza,,Wakiso,Makindye-Ssabagabo Municipality,0.22464,32.54746,osm_nominatim,0,placed on OSM point 'Lweza' (moved 3.3 km),neighbourhood,osm_agrees
+Kirinya,,Wakiso,Kira Municipality,0.31214,32.67532,ubos_parish_2016,0,placed on UBOS parish Kirinya (moved 0.0 km),neighbourhood,ubos_official
+Busabala,,Wakiso,Makindye-Ssabagabo Municipality,0.2214,32.60784,ubos_parish_2016,0,placed on UBOS parish Busabala (moved 0.0 km),neighbourhood,ubos_official
+Masanafu,,Kampala,Rubaga,0.33326,32.53545,osm_nominatim,0,placed on OSM point 'Masanafu' (moved 1.9 km),neighbourhood,osm_agrees
+Kitezi,,Wakiso,Nangabo,0.41688,32.56497,ubos_parish_2016,0,placed on UBOS parish Kiteezi (moved 0.0 km),neighbourhood,ubos_official
+Nampunge,,Wakiso,Wakiso,0.42,32.47,draft_approx,0,new row - run 00_verify_gazetteer.py; point is 15.57 km outside UBOS parish 'Nampunge' (falls in Namusera); a UBOS parish of this name lies 18 km away - probably a different place; please verify; a UBOS parish of this name lies 18 km away - probably a different place; please verify,neighbourhood,needs_review
+Kawuku,,Wakiso,Ssisa,0.21,32.6,draft_approx,0,new row - run 00_verify_gazetteer.py,neighbourhood,needs_review
+Katabi,,Wakiso,Katabi,0.00687,32.55524,ubos_subcounty_2017,0,placed on UBOS sub-county Katabi  Town Council,subcounty,ubos_official
+Nangabo,,Wakiso,Nangabo,0.45,32.58333,osm_nominatim,0,placed on OSM point 'Nangabo' (moved 2.9 km),subcounty,osm_agrees
+Gombe,,Wakiso,Gombe,0.50335,32.4921,ubos_subcounty_2017,0,placed on UBOS sub-county Gombe Division,subcounty,ubos_official
+Kyampisi,,Mukono,Kyampisi,0.50305,32.70629,ubos_subcounty_2017,0,placed on UBOS sub-county Kyampisi,subcounty,ubos_official
+Ssisa,Sisa,Wakiso,Ssisa,0.15,32.55,draft_approx,0,new row - run 00_verify_gazetteer.py,subcounty,needs_review
+Makindye-Ssabagabo,Ssabagabo-Makindye;Ssabagabo;Makindye Ssabagabo,Wakiso,Makindye-Ssabagabo Municipality,0.21338,32.57915,osm_nominatim,0,placed on OSM point 'Makindye Ssabagabo Road' (moved 3.6 km),subcounty,osm_agrees
+Busukuma,,Wakiso,Busukuma,0.52054,32.6068,ubos_subcounty_2017,0,placed on UBOS sub-county Busukuma Division,subcounty,ubos_official
+Kasanje,,Wakiso,Kasanje,0.1371,32.39432,ubos_subcounty_2017,0,placed on UBOS sub-county Kasanje,subcounty,ubos_official
+Namuwongo,,Kampala,Makindye,0.31157,32.60071,osm_nominatim,0,placed on OSM point 'Namuwongo' (moved 0.9 km),neighbourhood,osm_agrees
+Namungoona,Namugoonaa;Namugoona,Kampala,Rubaga,0.33289,32.54068,osm_nominatim,0,placed on OSM point 'Namungoona' (moved 1.1 km),neighbourhood,osm_agrees
+Lugogo,,Kampala,Nakawa,0.32719,32.6036,osm_nominatim,0,placed on OSM point 'Lugogo' (moved 0.4 km),neighbourhood,osm_agrees
+Nsasa,,Wakiso,Kira Municipality,0.41667,32.65,osm_nominatim,0,placed on OSM point 'Nsasa' (moved 2.2 km),neighbourhood,osm_agrees

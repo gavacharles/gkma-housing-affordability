@@ -1,0 +1,111 @@
+name,district,lat,lon,osm_lat,osm_lon,osm_name,distance_km,check
+Kololo,Kampala,0.331,32.595,0.3341117,32.5933374,"Kololo, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.39229632205223364,ok
+Nakasero,Kampala,0.323,32.58,0.3240394,32.581339,"Nakasero, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.18848167801364635,ok
+Old Kampala,Kampala,0.315,32.568,0.3169925,32.568594,"Old Kampala, Kisenyi, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.23119138265471542,ok
+Kamwokya,Kampala,0.338,32.585,0.3437583,32.5900635,"Kamwokya, Kololo, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.8526277241566169,ok
+Kisenyi,Kampala,0.31,32.57,0.311944,32.5692176,"Kisenyi, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.23301288459149933,ok
+Kampala CBD,Kampala,0.3136,32.5825,,,,,OSM not found
+Mengo,Kampala,0.303,32.566,0.3100919,32.555673,"Mengo, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",1.3929977091902788,ok
+Bugolobi,Kampala,0.318,32.615,0.3138978,32.6220405,"Bugolobi, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.9060521132659258,ok
+Naguru,Kampala,0.345,32.605,0.3419051,32.6063658,"Naguru, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.3761569720525532,ok
+Ntinda,Kampala,0.354,32.615,0.3544278,32.6136382,"Ntinda, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.1587184903609747,ok
+Kiwatule,Kampala,0.37,32.625,0.3727406,32.6298641,"Kiwatule, Kampala, Central Region, Uganda",0.6207961123655089,ok
+Kisaasi,Kampala,0.365,32.598,0.3628952,32.5997337,"Kisaasi, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.30321322790320654,ok
+Kyanja,Kampala,0.39,32.595,0.3951672,32.5948028,"Kyanja, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.5749846743932231,ok
+Bukoto,Kampala,0.348,32.595,0.3542425,32.6007307,"Bukoto, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.9422647667730083,ok
+Nakawa,Kampala,0.33,32.615,0.3291976,32.6150131,"Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.08923469863178915,ok
+Mbuya,Kampala,0.325,32.625,0.3226353,32.6265931,"Mbuya, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.31704581138396776,ok
+Luzira,Kampala,0.3,32.64,0.2974929,32.6528194,"Luzira, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",1.4524375700829202,ok
+Kyambogo,Kampala,0.35,32.63,0.356248,32.6267416,"Kyambogo, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.783543856896693,ok
+Banda,Kampala,0.35,32.64,0.3469834,32.5642237,"Banda, Kampala, Central Region, Uganda",8.432457017786698,CHECK
+Butabika,Kampala,0.315,32.655,0.3191131,32.6566617,"Butabika, Mutungo, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",0.4932689544381964,ok
+Kulambiro,Kampala,0.378,32.615,0.3744015,32.6089314,"Kulambiro, Kampala, Central Region, Uganda",0.7844997534285836,ok
+Kigoowa,Kampala,0.365,32.62,0.3715455,32.6149147,"Kigoowa Ii, Kampala, Central Region, Uganda",0.9216630599192127,ok
+Mutungo,Kampala,0.31,32.635,0.3159139,32.6425624,"Mutungo, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",1.0674853851614778,ok
+Kitintale,Kampala,0.31,32.62,0.3093046,32.6376289,"Kitintale, Nakawa, Kampala Capital City, Kampala, Central Region, Uganda",1.9617400829007512,ok
+Muyenga,Kampala,0.296,32.61,0.299107,32.6185707,"Muyenga, Bukasa, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",1.0136952217414565,ok
+Kansanga,Kampala,0.288,32.608,0.2920011,32.6045744,"Kansanga, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.5856842735140415,ok
+Kabalagala,Kampala,0.298,32.595,0.3026439,32.595175,"Kabalagala, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.5167446269265148,ok
+Ggaba,Kampala,0.264,32.63,0.2615309,32.6316374,"Ggaba, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.32943505784010085,ok
+Munyonyo,Kampala,0.25,32.62,0.2445448,32.6217496,"Munyonyo, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.6370241660347706,ok
+Makindye,Kampala,0.28,32.59,0.2843865,32.5836971,"Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.8538654139375937,ok
+Nsambya,Kampala,0.3,32.585,0.2913827,32.5883351,"Nsambya, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",1.027458248733585,ok
+Kibuye,Kampala,0.295,32.57,0.2889928,32.5712366,"Kibuye, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.6819757258435448,ok
+Katwe,Kampala,0.3,32.578,0.2971965,32.5758818,"Katwe, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.39070834786642783,ok
+Lukuli,Kampala,0.27,32.595,0.286649,32.5878847,"Lukuli, Nsambya, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",2.0132595216869316,CHECK
+Kibuli,Kampala,0.305,32.595,0.3117486,32.5957699,"Kibuli, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.755277419133915,ok
+Buziga,Kampala,0.26,32.615,0.2527739,32.610069,"Buziga, Kampala, Central Region, Uganda",0.9727540481764206,ok
+Salaama,Kampala,0.27,32.585,0.2479593,32.6149828,"Salaama, Munyonyo, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",4.137797331943955,CHECK
+Najjanankumbi,Kampala,0.278,32.568,0.2798069,32.5665557,"Najjanankubi, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.25721482449241195,ok
+Kisugu,Kampala,0.3,32.605,0.3025072,32.6037439,"Kisugu, Kabalagala, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.3118179315533465,ok
+Bunga,Kampala,0.275,32.62,0.2679746,32.6234353,"Bunga Trading Area, Kampala, Central Region, Uganda",0.8695788742328099,ok
+Konge,Kampala,0.27,32.605,0.2682646,32.6058578,"Konge, Makindye, Kampala Capital City, Kampala, Central Region, Uganda",0.21525389674039863,ok
+Rubaga,Kampala,0.302,32.553,0.3029705,32.5554782,"Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.2959367871087313,ok
+Namirembe,Kampala,0.313,32.558,0.3181511,32.5592067,"Namirembe, Mengo, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.588282249198943,ok
+Nateete,Kampala,0.298,32.537,0.2986226,32.5325,"Nateete, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.5051369386079789,ok
+Ndeeba,Kampala,0.295,32.56,0.2921842,32.5645794,"Ndeeba, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.5977601605650675,ok
+Kabowa,Kampala,0.285,32.555,0.2882555,32.5552312,"Kabowa, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.36290679141943777,ok
+Busega,Kampala,0.303,32.52,0.309317,32.518963,"Busega, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.711819756931767,ok
+Lungujja,Kampala,0.315,32.54,0.3129353,32.5379694,"Lungujja, Nabisasiro, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.3220086395253359,ok
+Kasubi,Kampala,0.329,32.554,0.3313486,32.5563638,"Kasubi, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.3705192517821668,ok
+Nakulabye,Kampala,0.328,32.562,0.3281239,32.5635399,"Nakulabye, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.17177962589565315,ok
+Mutundwe,Kampala,0.285,32.545,0.2827263,32.5326642,"Mutundwe, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",1.3947669846600168,ok
+Kawaala,Kampala,0.345,32.553,0.3429862,32.5501928,"Kawaala, Rubaga, Kampala Capital City, Kampala, Central Region, Uganda",0.38415355349631214,ok
+Kawempe,Kampala,0.378,32.558,0.366393,32.5778516,"Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",2.556978823009443,CHECK
+Kanyanya,Kampala,0.388,32.57,0.3699621,32.5775701,"Kanyanya, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",2.1751888412068108,CHECK
+Mulago,Kampala,0.34,32.575,0.3408433,32.5793555,"Mulago, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",0.49329542460566944,ok
+Wandegeya,Kampala,0.335,32.572,0.3334054,32.5755188,"Wandegeya, Central, Kampala Capital City, Kampala, Central Region, Uganda",0.42956773804778825,ok
+Makerere,Kampala,0.335,32.568,0.337735,32.5629406,"Makerere, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",0.6395098386687781,ok
+Bwaise,Kampala,0.355,32.56,0.3514726,32.5619786,"Bwaise III 3633, Makerere, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",0.44971795829051897,ok
+Kazo,Kampala,0.37,32.555,0.3609023,32.5602353,"Kazo, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",1.1671514888542378,ok
+Komamboga,Kampala,0.4,32.575,0.3851503,32.59146,"Komamboga, Mpererwe, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",2.4649986314017474,CHECK
+Kikaaya,Kampala,0.385,32.58,0.3741132,32.5883096,"Kikaaya A, Kampala, Central Region, Uganda",1.5228783525464438,ok
+Kalerwe,Kampala,0.355,32.57,0.3342898,32.6253302,"Kalerwe, Kampala, Central Region, Uganda",6.569188752081485,CHECK
+Mpererwe,Kampala,0.393,32.585,0.3781863,32.5775433,"Mpererwe, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",1.8441116789592222,ok
+Kyebando,Kampala,0.36,32.585,0.3567331,32.5807049,"Kyebando, Kawempe, Kampala Capital City, Kampala, Central Region, Uganda",0.6000384796458725,ok
+Kira,Wakiso,0.397,32.638,0.4003408,32.6391845,"Kira, Wakiso, Central Region, Uganda",0.39413727642081875,ok
+Najjera,Wakiso,0.38,32.633,0.3810187,32.626258,"Najjera High School, Kira Najjeera Road, Najjeera, Wakiso, Central Region, Uganda",0.7581693332129216,ok
+Kyaliwajjala,Wakiso,0.383,32.648,0.3802059,32.6468271,"Kyaliwajjala, Kira, Wakiso, Central Region, Uganda",0.33695232871071146,ok
+Namugongo,Wakiso,0.396,32.656,0.3907151,32.6541992,"Namugongo, Kira, Wakiso, Central Region, Uganda",0.620831197022035,ok
+Naalya,Wakiso,0.37,32.645,0.3724716,32.636305,"Naalya, Kyaliwajjala, Naalya Estate, Wakiso, Central Region, Uganda",1.0051226662359285,ok
+Bweyogerere,Wakiso,0.355,32.668,0.3559903,32.6786265,"BWEYOGERERE, Jinja - Kampala Road, Namanve, Bbuto, Kireku Railway, Wakiso, Central Region, Uganda",1.1867101691347774,ok
+Kireka,Wakiso,0.348,32.65,0.3462149,32.6440912,"Kireka, Wakiso, Central Region, Uganda",0.6863457777785482,ok
+Mulawa,Wakiso,0.4,32.665,0.4143879,32.6383642,"Mulawa, Wakiso, Central Region, Uganda",3.366182712455633,CHECK
+Kungu,Wakiso,0.39,32.615,0.4941467,32.520401,"Kungu, Wakiso, Central Region, Uganda",15.644573474944673,CHECK
+Buwate,Wakiso,0.39,32.625,0.4,32.616667,"Buwate, Wakiso, Central Region, Uganda",1.4473960967898833,ok
+Mbalwa,Wakiso,0.387,32.67,0.3643265,32.6495657,"Mbalwa, Bbuto, Mbalwa B, Wakiso, Central Region, Uganda",3.3939583740437897,CHECK
+Kasangati,Wakiso,0.44,32.6,0.437682,32.604922,"Kasangati, Wakiso, Central Region, Uganda",0.6049431126051087,ok
+Gayaza,Wakiso,0.45,32.615,0.451786,32.611144,"Gayaza, Wakiso, Central Region, Uganda",0.472514527452302,ok
+Bulindo,Wakiso,0.41,32.63,0.4276119,32.6418034,"Bulindo, Wakiso, Central Region, Uganda",2.357469177176432,CHECK
+Kitukutwe,Wakiso,0.425,32.64,0.4427481,32.6574187,"Kitukutwe, Wakiso, Central Region, Uganda",2.76513293705226,CHECK
+Nansana,Wakiso,0.365,32.528,0.365816,32.529226,"Nansana, Wakiso, Central Region, Uganda",0.16375773914820255,ok
+Nabweru,Wakiso,0.375,32.54,0.3510688,32.5475328,"Nabweru South I, Nabweru South, Wakiso, Central Region, Uganda",2.789736401935565,CHECK
+Wakiso Town,Wakiso,0.404,32.46,0.3709794,32.5767856,"Kirabo Legacy Uganda ltd, Gayaza Road, Kawempe, Kampala Capital City, Kampala, Wakiso, Central Region, Uganda",13.494757718237963,CHECK
+Kyengera,Wakiso,0.29,32.5,0.2946117,32.5020999,"Kyengera, Wakiso, Central Region, Uganda",0.5634549209147454,ok
+Nsangi,Wakiso,0.272,32.46,0.278546,32.4573358,"Nsangi, Wakiso, Central Region, Uganda",0.7858572538843518,ok
+Buloba,Wakiso,0.297,32.48,0.3180079,32.4387191,"Buloba Bunwa Kapeeka, Wakiso, Central Region, Uganda",5.1503766112958775,CHECK
+Kakiri,Wakiso,0.42,32.39,0.4187326,32.3907615,"Kakiri, Wakiso, Central Region, Uganda",0.16440890383874399,ok
+Matugga,Wakiso,0.47,32.54,0.4616243,32.5250718,"Matugga, Wakiso, Central Region, Uganda",1.9033132350333473,ok
+Kajjansi,Wakiso,0.215,32.547,0.2148394,32.536681,"Kajjansi wetland, Entebbe City, Wakiso, Central Region, Uganda",1.1475513282034826,ok
+Lubowa,Wakiso,0.24,32.57,0.2461915,32.552802,"Lubowa, Wakiso, Central Region, Uganda",2.0324677201011956,CHECK
+Seguku,Wakiso,0.248,32.555,0.2249983,32.5613798,"Seguku, Wakiso, Central Region, Uganda",2.6542284619554573,CHECK
+Zana,Wakiso,0.26,32.558,0.2535651,32.561224,"Zana, Wakiso, Central Region, Uganda",0.8003092143139688,ok
+Namasuba,Wakiso,0.26,32.568,0.272185,32.5633748,"Namasuba, Gabunga Road 2, Nankinga, Nyanama, Kampala Capital City, Namasuba Para, Wakiso, Central Region, Uganda",1.4492340673773048,ok
+Kitende,Wakiso,0.2,32.535,0.1869641,32.5387036,"Mulangira Ssemakokiro Metal Works (kitende Branch), Entebbe Road, Akright City, Bwebajja, Entebbe City, Central Region, Uganda",1.5068909613499861,ok
+Bwebajja,Wakiso,0.19,32.53,,,,,OSM not found
+Abaita Ababiri,Wakiso,0.155,32.508,,,,,OSM not found
+Kisubi,Wakiso,0.125,32.535,,,,,OSM not found
+Nkumba,Wakiso,0.102,32.515,0.0734711,32.5109589,"Nkumba Bufulu, Nkumba, Entebbe City, Central Region, Uganda",3.203935839590499,CHECK
+Kigo,Wakiso,0.188,32.598,0.2051596,32.5967298,"Kigo, Wakiso, Central Region, Uganda",1.9132807417019142,ok
+Garuga,Wakiso,0.13,32.55,,,,,OSM not found
+Entebbe,Wakiso,0.06,32.47,0.0664008,32.4774527,"Post Office Subward, Manyago I, Entebbe City, Central Region, Uganda",1.0923899442177294,ok
+Mukono Town,Mukono,0.353,32.755,0.360848,32.7460874,"Mukono, Central Region, Uganda",1.3204720708277735,ok
+Seeta,Mukono,0.365,32.725,0.3667376,32.7131305,"Seeta, Baggala, Mukono, Central Region, Uganda",1.333869083629713,ok
+Namanve,Mukono,0.355,32.695,0.3515149,32.6784982,"Namanve, Old Jinja Road, Namanve, Bbuto, Central, Wakiso, Central Region, Uganda",1.8753573144945517,ok
+Sonde,Mukono,0.37,32.7,0.3948631,32.6814889,"Sonde, Mukono, Central Region, Uganda",3.4467203807319793,CHECK
+Joggo,Mukono,0.38,32.71,0.4095094,32.7107705,"Joggo, Mukono, Central Region, Uganda",3.282413838604371,CHECK
+Goma,Mukono,0.36,32.72,0.3936238,32.7012752,"GOMA, Bukerere Road, Seeta, Bugoba, Mukono, Central Region, Uganda",4.279436424305486,CHECK
+Nakisunga,Mukono,0.3,32.82,0.2859432,32.7884562,"Nakisunga, Mukono, Central Region, Uganda",3.8399742192077855,CHECK
+Mpigi Town,Mpigi,0.225,32.315,0.2241696,32.3263348,"Bessamaya Church of Uganda Primary School, Mpiigi Kabasanda Road, Bukakala, Mpigi, Central Region, Uganda",1.2637403645845358,ok
+Lugazi,Buikwe,0.37,32.94,0.3693191,32.9367405,"Lugazi, Buikwe, Central Region, Uganda",0.37025609815661975,ok
+Bombo,Luweero,0.58,32.535,0.5770175,32.5370142,"Bombo, Luweero, Central Region, Uganda",0.40017650111159025,ok

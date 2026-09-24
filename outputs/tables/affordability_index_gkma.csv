@@ -1,0 +1,2 @@
+area,households,n_rent,n_sale,median_income,median_rent,rai,rai_lo,rai_hi,rent_income_needed,agi_rent,ri_rent,ri_rent_housing_induced,below_nonhousing_min,ri_rent_median_residual,median_price,monthly_payment,own_income_needed,oai,oai_lo,oai_hi,agi_own,ri_own,ri_own_housing_induced
+GKMA,1960816.0,2086,3896,546925.551,900000.0,18.2309,18.2309,19.3033,3000000.0,0.9749,0.7848,0.5908,0.1941,-589350.3731,470000000.0,5151869.0564,14719625.8754,3.7156,3.4927,3.8808,0.9999,0.996,0.8019

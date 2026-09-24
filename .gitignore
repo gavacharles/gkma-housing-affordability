@@ -1,0 +1,39 @@
+# environment and secrets
+.venv/
+.env
+*.pyc
+__pycache__/
+.pytest_cache/
+.DS_Store
+cache/
+tools/
+
+# listing-level data (portal content; consent pending; not redistributed)
+data/raw/
+data/interim/
+data/processed/
+data/paper_snapshot_*/
+
+# third-party downloads: keep only small derived inputs needed to run the pipeline
+data/external/**
+!data/external/
+!data/external/*.csv
+!data/external/*.json
+!data/external/README.md
+
+# outputs: keep aggregate tables, PNG figures, captions and social; drop heavy exports and logs
+outputs/**
+!outputs/
+!outputs/tables/
+!outputs/tables/**
+!outputs/maps/
+!outputs/maps/*.png
+!outputs/maps/captions.md
+!outputs/social/
+!outputs/social/**
+
+demo/raw/
+demo/processed/
+demo/*.log
+demo/outputs/
+tests/fixtures/

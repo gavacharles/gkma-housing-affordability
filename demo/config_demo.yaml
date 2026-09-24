@@ -1,0 +1,96 @@
+# SYNTHETIC DEMO CONFIG - do not use for the paper
+project:
+  crs_geographic: EPSG:4326
+  crs_projected: EPSG:32636
+  random_seed: 42
+  raw_dir: demo/raw
+collection:
+  contact_email: ""                           # optional; added to the User-Agent only if filled in
+  user_agent: "GKMA-affordability-research/0.1 (University of Johannesburg)"
+  min_delay_seconds: 4.0
+  max_pages_per_run: 200
+  cache_dir: data/raw/_http_cache
+  collection_window:
+    start: '2026-10-01'
+    end: '2026-12-31'
+  portals:
+    jiji:
+      permission: terms_permit
+      consent_reference: ''
+      categories:
+      - houses-apartments-for-rent
+      - houses-apartments-for-sale
+      - land-and-plots-for-sale
+      region_slugs: []
+    red:
+      permission: not_granted
+      consent_reference: ''
+      sitemap: https://www.realestatedatabase.net/SiteMap4RealEstateDatabase.xml
+      feed_csv: ''
+    upc:
+      permission: not_granted
+      consent_reference: ''
+      sitemap: https://ugandapropertycentre.com/sitemaps/sitemap_listings_1.txt
+cleaning:
+  usd_ugx_fallback: 3700
+  fx_table: data/external/bou_usd_ugx_monthly.csv
+  decimal_m2: 40.4686
+  bounds:
+    rent_month:
+    - 50000
+    - 60000000
+    sale:
+    - 5000000
+    - 30000000000
+    land_per_decimal:
+    - 500000
+    - 1500000000
+  dedup:
+    title_similarity: 88
+    price_tolerance: 0.005
+    date_window_days: 60
+geography:
+  gkma_districts:
+  - Kampala
+  - Wakiso
+  - Mukono
+  gkma_fringe_districts:
+  - Mpigi
+  - Buikwe
+  - Luwero
+  parishes: data/external/boundaries/uga_admin4_parishes.gpkg
+  subcounties: data/external/boundaries/uga_admin3_subcounties.gpkg
+  parish_name_col: PName2016
+  subcounty_name_col: SName2016
+  district_name_col: DName2016
+  neighbourhood_lookup: data/lookup/neighbourhood_lookup.csv
+  # Island sub-counties whose parishes are mostly open lake (not part of the
+  # metropolitan housing market)
+  exclude_subcounties: ["Koome"]
+  min_listings_per_unit: 5
+  points_of_interest:
+    cbd:
+    - 32.5825
+    - 0.3136
+  corridors:
+    northern_bypass: Northern Bypass
+    entebbe_expressway: Kampala-Entebbe Expressway
+  night_lights: data/external/viirs_annual_2024_uganda.tif
+  flood: data/external/flood_hazard_gkma.gpkg
+income:
+  table: demo/external/income_SYNTHETIC.csv
+  join_level: district
+  affordability_threshold: 0.3
+construction:
+  table: demo/external/rates_SYNTHETIC.csv
+  m2_per_bedroom:
+  - 25
+  - 32
+  - 40
+  depreciation_default: 0.15
+modelling:
+  spatial_cv_folds: 5
+  spatial_cv_block_km: 3
+  targets:
+    rent: log_rent_month_ugx
+    sale: log_price_ugx

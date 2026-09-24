@@ -1,0 +1,56 @@
+{
+  "n_listings": 10643,
+  "distinct_locations": 187,
+  "hedonic": {
+    "rent": {
+      "n": 3205,
+      "parameters": 31,
+      "obs_per_parameter": 103.4
+    },
+    "sale": {
+      "n": 2529,
+      "parameters": 32,
+      "obs_per_parameter": 79.0
+    }
+  },
+  "precision_at": {
+    "rent (1\u20132 bedrooms)": {
+      "5": 0.683,
+      "10": 0.448,
+      "15": 0.333,
+      "20": 0.302,
+      "30": 0.229,
+      "50": 0.188,
+      "75": 0.145,
+      "100": 0.115
+    },
+    "sale (houses, apartments)": {
+      "5": 1.057,
+      "10": 0.634,
+      "15": 0.477,
+      "20": 0.423,
+      "30": 0.351,
+      "50": 0.275,
+      "75": 0.218,
+      "100": 0.175
+    }
+  },
+  "convergence_max_abs_change_50pct_to_full": {
+    "GKMA": {
+      "rai": 0.059,
+      "oai": 0.043
+    },
+    "Kampala": {
+      "rai": 0.76,
+      "oai": 0.024
+    },
+    "Mukono": {
+      "rai": 1.508,
+      "oai": 0.001
+    },
+    "Wakiso": {
+      "rai": 0.587,
+      "oai": 0.015
+    }
+  }
+}
