@@ -1,0 +1,47 @@
+market,spec,wealth_control,term,coef,se,p,n,points,r2_adj
+rent,distance (paper 1),False,np.log1p(dist_cbd_km),-0.4364,0.1323,0.001,3389,123,0.6607
+rent,distance (paper 1),False,np.log1p(dist_entebbe_expressway_km),-0.1527,0.1032,0.1393,3389,123,0.6607
+rent,distance (paper 1),False,np.log1p(dist_northern_bypass_km),0.0182,0.0529,0.7308,3389,123,0.6607
+rent,distance (paper 1),True,np.log1p(dist_cbd_km),-0.4297,0.1409,0.0023,3199,118,0.6639
+rent,distance (paper 1),True,np.log1p(dist_entebbe_expressway_km),-0.1788,0.112,0.1103,3199,118,0.6639
+rent,distance (paper 1),True,np.log1p(dist_northern_bypass_km),0.0452,0.062,0.4658,3199,118,0.6639
+rent,distance (paper 1),True,wealth_index,0.2233,0.2304,0.3325,3199,118,0.6639
+rent,travel time,False,ln_tt_cbd_min,-0.3796,0.1206,0.0017,3389,123,0.6498
+rent,travel time,False,ln_tt_expressway_min,-0.2411,0.1255,0.0546,3389,123,0.6498
+rent,travel time,False,ln_tt_bypass_min,0.1064,0.0568,0.0611,3389,123,0.6498
+rent,travel time,True,ln_tt_cbd_min,-0.3824,0.127,0.0026,3199,118,0.654
+rent,travel time,True,ln_tt_expressway_min,-0.2508,0.1271,0.0485,3199,118,0.654
+rent,travel time,True,ln_tt_bypass_min,0.14,0.0774,0.0705,3199,118,0.654
+rent,travel time,True,wealth_index,0.253,0.2493,0.3102,3199,118,0.654
+rent,travel time + activity access,False,ln_tt_cbd_min,-0.3933,0.1356,0.0037,3389,123,0.6499
+rent,travel time + activity access,False,ln_tt_expressway_min,-0.2488,0.1258,0.048,3389,123,0.6499
+rent,travel time + activity access,False,ln_tt_bypass_min,0.0922,0.0581,0.1126,3389,123,0.6499
+rent,travel time + activity access,False,ln_acc60,-0.0584,0.1488,0.6948,3389,123,0.6499
+rent,travel time + activity access,True,ln_tt_cbd_min,-0.4076,0.1451,0.005,3199,118,0.6545
+rent,travel time + activity access,True,ln_tt_expressway_min,-0.2662,0.1305,0.0413,3199,118,0.6545
+rent,travel time + activity access,True,ln_tt_bypass_min,0.1165,0.0675,0.0843,3199,118,0.6545
+rent,travel time + activity access,True,ln_acc60,-0.106,0.151,0.4828,3199,118,0.6545
+rent,travel time + activity access,True,wealth_index,0.2681,0.2598,0.3022,3199,118,0.6545
+sale,distance (paper 1),False,np.log1p(dist_cbd_km),-0.3452,0.1449,0.0172,2602,115,0.5707
+sale,distance (paper 1),False,np.log1p(dist_entebbe_expressway_km),-0.2213,0.0548,0.0001,2602,115,0.5707
+sale,distance (paper 1),False,np.log1p(dist_northern_bypass_km),-0.163,0.0812,0.0448,2602,115,0.5707
+sale,distance (paper 1),True,np.log1p(dist_cbd_km),-0.2494,0.144,0.0834,2544,110,0.596
+sale,distance (paper 1),True,np.log1p(dist_entebbe_expressway_km),-0.2454,0.0488,0.0,2544,110,0.596
+sale,distance (paper 1),True,np.log1p(dist_northern_bypass_km),-0.0025,0.0779,0.9741,2544,110,0.596
+sale,distance (paper 1),True,wealth_index,0.6678,0.1383,0.0,2544,110,0.596
+sale,travel time,False,ln_tt_cbd_min,-0.3156,0.1506,0.0362,2602,115,0.5613
+sale,travel time,False,ln_tt_expressway_min,-0.2323,0.0632,0.0002,2602,115,0.5613
+sale,travel time,False,ln_tt_bypass_min,-0.1153,0.0916,0.2085,2602,115,0.5613
+sale,travel time,True,ln_tt_cbd_min,-0.2138,0.1386,0.1229,2544,110,0.5936
+sale,travel time,True,ln_tt_expressway_min,-0.3556,0.0467,0.0,2544,110,0.5936
+sale,travel time,True,ln_tt_bypass_min,0.0895,0.0895,0.3173,2544,110,0.5936
+sale,travel time,True,wealth_index,0.687,0.1398,0.0,2544,110,0.5936
+sale,travel time + activity access,False,ln_tt_cbd_min,-0.2555,0.1632,0.1173,2602,115,0.5635
+sale,travel time + activity access,False,ln_tt_expressway_min,-0.1998,0.0719,0.0055,2602,115,0.5635
+sale,travel time + activity access,False,ln_tt_bypass_min,-0.0621,0.0939,0.508,2602,115,0.5635
+sale,travel time + activity access,False,ln_acc60,0.18,0.1496,0.2288,2602,115,0.5635
+sale,travel time + activity access,True,ln_tt_cbd_min,-0.2635,0.1567,0.0925,2544,110,0.595
+sale,travel time + activity access,True,ln_tt_expressway_min,-0.3951,0.0543,0.0,2544,110,0.595
+sale,travel time + activity access,True,ln_tt_bypass_min,0.067,0.0847,0.4288,2544,110,0.595
+sale,travel time + activity access,True,ln_acc60,-0.1586,0.0886,0.0736,2544,110,0.595
+sale,travel time + activity access,True,wealth_index,0.7545,0.1537,0.0,2544,110,0.595

@@ -63,3 +63,21 @@ They share one spatial pipeline (geocoding, the OpenStreetMap network, animation
 2. **The informal submarket.** The listings are almost entirely formal: 15 kibanja plots, 21 untitled houses, and only 16 rentals described as single rooms or room-and-parlour. Research question 2 needs either a different comparison (e.g. lower- versus upper-priced listings, Jiji versus RED) or an additional data source on informal rents.
 3. **Rail coverage.** The commuter service has few stations, so the number of listings near a station may be small; this needs counting once stations are mapped.
 4. **Time.** One cross-section (2025–26). The continuing RED crawl could support a later before–after comparison if a rail service change falls within the collection period.
+
+## Feasibility findings (25 September 2026)
+
+**Rail capitalisation is not identifiable with these data.** OpenStreetMap maps four stations (Kampala, Namboole, Namanve, one unnamed stop). No listing lies within 500 m of a station; 98 listings (14 rentals) lie within 1 km, on only 2 neighbourhood points; within 2 km there are 15 points, and the main station sits in the CBD, so any station effect is confounded with CBD access. The taxi-stage layer (224 points) mixes taxi parks, bus stations and 92 bus stops, and OSM coverage of Kampala taxi stages is incomplete.
+
+**Road-network accessibility is measurable** (`scripts/01_accessibility.py` → `outputs/tables/neighbourhood_accessibility.csv`): travel time from each of the 187 neighbourhood points to the CBD, to the 12 Entebbe Expressway and 37 Northern Bypass access points, and to the mapped stations, plus night-light activity reachable within 30/45/60 minutes, on a 55,884-node road graph with assumed congested speeds.
+
+**First look** (`scripts/02_first_look.py` → `outputs/tables/first_look.csv`; clustered by neighbourhood point, 110–123 points):
+- Travel time to Expressway access points is priced into sale prices (elasticity −0.36, p < 0.01, with the wealth control) and, unlike straight-line distance, also into rents (−0.25, p < 0.05).
+- Travel time to the CBD is priced into rents (−0.38, p < 0.01). The Northern Bypass shows no premium.
+- Activity access (night lights within 60 min) adds nothing beyond CBD travel time: the two correlate at −0.84 to −0.94 in this monocentric city.
+- Whether the Expressway premium runs through its access points rather than proximity to the road cannot be separated: time and distance correlate at 0.83–0.89 across the neighbourhood points.
+
+## Proposed reframing
+
+**Paying for access in a paratransit city: road accessibility, the Entebbe Expressway and housing prices in Greater Kampala.** Access by road (the network that taxis and boda-bodas use) replaces rail-station proximity; the tolled, limited-access Expressway against the open Northern Bypass becomes the central comparison; rail enters as a value-capture scenario rather than an estimated effect.
+
+Open decisions: (1) adopt the reframing; (2) confirm the commuter-rail stops from Uganda Railways' timetable; (3) choose the jobs proxy (night lights now; building footprints or a business census if available); (4) handle the Entebbe Road corridor, a high-value area on its own (paper 1 LISA), so the Expressway effect is not simply the corridor's affluence.
