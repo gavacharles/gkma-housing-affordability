@@ -23,8 +23,8 @@ data = (ROOT / "outputs/interactive/explorer_data.json").read_text(encoding="utf
 body = tpl.replace("__DATA__", data)
 
 TITLE = "Who can afford the housing on offer in Greater Kampala?"
-DESC = ("97.5% of households in Greater Kampala cannot afford the typical listed 1–2 bedroom rental at 30% of income. "
-        "Explore the map by parish, change the assumptions, or play the tour.")
+DESC = ("97.5% of households in Greater Kampala cannot afford the typical listed 1–2 bedroom rental at 30% of "
+        "income, and 78% even at 80%. Explore the map, change the assumptions, or play the tour.")
 head = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -69,7 +69,8 @@ d.text((x, 262), "97.5%", font=ImageFont.truetype(fonts + "Arial Bold.ttf", 88) 
 d.text((x, 362), "of households cannot afford the", font=fr, fill="#1d2330")
 d.text((x, 394), "typical listed 1–2 bedroom rental", font=fr, fill="#1d2330")
 d.text((x, 426), "at 30% of income", font=fr, fill="#1d2330")
-d.text((x, 540), "Interactive map by parish  ·  play the tour", font=fs, fill="#5b6474")
+d.text((x, 472), "Even at 80% of income: 78% priced out", font=fr, fill="#9b1030")
+d.text((x, 540), "Interactive map  ·  change the assumptions  ·  play the tour", font=fs, fill="#5b6474")
 d.text((x, 566), "10,643 online listings, 2025–26; modelled incomes (UBOS)", font=fs, fill="#5b6474")
 img.save(EXP / "preview.png", optimize=True)
 print("wrote docs/explorer/explorer.html, docs/explorer/preview.png")
