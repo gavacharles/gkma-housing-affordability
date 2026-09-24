@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or its results, please cite it as below."
-title: "Priced out of the formal market: A housing affordability index and spatial machine-learning analysis for Greater Kampala, Uganda"
+title: "Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning"
 type: software
 authors:
   - family-names: Gava
