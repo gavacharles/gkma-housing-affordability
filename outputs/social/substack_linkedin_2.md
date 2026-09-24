@@ -64,7 +64,9 @@ https://gavacharles.github.io/kampala-affordability-explorer/#tour
 
 # Notes
 
-**Best visual:** `affordability_tour.mp4` covers the same route (Central Division, Kira and Goma are stops 3, 5 and 7), so it works as the LinkedIn video and inside the Substack post. Upload it directly on LinkedIn and put the Substack link in the first comment.
+**Graphic for this post:** `move_further_out_square.png` (1080 × 1080, for LinkedIn) and `move_further_out_wide.png` (1600 × 900, for the top of the Substack post). Alt text: "Chart comparing, for Central Division, Kira Division and Goma Division, the rent a median household can afford at 30% of income with the median listed 1–2 bedroom rent: UGX 236,000 against 1.5 million, 264,000 against 870,000, and 201,000 against 400,000. Rent falls 73% and income 15%; the gap narrows but never closes."
+
+**Video option:** `affordability_tour.mp4` covers the same route (Central Division, Kira and Goma are stops 3, 5 and 7), so it works as the LinkedIn video and inside the Substack post. Upload it directly on LinkedIn and put the Substack link in the first comment.
 
 **Figures used** (explorer tour data; affordability index tables)
 
