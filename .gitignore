@@ -37,3 +37,6 @@ demo/processed/
 demo/*.log
 demo/outputs/
 tests/fixtures/
+
+# Word versions of the manuscript stay local
+*.docx
