@@ -117,12 +117,64 @@ for key, name, blurb in STOPS:
                  "rent": float(r["median_rent"]), "income": float(r["median_income"]), "rai": float(r["rai"]),
                  "out": float(r["agi_rent"]), "hh": float(r["households"]), "n": int(r["n_rent"])})
 
+# each stop's share priced out at every burden threshold (same code as the paper's index)
+import _stage  # noqa: E402
+from gkma.analysis.affordability_index import compute_index  # noqa: E402
+_, _, pts, _, _ = _stage.setup(__doc__)
+mt = cfg["affordability_index"]["mortgage"]
+base_m = {"rate": bou_lending_rate(), "deposit": mt["deposit"], "term_years": mt["term_years"], "cap": mt["cap"]}
+grad = {}
+for bpct in range(10, 81):
+    for lv in ("gkma", "district", "subcounty"):
+        r_ = compute_index(pts, lv, {**base_m, "cap": bpct / 100}, t=bpct / 100).set_index("area")
+        for t in tour:
+            if t["key"] in r_.index:
+                grad.setdefault(t["key"], {})[bpct] = round(float(r_.loc[t["key"], "agi_rent"]), 4)
+for t in tour:
+    r = idx.loc[t["key"]]
+    t["grad"] = grad[t["key"]]
+    t["resid"] = round(float(r["ri_rent"]), 4)
+    t["resid_induced"] = round(float(r["ri_rent_housing_induced"]), 4)
+    assert abs(t["grad"][30] - t["out"]) < 1e-6, t["key"]           # matches the published index
+gk_grad = pd.read_csv(T / "affordability_burden_gradient.csv").query("area == 'GKMA'").set_index("burden")
+own = {"oai": float(idx.loc["GKMA", "oai"]), "own80": float(gk_grad.loc[0.8, "agi_own"]),
+       "best": None}
+sub = pd.read_csv(T / "affordability_index_subcounty.csv").dropna(subset=["oai"])
+top = sub.loc[sub["oai"].idxmax()]
+own["best"] = {"name": top["area"].split("/")[1] + ", " + top["area"].split("/")[0], "oai": float(top["oai"]),
+               "n": int(top["n_sale"])}
+
+# Census 2024 household totals for display (shares above use the 93% of households in matched parishes)
+import re  # noqa: E402
+cen = pd.read_csv(p("data/external/census2024_parish.csv"))
+cen = cen[~cen["subcounty"].str.upper().str.contains("KOOME")]                 # open-lake islands, excluded
+_k = lambda v: re.sub(r"[^a-z]", "", re.sub(r"\b(kampala|division|town council|municipality|sub ?county)\b", "",
+                                           str(v).lower()))  # noqa: E731
+cen["d"], cen["s"] = cen["district"].str.title(), cen["subcounty"].map(_k)
+GK_DISTRICTS = ["Kampala", "Wakiso", "Mukono", "Mpigi", "Buikwe", "Luwero"]
+
+
+def census_hh(key):
+    if key == "GKMA":
+        return int(cen[cen["d"].isin(GK_DISTRICTS)]["households"].sum())
+    if "/" not in key:
+        return int(cen[cen["d"] == key]["households"].sum())
+    d_, s_ = key.split("/")
+    return int(cen[(cen["d"] == d_) & (cen["s"] == _k(s_))]["households"].sum())
+
+
+for t in tour:
+    t["census_hh"] = census_hh(t["key"])
+    assert 0.85 <= t["hh"] / t["census_hh"] <= 1.02, (t["key"], t["hh"], t["census_hh"])
+for k_ in areas:
+    areas[k_]["census_hh"] = census_hh(k_)
+
 m = cfg["affordability_index"]["mortgage"]
 data = {"parishes": parishes, "lake": lake, "districts": dist,
-        "viewbox": [1000, round((y1 - y0) * S)], "areas": areas, "tour": tour,
+        "viewbox": [1000, round((y1 - y0) * S)], "areas": areas, "tour": tour, "own": own,
         "mortgage": {"rate": round(bou_lending_rate(), 4), "deposit": m["deposit"], "term": m["term_years"],
                      "cap": m["cap"]},
-        "meta": {"listings": 10643, "cpi": cpi}}
+        "meta": {"listings": 10643, "cpi": cpi, "census_hh": census_hh("GKMA")}}
 out = p("outputs/interactive")
 out.mkdir(parents=True, exist_ok=True)
 (out / "explorer_data.json").write_text(json.dumps(data, separators=(",", ":")))
