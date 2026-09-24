@@ -1,0 +1,297 @@
+<title>Greater Kampala Affordability Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --ground: #f5f7f9;
+  --surface: #ffffff;
+  --ink: #1d2330;
+  --muted: #5b6474;
+  --faint: #d9dee6;
+  --line: #c3cad5;
+  --lake: #d6e4f0;
+  --lake-edge: #a9c3da;
+  --outside: #eceff3;
+  --accent: #9b1030;
+  --control: #1d2330;
+  --control-ink: #ffffff;
+  --shadow: 0 1px 2px rgba(29,35,48,.06), 0 4px 16px rgba(29,35,48,.06);
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #12151b; --surface: #1a1e26; --ink: #e8ebf0; --muted: #9aa3b2; --faint: #2c323d;
+    --line: #3a414d; --lake: #1c2a38; --lake-edge: #2c4258; --outside: #171a21; --accent: #ff6b86;
+    --control: #e8ebf0; --control-ink: #12151b; --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #12151b; --surface: #1a1e26; --ink: #e8ebf0; --muted: #9aa3b2; --faint: #2c323d;
+  --line: #3a414d; --lake: #1c2a38; --lake-edge: #2c4258; --outside: #171a21; --accent: #ff6b86;
+  --control: #e8ebf0; --control-ink: #12151b; --shadow: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 15px/1.5 var(--body); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 40px; }
+header h1 { font: 700 clamp(30px, 4.2vw, 46px)/1.02 var(--display); letter-spacing: .005em; margin: 0 0 8px; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); max-width: 70ch; }
+.grid { display: grid; grid-template-columns: minmax(280px, 340px) 1fr; gap: 24px; margin-top: 24px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border-radius: 10px; box-shadow: var(--shadow); border: 1px solid var(--faint); padding: 18px; display: grid; gap: 18px; }
+.label { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: 500 14px var(--body); padding: 8px 6px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--control); color: var(--control-ink); }
+.seg button:focus-visible, input:focus-visible, .reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.row output { font: 600 20px var(--display); font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--control); margin: 4px 0 0; }
+input[type=range]:disabled { opacity: .35; }
+.ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+.hint { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
+.mortgage { display: grid; gap: 12px; padding-top: 4px; border-top: 1px solid var(--faint); }
+.mortgage[hidden] { display: none !important; }
+.reset { font: 500 13px var(--body); background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; cursor: pointer; justify-self: start; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+.stat .big { font: 700 clamp(40px, 5vw, 56px)/1 var(--display); font-variant-numeric: tabular-nums; }
+.stat .big.hot { color: var(--accent); }
+.stat .cap { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.mapcard { background: var(--surface); border-radius: 10px; box-shadow: var(--shadow); border: 1px solid var(--faint); padding: 16px; display: grid; gap: 14px; }
+.mapbox { position: relative; }
+svg { width: 100%; height: auto; display: block; border-radius: 6px; background: var(--outside); }
+.par { stroke: var(--surface); stroke-width: .5; }
+.par:hover { stroke: var(--ink); stroke-width: 1.6; }
+.lake { fill: var(--lake); stroke: var(--lake-edge); stroke-width: .6; }
+.dist { fill: none; stroke: var(--ink); stroke-width: 1.1; opacity: .55; pointer-events: none; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; box-shadow: var(--shadow); min-width: 190px; }
+.tip b { display: block; font-size: 14px; }
+.tip .v { font-variant-numeric: tabular-nums; }
+.legend { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.ramp { height: 10px; width: 220px; max-width: 100%; border-radius: 3px; background: linear-gradient(90deg, #ffffcc, #fed976, #fd8d3c, #e31a1c, #800026); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th { text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); padding: 6px 8px; }
+td { padding: 8px; border-bottom: 1px solid var(--faint); }
+td.num, th.num { text-align: right; }
+.bar { display: inline-block; height: 8px; border-radius: 2px; background: var(--accent); vertical-align: middle; margin-left: 8px; opacity: .8; }
+.notes { margin-top: 26px; color: var(--muted); font-size: 13px; max-width: 95ch; display: grid; gap: 6px; }
+.notes p { margin: 0; }
+@media (prefers-reduced-motion: no-preference) { .par { transition: fill .18s linear; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Who can afford the housing on offer in Greater Kampala?</h1>
+    <p>Each parish is shaded by the share of its households who could not afford the typical home listed online. Change the test, the share of income people can spend, or the mortgage terms, and the map and figures update.</p>
+  </header>
+
+  <div class="grid">
+    <div class="panel" role="group" aria-label="Assumptions">
+      <div>
+        <div class="label" id="lbl-mode">Housing</div>
+        <div class="seg" aria-labelledby="lbl-mode">
+          <button id="mode-rent" aria-pressed="true">Renting</button>
+          <button id="mode-own" aria-pressed="false">Buying</button>
+        </div>
+        <p class="hint" id="mode-hint"></p>
+      </div>
+      <div>
+        <div class="label" id="lbl-test">Affordability test</div>
+        <div class="seg" aria-labelledby="lbl-test">
+          <button id="test-ratio" aria-pressed="true">Share of income</button>
+          <button id="test-resid" aria-pressed="false">Basic needs</button>
+        </div>
+        <p class="hint" id="test-hint"></p>
+      </div>
+      <div>
+        <div class="row"><label class="label" for="burden">Share of income for housing</label><output id="burden-out"></output></div>
+        <input type="range" id="burden" min="10" max="80" step="1" value="30">
+        <div class="ticks"><span>10%</span><span>30% norm</span><span>50% severe</span><span>80%</span></div>
+      </div>
+      <div class="mortgage" id="mortgage" hidden>
+        <div>
+          <div class="row"><label class="label" for="rate">Interest rate</label><output id="rate-out"></output></div>
+          <input type="range" id="rate" min="10" max="25" step="0.1" value="18.3">
+        </div>
+        <div>
+          <div class="row"><label class="label" for="deposit">Deposit</label><output id="deposit-out"></output></div>
+          <input type="range" id="deposit" min="10" max="60" step="5" value="30">
+        </div>
+        <div>
+          <div class="row"><label class="label" for="term">Term</label><output id="term-out"></output></div>
+          <input type="range" id="term" min="5" max="30" step="1" value="20">
+        </div>
+        <p class="hint">Defaults: Bank of Uganda average lending rate (12 months to July 2026); Housing Finance Bank terms (30% deposit, 20 years, repayments up to 35% of income).</p>
+      </div>
+      <div>
+        <div class="label" id="lbl-ref">Compare households with</div>
+        <div class="seg" aria-labelledby="lbl-ref">
+          <button id="ref-gkma" aria-pressed="true">GKMA median</button>
+          <button id="ref-dist" aria-pressed="false">Own district</button>
+        </div>
+        <p class="hint">"Own district" uses the median listed home in Kampala, Wakiso or Mukono; Buikwe, Luwero and Mpigi have too few listings and use the GKMA median.</p>
+      </div>
+      <button class="reset" id="reset">Reset to the paper's base case</button>
+    </div>
+
+    <div class="mapcard">
+      <div class="stats" aria-live="polite">
+        <div class="stat"><div class="big hot" id="s-share"></div><div class="cap" id="s-share-cap"></div></div>
+        <div class="stat"><div class="big" id="s-hh"></div><div class="cap">households priced out, of 1.96 million</div></div>
+        <div class="stat"><div class="big" id="s-typ"></div><div class="cap" id="s-typ-cap"></div></div>
+      </div>
+      <div class="mapbox" id="mapbox">
+        <svg id="map" role="img" aria-label="Map of Greater Kampala parishes shaded by the share of households priced out"></svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <div class="legend"><span>Households priced out</span><span>0%</span><span class="ramp"></span><span>100%</span><span>· thick lines: district boundaries</span></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Area</th><th class="num">Households</th><th class="num" id="th-cost">Monthly cost</th><th class="num">Priced out</th><th class="num" id="th-typ">Typical household</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <p><b>What this shows.</b> The typical home is the median asking rent of 1–2 bedroom units, or the median asking price of houses and apartments, among 10,643 deduplicated online listings (Jiji, Real Estate Database, Uganda Property Centre; 2025–26). Parish incomes are modelled from UBOS UNHS 2019/20 medians and Census 2024 household wealth, uprated to 2026 prices, with lognormal income spread from UBOS Gini coefficients.</p>
+    <p><b>The two tests.</b> "Share of income": a household is priced out if the monthly cost exceeds the chosen share of its income. "Basic needs": it is priced out if, after paying the cost, it could not cover a minimum non-housing budget (UBOS upper poverty line of UGX 87,000 per adult equivalent per month in 2019/20, uprated; scaled by household size; housing share removed).</p>
+    <p><b>Caveats.</b> Asking prices, not transaction prices; online listings cover the formal, titled market, not informal rentals. Parish values describe modelled household incomes, not listings located in each parish. From <i>Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning</i> (University of Johannesburg, 2026).</p>
+  </div>
+</div>
+
+<script>
+const DATA = __DATA__;
+const $ = (id) => document.getElementById(id);
+const base = { mode: "rent", test: "ratio", burden: 30, rate: Math.round(DATA.mortgage.rate * 1000) / 10,
+               deposit: DATA.mortgage.deposit * 100, term: DATA.mortgage.term, ref: "gkma" };
+let st = { ...base };
+
+// normal CDF (Abramowitz & Stegun 7.1.26)
+function Phi(z) {
+  const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+  const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t
+            * Math.exp(-z * z / 2);
+  return z >= 0 ? (1 + y) / 2 : (1 - y) / 2;
+}
+const payment = (P, r, d, T) => { const L = P * (1 - d), m = r / 12, n = T * 12; return L * m / (1 - Math.pow(1 + m, -n)); };
+const STOPS = [[255,255,204],[254,217,118],[253,141,60],[227,26,28],[128,0,38]];
+function ramp(v) {
+  const x = Math.max(0, Math.min(1, v)) * (STOPS.length - 1), i = Math.min(STOPS.length - 2, Math.floor(x)), f = x - i;
+  const c = STOPS[i].map((a, k) => Math.round(a + (STOPS[i + 1][k] - a) * f));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+const ugx = (v) => "UGX " + (v >= 1e6 ? (v / 1e6).toFixed(v >= 1e7 ? 1 : 2) + " m" : Math.round(v / 1000) + ",000");
+const pct = (v) => (v * 100 >= 99.95 ? ">99.9" : (v * 100).toFixed(1)) + "%";
+
+// monthly housing cost for an area
+function cost(area) {
+  const a = DATA.areas[area] || DATA.areas.GKMA;
+  const src = (st.mode === "rent" ? a.rent : a.price) == null ? DATA.areas.GKMA : a;
+  return st.mode === "rent" ? src.rent : payment(src.price, st.rate / 100, st.deposit / 100, st.term);
+}
+function share(p, H) {
+  const q = st.test === "ratio" ? H / (st.burden / 100) : H + p.nm;
+  return Phi((Math.log(q) - Math.log(p.inc)) / p.sg);
+}
+
+// map
+const svg = $("map");
+const [W, Hh] = DATA.viewbox;
+svg.setAttribute("viewBox", `0 0 ${W} ${Hh}`);
+const NS = "http://www.w3.org/2000/svg";
+const mk = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+svg.append(mk("path", { d: DATA.lake, class: "lake", "fill-rule": "evenodd" }));
+const paths = DATA.parishes.map((p, i) => {
+  const e = mk("path", { d: p.p, class: "par", "fill-rule": "evenodd", "data-i": i });
+  svg.append(e); return e;
+});
+svg.append(mk("path", { d: DATA.districts, class: "dist", "fill-rule": "evenodd" }));
+let shares = [];
+
+function update() {
+  const Hg = cost("GKMA");
+  const Hof = (p) => (st.ref === "dist" ? cost(p.d) : Hg);
+  shares = DATA.parishes.map((p) => share(p, Hof(p)));
+  paths.forEach((e, i) => e.setAttribute("fill", ramp(shares[i])));
+  const agg = (pred) => {
+    let hh = 0, out = 0, lw = 0, ln = 0;
+    DATA.parishes.forEach((p, i) => { if (pred(p)) { hh += p.hh; out += p.hh * shares[i]; lw += p.hh * Math.log(p.inc); ln += p.hh * Math.log(p.nm); } });
+    return { hh, share: out / hh, med: Math.exp(lw / hh), nm: Math.exp(ln / hh) };
+  };
+  const G = agg(() => true);
+  $("s-share").textContent = pct(G.share);
+  $("s-share-cap").textContent = `of GKMA households cannot afford the typical listed ${st.mode === "rent" ? "1–2 bedroom rental" : "house with a mortgage"}`;
+  $("s-hh").textContent = (G.share * G.hh / 1e6).toFixed(2) + " m";
+  if (st.test === "ratio") {
+    $("s-typ").textContent = Math.round(100 * Hg / G.med) + "%";
+    $("s-typ-cap").textContent = `of the median household's income would go on ${st.mode === "rent" ? "rent" : "repayments"} (${ugx(Hg)} a month)`;
+  } else {
+    const left = G.med - Hg - G.nm;
+    $("s-typ").textContent = (left < 0 ? "−" : "+") + ugx(Math.abs(left)).replace("UGX ", "");
+    $("s-typ-cap").textContent = `UGX a month left over after ${st.mode === "rent" ? "rent" : "repayments"} and basic needs, for the median household`;
+  }
+  // table
+  $("th-cost").textContent = st.mode === "rent" ? "Median rent" : "Monthly repayment";
+  $("th-typ").textContent = st.test === "ratio" ? "Typical burden" : "Typical left over";
+  const rows = [["GKMA", () => true], ...["Kampala", "Wakiso", "Mukono"].map((d) => [d, (p) => p.d === d])];
+  $("tbody").innerHTML = rows.map(([name, pred]) => {
+    const A = agg(pred), H = st.ref === "dist" ? cost(name) : Hg;
+    const lo = A.med - H - A.nm;
+    const typ = st.test === "ratio" ? Math.round(100 * H / A.med) + "%" : (lo < 0 ? "−" : "+") + ugx(Math.abs(lo));
+    return `<tr><td>${name}</td><td class="num">${A.hh.toLocaleString("en-GB")}</td><td class="num">${ugx(H)}</td>` +
+           `<td class="num">${pct(A.share)}<span class="bar" style="width:${Math.round(60 * A.share)}px"></span></td><td class="num">${typ}</td></tr>`;
+  }).join("");
+  // controls
+  $("burden-out").textContent = st.test === "ratio" ? st.burden + "%" : "not used";
+  $("burden").disabled = st.test !== "ratio";
+  $("rate-out").textContent = st.rate.toFixed(1) + "%";
+  $("deposit-out").textContent = st.deposit + "%";
+  $("term-out").textContent = st.term + " years";
+  $("mortgage").hidden = st.mode !== "own";
+  $("mode-hint").textContent = st.mode === "rent"
+    ? `Median listed 1–2 bedroom rent: ${ugx(DATA.areas.GKMA.rent)} a month (GKMA).`
+    : `Median listed house or apartment: ${ugx(DATA.areas.GKMA.price)} (GKMA).`;
+  $("test-hint").textContent = st.test === "ratio"
+    ? "Priced out if the monthly cost exceeds the chosen share of income."
+    : "Priced out if, after paying, income would not cover basic non-housing needs.";
+  for (const [id, key, val] of [["mode-rent","mode","rent"],["mode-own","mode","own"],["test-ratio","test","ratio"],
+                                ["test-resid","test","resid"],["ref-gkma","ref","gkma"],["ref-dist","ref","dist"]])
+    $(id).setAttribute("aria-pressed", String(st[key] === val));
+}
+
+const bind = (id, key, fn = Number) => $(id).addEventListener("input", (e) => { st[key] = fn(e.target.value); update(); });
+bind("burden", "burden"); bind("rate", "rate"); bind("deposit", "deposit"); bind("term", "term");
+const tap = (id, patch) => $(id).addEventListener("click", () => { st = { ...st, ...patch() }; syncSliders(); update(); });
+tap("mode-rent", () => ({ mode: "rent", burden: st.mode === "rent" ? st.burden : 30 }));
+tap("mode-own", () => ({ mode: "own", burden: st.mode === "own" ? st.burden : 35 }));
+tap("test-ratio", () => ({ test: "ratio" })); tap("test-resid", () => ({ test: "resid" }));
+tap("ref-gkma", () => ({ ref: "gkma" })); tap("ref-dist", () => ({ ref: "dist" }));
+tap("reset", () => ({ ...base, mode: st.mode, burden: st.mode === "own" ? 35 : 30 }));
+function syncSliders() { for (const k of ["burden", "rate", "deposit", "term"]) $(k).value = st[k]; }
+
+// tooltip
+const tip = $("tip"), box = $("mapbox");
+svg.addEventListener("mousemove", (e) => {
+  const i = e.target.getAttribute && e.target.getAttribute("data-i");
+  if (i == null) { tip.hidden = true; return; }
+  const p = DATA.parishes[+i], r = box.getBoundingClientRect();
+  tip.innerHTML = `<b>${p.n}</b>${p.s}, ${p.d}<br>Median income <span class="v">${ugx(p.inc)}</span> a month` +
+                  `<br>Households <span class="v">${p.hh.toLocaleString("en-GB")}</span><br>Priced out <span class="v"><b style="display:inline">${pct(shares[+i])}</b></span>`;
+  tip.hidden = false;
+  const x = e.clientX - r.left, y = e.clientY - r.top;
+  tip.style.left = Math.min(x + 14, r.width - tip.offsetWidth - 4) + "px";
+  tip.style.top = Math.max(4, y - tip.offsetHeight - 10) + "px";
+});
+svg.addEventListener("mouseleave", () => (tip.hidden = true));
+
+syncSliders();
+update();
+</script>
