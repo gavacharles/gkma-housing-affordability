@@ -9,6 +9,7 @@ listed 1-2 bedroom rent of their district at 30% of income.
 Run scripts/export_explorer_data.py first (tour stops and area medians).
 """
 import json
+import textwrap
 
 import geopandas as gpd
 import matplotlib
@@ -101,15 +102,21 @@ def set_card(i):
     for ln in drawn:
         ln.remove()
     drawn.clear()
-    if i is None:
-        T["step"].set_text("And buying?")
+    if i is None:                                          # closing card, worded as in the explorer
+        for k in ("hero", "sub", "kv2"):
+            T[k].set_text("")
+        T["step"].set_text("AND BUYING?")
         T["name"].set_text("Nowhere comes close")
-        T["blurb"].set_text("On typical Ugandan mortgage terms (about 18%,")
-        T["hero"].set_text("OAI 3.7")
-        T["sub"].set_text("30% deposit, 20 years). 100 would be affordable.")
-        T["kv"].set_text("Even the most affordable sub-county to buy in,\nNansana, scores 20 out of 100.")
-        T["kv2"].set_text("")
+        T["blurb"].set_text(textwrap.fill(
+            "On typical Ugandan mortgage terms (about 18% interest, 30% deposit, 20 years), the Ownership "
+            "Affordability Index is 3.7 for Greater Kampala. Even the most affordable sub-county to buy in, "
+            "Nansana, scores 20 out of 100.", 50))
+        T["blurb"].set_fontsize(15)
+        T["kv"].set_position((0.06, 0.725))
+        T["kv"].set_text("Explore the map yourself:\ngavacharles.github.io/kampala-affordability-explorer")
         return
+    T["blurb"].set_fontsize(14)
+    T["kv"].set_position((0.06, 0.765))
     t = D["tour"][i]
     T["step"].set_text(f"STOP {i + 1} OF {len(D['tour'])}")
     T["name"].set_text(t["name"])
