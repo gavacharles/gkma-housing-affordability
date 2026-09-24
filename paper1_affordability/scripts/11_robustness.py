@@ -10,6 +10,7 @@ Outputs  tables/robustness.csv
 import numpy as np
 import pandas as pd
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.analysis.affordability_index import bou_lending_rate, compute_index
 from gkma.analysis.hedonic import hedonic_ols

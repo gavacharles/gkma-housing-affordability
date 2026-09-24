@@ -8,6 +8,7 @@ import sys
 import numpy as np
 import pandas as pd
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.analysis.hedonic import gwr_fit, hedonic_ols, premium_table, residual_moran, tenure_models
 from gkma.viz import pubmaps as maps

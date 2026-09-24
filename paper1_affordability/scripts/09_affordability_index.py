@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.analysis.affordability_index import bou_lending_rate, burden_gradient, compute_index
 from gkma.config import load_config, p

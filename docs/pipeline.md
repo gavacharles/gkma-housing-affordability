@@ -22,27 +22,27 @@ Optional: `collection.contact_email` in `config.yaml` adds a contact address to 
 | 0 | `00_verify_gazetteer.py` | Checks the neighbourhood lookup against OpenStreetMap and UBOS parishes | `data/lookup/lookup_osm_check.csv`, `lookup_parish_check.csv` |
 | 1 | `01_collect.py --portal jiji` (weekly) · `--portal red` (resumable crawl) · `--portal red --extract file.csv` · `--manual` | Data | `data/raw/<source>/…csv` |
 | 2 | `02_clean.py [--nominatim]` | Cleaning and text-extraction pipeline (methods contribution) | `data/processed/listings.gpkg`, `cleaning_log.csv`, `dedup_report.csv` |
-| 3 | `03_spatial_patterns.py` | **RQ1** distribution and clustering | median choropleths, LISA maps, `morans_i.csv` |
-| 4 | `04_hedonic_gwr.py [--mgwr]` | **RQ2** drivers, title premium, spatial variation | hedonic tables, `title_premium_houses.csv`, `tenure_premium_land.csv`, GWR coefficient maps |
-| 5 | `05_machine_learning.py [--gwr]` | **RQ3** ML vs hedonic, spatial CV, SHAP | `cv_summary_*.csv`, SHAP importance, SHAP-by-location maps |
-| 6 | `06_affordability.py` | **RQ4** where, and for what share, housing is unaffordable | affordability-gap maps, `affordability_summary.csv` |
-| 7 | `07_land_value.py` | Implied land value (links to HAFE) | land-share and land-value maps, `land_value_scenarios.csv` |
-| 8 | `08_validation.py` | Listing-based hedonic index vs UBOS RPPI | `validation_listing_index_vs_rppi.csv`, validation chart |
-| 9 | `09_affordability_index.py` | **RQ4** GKMA Housing Affordability Index (RAI, OAI, AGI), mortgage sensitivity, 10–80% burden gradient, residual-income test, parish supplement | `affordability_index_*.csv`, maps 19–24, S1–S3 |
+| 3 | `paper1_affordability/scripts/03_spatial_patterns.py` | **RQ1** distribution and clustering | median choropleths, LISA maps, `morans_i.csv` |
+| 4 | `paper1_affordability/scripts/04_hedonic_gwr.py [--mgwr]` | **RQ2** drivers, title premium, spatial variation | hedonic tables, `title_premium_houses.csv`, `tenure_premium_land.csv`, GWR coefficient maps |
+| 5 | `paper1_affordability/scripts/05_machine_learning.py [--gwr]` | **RQ3** ML vs hedonic, spatial CV, SHAP | `cv_summary_*.csv`, SHAP importance, SHAP-by-location maps |
+| 6 | `paper1_affordability/scripts/06_affordability.py` | **RQ4** where, and for what share, housing is unaffordable | affordability-gap maps, `affordability_summary.csv` |
+| 7 | `paper1_affordability/scripts/07_land_value.py` | Implied land value (links to HAFE) | land-share and land-value maps, `land_value_scenarios.csv` |
+| 8 | `paper1_affordability/scripts/08_validation.py` | Listing-based hedonic index vs UBOS RPPI | `validation_listing_index_vs_rppi.csv`, validation chart |
+| 9 | `paper1_affordability/scripts/09_affordability_index.py` | **RQ4** GKMA Housing Affordability Index (RAI, OAI, AGI), mortgage sensitivity, 10–80% burden gradient, residual-income test, parish supplement | `affordability_index_*.csv`, maps 19–24, S1–S3 |
 | 10 | `10_sample_adequacy.py` | Precision curve and convergence (justifies the 10,000-listing sample) | `sample_adequacy_*.csv`, S4–S5 |
 | 11 | `11_robustness.py` | Neighbourhood-only locations; each portal left out | `robustness.csv` |
 | — | `run_paper.sh` | All analysis stages on the frozen dataset, then the manuscript (`build_manuscript.py`, `build_supplement.py`, `build_docx.py`) | `docs/manuscript/manuscript.docx`, `supplementary.docx` |
 
-Run the scripts with `.venv/bin/python scripts/<name>.py`. Tables go to `outputs/tables/`.
+Shared stages (00–02) run with `.venv/bin/python scripts/<name>.py`; paper-1 stages (03 onwards) with `.venv/bin/python paper1_affordability/scripts/<name>.py`. Paper-1 tables go to `paper1_affordability/outputs/tables/`.
 
 ## Publication maps
 Built once: `.venv/bin/python scripts/00_prepare_basemap.py` (lake, land mask, boundaries, roads, labels, Uganda locator). All figures follow Elsevier, Taylor & Francis and MDPI artwork rules:
-- **Formats:** each figure in `outputs/maps/` as vector **PDF** (fonts embedded), **600 dpi TIFF** (LZW) and 300 dpi PNG for drafts.
+- **Formats:** each figure in `paper1_affordability/outputs/maps/` as vector **PDF** (fonts embedded), **600 dpi TIFF** (LZW) and 300 dpi PNG for drafts.
 - **Size and type:** 170 mm full width (90 mm single column), Arial at 6–8 pt at print size.
-- **Titles and captions:** titles go in the caption, not the figure. `outputs/maps/captions.md` holds a draft caption for each figure, with notes and data sources.
+- **Titles and captions:** titles go in the caption, not the figure. `paper1_affordability/outputs/maps/captions.md` holds a draft caption for each figure, with notes and data sources.
 - **Cartography:** a fixed GKMA extent for every map; parishes clipped to the Lake Victoria shoreline; a Kampala-core inset; degree ticks, scale bar, north arrow; and the OpenStreetMap attribution (required by its ODbL licence).
 - **Colour:** ColorBrewer for magnitudes (safe for colour-blind readers and greyscale print), GeoDa colours for LISA clusters, Okabe–Ito for categories.
-- **Editable layers:** each mapped layer is also saved to `outputs/gis/<figure>.gpkg`, so any map can be restyled in QGIS or ArcGIS.
+- **Editable layers:** each mapped layer is also saved to `paper1_affordability/outputs/gis/<figure>.gpkg`, so any map can be restyled in QGIS or ArcGIS.
 
 ## Try it on synthetic data first
 
@@ -51,7 +51,7 @@ Built once: `.venv/bin/python scripts/00_prepare_basemap.py` (lake, land mask, b
 export GKMA_CONFIG=demo/config_demo.yaml
 .venv/bin/python scripts/02_clean.py --out demo/processed
 for s in 03_spatial_patterns 04_hedonic_gwr 05_machine_learning 06_affordability 07_land_value; do
-  .venv/bin/python scripts/$s.py --data demo/processed --out demo/outputs; done
+  .venv/bin/python paper1_affordability/scripts/$s.py --data demo/processed --out demo/outputs; done
 unset GKMA_CONFIG
 ```
 

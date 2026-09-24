@@ -6,7 +6,7 @@
   2. hundred_households    100 households: already below the poverty line, pushed
                            below it by the typical rent, able to afford it
 
-  python scripts/anim_affordability.py  ->  outputs/animations/*.gif, *.mp4
+  python paper1_affordability/scripts/anim_affordability.py  ->  outputs/animations/*.gif, *.mp4
 """
 import geopandas as gpd
 import matplotlib
@@ -18,6 +18,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Polygon, Rectangle
 from scipy.stats import norm
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 from gkma.config import load_config, p
 from gkma.viz import pubmaps as pm
@@ -29,7 +30,7 @@ try:
 except ImportError:
     HAVE_MP4 = False
 
-OUT = p("outputs/animations")
+OUT = p("paper1_affordability/outputs/animations")
 OUT.mkdir(parents=True, exist_ok=True)
 plt.rcParams["font.family"] = ["Arial", "Helvetica", "DejaVu Sans"]
 INK, MUTED, BG = "#1f1f1f", "#5a5a5a", "#ffffff"
@@ -55,7 +56,7 @@ par = gpd.read_file(p(cfg["income"]["parish_income"]))
 par["district"] = par[g["district_name_col"]].str.title()
 par["income"] = par["median_income_2019_20"] * cpi
 par["sigma"] = par["district"].map(sig)
-T = p("outputs/tables")
+T = p("paper1_affordability/outputs/tables")
 gk = pd.read_csv(T / "affordability_index_gkma.csv").iloc[0]
 RENT = float(gk["median_rent"])                           # median listed 1-2 bedroom rent, GKMA
 ok = par.dropna(subset=["income", "sigma", "households"])

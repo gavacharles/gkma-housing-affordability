@@ -22,15 +22,16 @@ data/external/**
 !data/external/README.md
 
 # outputs: keep aggregate tables, PNG figures, captions and social; drop heavy exports and logs
-outputs/**
-!outputs/
-!outputs/tables/
-!outputs/tables/**
-!outputs/maps/
-!outputs/maps/*.png
-!outputs/maps/captions.md
-!outputs/social/
-!outputs/social/**
+outputs/
+paper*/outputs/**
+!paper*/outputs/
+!paper*/outputs/tables/
+!paper*/outputs/tables/**
+!paper*/outputs/maps/
+!paper*/outputs/maps/*.png
+!paper*/outputs/maps/captions.md
+!paper*/outputs/social/
+!paper*/outputs/social/**
 
 demo/raw/
 demo/processed/

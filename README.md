@@ -34,12 +34,18 @@ Housing policy in Uganda has relied on national figures—the housing deficit, m
 3. How well do machine-learning models predict prices compared with hedonic models, once validated spatially?
 4. How affordable is the housing on offer, for renting and for ownership, and where is the gap widest?
 
+## Papers
+
+This repository holds one shared data pipeline and the papers built on it:
+
+- **Paper 1 — [`paper1_affordability/`](paper1_affordability/):** *Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning.* The findings above come from this paper.
+- **Paper 2 — [`paper2_transit/`](paper2_transit/) (in planning):** *Is transit access capitalised in an informal housing market? Evidence from online listings in Greater Kampala.*
+
 ## Repository contents
 
-- `docs/manuscript/`: the paper and its supplementary materials
-- `outputs/maps/` and `outputs/tables/`: figures and aggregate results
-- `docs/explorer/explorer.html`: an interactive map of who can afford the typical listed home (download and open in a browser; it works offline)
-- `src/` and `scripts/`: the data pipeline and analysis code
+- `src/`, `scripts/` (stages 00–02) and `config.yaml`: the shared pipeline for collecting, cleaning and locating listings and preparing census, income and map data
+- `paper1_affordability/`: paper 1's analysis scripts, results, manuscript and interactive explorer
+- `paper2_transit/`: paper 2's plan and, as it develops, its scripts and results
 - `docs/pipeline.md`: setup, workflow and technical notes
 
 Listing-level data are not included, because they contain third-party content from the portals.

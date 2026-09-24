@@ -1,7 +1,8 @@
 """Conceptual framework figure (publication format, 170 mm wide).
 
-  python scripts/fig_conceptual_framework.py   -> outputs/maps/00_conceptual_framework.{pdf,tif,png}
+  python paper1_affordability/scripts/fig_conceptual_framework.py   -> outputs/maps/00_conceptual_framework.{pdf,tif,png}
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch

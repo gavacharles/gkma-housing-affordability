@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import shap
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.analysis.ml import cross_validate, fit_and_explain, shap_by_unit, shap_importance, summarise_cv
 from gkma.viz import pubmaps as maps

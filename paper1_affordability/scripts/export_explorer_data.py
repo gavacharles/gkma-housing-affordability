@@ -4,7 +4,7 @@ Parish shapes (clipped to land, simplified, projected to an SVG viewBox),
 modelled parish incomes, dispersion, households and minimum non-housing
 budgets, plus the median listed rent/price for each area.
 
-  python scripts/export_explorer_data.py  ->  outputs/interactive/explorer_data.json
+  python paper1_affordability/scripts/export_explorer_data.py  ->  outputs/interactive/explorer_data.json
 """
 import json
 
@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import norm
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 from gkma.analysis.affordability_index import bou_lending_rate
 from gkma.config import load_config, p
@@ -69,7 +70,7 @@ dist = "".join(path(gm.intersection(frame), tol=60) for gm in b["districts"].geo
 
 areas = {}
 for f, key in [("affordability_index_gkma.csv", None), ("affordability_index_district.csv", None)]:
-    for _, r in pd.read_csv(p("outputs/tables") / f).iterrows():
+    for _, r in pd.read_csv(p("paper1_affordability/outputs/tables") / f).iterrows():
         if pd.notna(r.get("median_rent")) or pd.notna(r.get("median_price")):
             areas[r["area"]] = {"rent": None if pd.isna(r["median_rent"]) else float(r["median_rent"]),
                                 "price": None if pd.isna(r["median_price"]) else float(r["median_price"]),
@@ -80,7 +81,7 @@ sc = gpd.read_file(p(g["subcounties"])).to_crs(crs)
 sc["area"] = sc[g["district_name_col"]].str.title() + "/" + sc[g["subcounty_name_col"]]
 dist_poly = sc.dissolve(g["district_name_col"]).reset_index()
 dist_poly["area"] = dist_poly[g["district_name_col"]].str.title()
-T = p("outputs/tables")
+T = p("paper1_affordability/outputs/tables")
 idx = pd.concat([pd.read_csv(T / f"affordability_index_{lv}.csv") for lv in ("gkma", "district", "subcounty")])
 idx = idx.set_index("area")
 STOPS = [("GKMA", "Greater Kampala", "The whole metropolitan area"),
@@ -175,7 +176,7 @@ data = {"parishes": parishes, "lake": lake, "districts": dist,
         "mortgage": {"rate": round(bou_lending_rate(), 4), "deposit": m["deposit"], "term": m["term_years"],
                      "cap": m["cap"]},
         "meta": {"listings": 10643, "cpi": cpi, "census_hh": census_hh("GKMA")}}
-out = p("outputs/interactive")
+out = p("paper1_affordability/outputs/interactive")
 out.mkdir(parents=True, exist_ok=True)
 (out / "explorer_data.json").write_text(json.dumps(data, separators=(",", ":")))
 print(len(parishes), "parishes;", round((out / "explorer_data.json").stat().st_size / 1024), "KB;", list(areas))

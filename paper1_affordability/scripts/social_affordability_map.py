@@ -5,8 +5,9 @@ for sub-counties / Kampala divisions with at least 20 rental listings, in three
 broad bands. Same figures as Figure 14 of the paper and the online explorer
 (outputs/tables/affordability_index_subcounty.csv).
 
-  python scripts/social_affordability_map.py
+  python paper1_affordability/scripts/social_affordability_map.py
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 import geopandas as gpd
 import matplotlib.patheffects as pe
@@ -19,8 +20,8 @@ from gkma.config import load_config, p
 from gkma.viz import pubmaps as pm
 
 g = load_config()["geography"]
-aff = pd.read_csv(p("outputs/tables/affordability_index_subcounty.csv")).dropna(subset=["agi_rent"])
-gk = pd.read_csv(p("outputs/tables/affordability_index_gkma.csv")).iloc[0]
+aff = pd.read_csv(p("paper1_affordability/outputs/tables/affordability_index_subcounty.csv")).dropna(subset=["agi_rent"])
+gk = pd.read_csv(p("paper1_affordability/outputs/tables/affordability_index_gkma.csv")).iloc[0]
 sub = pm.clip_land(gpd.read_file(p(g["subcounties"])))
 
 # the paper's gap index by sub-county; needs >= 20 rental listings
@@ -70,7 +71,7 @@ fig.text(0.05, 0.035, "Early findings from PhD research, University of Johannesb
          fontsize=5.4, color="#555555")
 fig.text(0.05, 0.015, "Data: 10,643 online property listings, 2025–26; UBOS Census 2024 & UNHS 2019/20. Basemap © OpenStreetMap contributors.",
          fontsize=5.0, color="#777777")
-out = p("outputs/social")
+out = p("paper1_affordability/outputs/social")
 out.mkdir(parents=True, exist_ok=True)
 fig.savefig(out / "affordability_social_1080.png", dpi=200, facecolor="white")
 print("saved", out / "affordability_social_1080.png", "| sub-counties shown:", int(sub["share"].notna().sum()))

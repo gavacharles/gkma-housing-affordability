@@ -36,12 +36,6 @@
 ## S5_convergence
 **Stability of the affordability index as the sample grows.** Points: mean over 20 random subsamples of 50–90% of listings (full sample at right); whiskers: ±1.96 s.d. across subsamples. Sources: Listings; modelled incomes; BoU lending rates.
 
-## 17_parish_median_income
-**Modelled median monthly household income by parish (2026 prices).** Parish median = UNHS 2019/20 sub-region median × exp(b × (parish wealth − sub-region mean)); Census 2024 wealth index; uprated by headline CPI (×1.297). Sources: Listings: RED, Jiji, Uganda Property Centre (asking prices, deduplicated); boundaries: UBOS (parishes 2016); basemap: OpenStreetMap; lake: OSM.
-
-## 18_income_calibration
-**Calibration of the parish income model across the 15 UNHS sub-regions.** Each point is a UNHS 2019/20 sub-region; the line is the fitted relationship used to scale sub-region medians to parishes. Sources: UBOS UNHS 2019/20 (Table 5.21); UBOS NPHC 2024 sub-county profile tables.
-
 ## 01_study_area
 **Study area: Greater Kampala Metropolitan Area and listing locations.** Study districts shaded red on the locator map; the frame shows the map extent used in all figures. Sources: Listings: RED, Jiji, Uganda Property Centre (asking prices, deduplicated); boundaries: UBOS (parishes 2016); basemap: OpenStreetMap; lake: OSM.
 
@@ -122,6 +116,12 @@
 
 ## 24_residual_income
 **Residual-income test of affordability.** A household can afford the home if income minus the housing cost covers its minimum non-housing budget: the UBOS upper poverty line (UGX 87,000 per adult equivalent per month, 2019/20; uprated by CPI) × adult equivalents, less the housing share of spending. Mortgage: 18.3%, 30% deposit, 20 years. Sources: Listings; UBOS UNHS 2019/20 and Census 2024 (modelled incomes, household size); BoU lending rates.
+
+## 17_parish_median_income
+**Modelled median monthly household income by parish (2026 prices).** Parish median = UNHS 2019/20 sub-region median × exp(b × (parish wealth − sub-region mean)); Census 2024 wealth index; uprated by headline CPI (×1.297). Sources: Listings: RED, Jiji, Uganda Property Centre (asking prices, deduplicated); boundaries: UBOS (parishes 2016); basemap: OpenStreetMap; lake: OSM.
+
+## 18_income_calibration
+**Calibration of the parish income model across the 15 UNHS sub-regions.** Each point is a UNHS 2019/20 sub-region; the line is the fitted relationship used to scale sub-region medians to parishes. Sources: UBOS UNHS 2019/20 (Table 5.21); UBOS NPHC 2024 sub-county profile tables.
 
 ## 00_conceptual_framework
 **Conceptual framework of the study.** Theoretical lenses (T1–T5) inform the determinants of asking prices and rents, the decomposition into land and structure, and the affordability gap. Online listings observe the formal, titled segment of the market, which conditions all observed outcomes. Sources: Authors' elaboration.
