@@ -1,0 +1,17 @@
+market,n,median,q25,q75
+rent (1–2 bedrooms),5,0.683,0.4938,1.2631
+rent (1–2 bedrooms),10,0.448,0.3284,0.7294
+rent (1–2 bedrooms),15,0.3333,0.2353,0.5041
+rent (1–2 bedrooms),20,0.3021,0.2063,0.4381
+rent (1–2 bedrooms),30,0.2286,0.1786,0.3333
+rent (1–2 bedrooms),50,0.1875,0.1349,0.288
+rent (1–2 bedrooms),75,0.145,0.1071,0.2253
+rent (1–2 bedrooms),100,0.115,0.0959,0.1933
+"sale (houses, apartments)",5,1.0566,0.6508,1.7379
+"sale (houses, apartments)",10,0.6339,0.4566,0.8988
+"sale (houses, apartments)",15,0.477,0.3388,0.6932
+"sale (houses, apartments)",20,0.4232,0.3078,0.5509
+"sale (houses, apartments)",30,0.3508,0.2656,0.4695
+"sale (houses, apartments)",50,0.2746,0.2091,0.3627
+"sale (houses, apartments)",75,0.2179,0.1698,0.2878
+"sale (houses, apartments)",100,0.1754,0.1352,0.2373

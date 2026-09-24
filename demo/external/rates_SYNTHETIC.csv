@@ -1,0 +1,6 @@
+cost_class,rate_ugx_per_m2,year,source
+bungalow_standard,1500000,2026,SYNTHETIC placeholder
+bungalow_high,2200000,2026,SYNTHETIC placeholder
+storeyed,2400000,2026,SYNTHETIC placeholder
+apartment,2000000,2026,SYNTHETIC placeholder
+shell,800000,2026,SYNTHETIC placeholder

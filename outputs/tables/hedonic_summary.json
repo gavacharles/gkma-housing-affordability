@@ -1,0 +1,42 @@
+{
+  "rent": {
+    "n": 3205,
+    "r2_adj": 0.6817058857803511,
+    "moran_I_resid": 0.18797333263727412,
+    "p_sim": 0.001,
+    "gwr": {
+      "aicc": 5465.596342412526,
+      "r2": 0.6670797239166928,
+      "bandwidths": {
+        "intercept": 272.0,
+        "bedrooms": 306.0,
+        "bathrooms": 278.0,
+        "dist_cbd_km": 272.0,
+        "dist_major_road_km": 272.0,
+        "f_self_contained": 335.0,
+        "f_gated": 2810.0
+      },
+      "n": 3000
+    }
+  },
+  "sale": {
+    "n": 2529,
+    "r2_adj": 0.6218436880471201,
+    "moran_I_resid": 0.14141785173235202,
+    "p_sim": 0.001,
+    "gwr": {
+      "aicc": 202.557260415183,
+      "r2": 0.5312957233664699,
+      "bandwidths": {
+        "intercept": 509.0,
+        "bedrooms": 446.0,
+        "bathrooms": 2352.0,
+        "dist_cbd_km": 386.0,
+        "dist_major_road_km": 386.0,
+        "f_self_contained": 2032.0,
+        "f_gated": 2189.0
+      },
+      "n": 2529
+    }
+  }
+}

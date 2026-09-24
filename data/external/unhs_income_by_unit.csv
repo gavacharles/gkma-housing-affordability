@@ -1,0 +1,7 @@
+unit,median_monthly_income_ugx,households,income_log_sd,gini,survey_median_rent_ugx,cpi_uplift,unhs_subregion,source_note
+Kampala,667000,,,0.342,,1.2969,Kampala,"UNHS 2019/20 report Table 5.21 (median monthly household income, cash + in-kind, 2019/20 total) and Table 6.10 (consumption Gini 2019/20)"
+Wakiso,302000,,,0.45,,1.2969,Buganda South,"Sub-region value (Buganda South also covers Masaka, Mpigi, Rakai etc.); replace with district estimate from microdata; Gini: district value from UBOS/UNICEF/World Bank Poverty Map report (Oct 2019), Wakiso 0.45, Mukono 0.44+"
+Mpigi,302000,,,0.428,,1.2969,Buganda South,Sub-region value; replace with district estimate from microdata
+Mukono,208000,,,0.44,,1.2969,Buganda North,"Sub-region value (Buganda North also covers Kayunga, Mubende etc.); replace with district estimate from microdata; Gini: district value from UBOS/UNICEF/World Bank Poverty Map report (Oct 2019), Wakiso 0.45, Mukono 0.44+"
+Buikwe,208000,,,0.343,,1.2969,Buganda North,Sub-region value; replace with district estimate from microdata
+Luwero,208000,,,0.343,,1.2969,Buganda North,Sub-region value; replace with district estimate from microdata

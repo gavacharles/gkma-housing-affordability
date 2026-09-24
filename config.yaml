@@ -1,0 +1,149 @@
+# ---------------------------------------------------------------------------
+# GKMA housing affordability — project configuration
+# All paths are relative to the project root.
+# ---------------------------------------------------------------------------
+
+project:
+  crs_geographic: "EPSG:4326"
+  crs_projected: "EPSG:32636"      # UTM zone 36N — metres, covers GKMA
+  random_seed: 42
+  raw_dir: "data/raw"
+
+# ---------------------------------------------------------------------------
+# Data collection
+# Each portal is gated. A collector refuses to run unless `permission` is
+# one of: "terms_permit" (terms/robots checked and do not prohibit),
+# "written_consent" (you hold a letter/email — record its reference).
+# Portals whose terms prohibit automated copying stay "not_granted" until
+# consent arrives. See docs/portal_assessment.md.
+# ---------------------------------------------------------------------------
+collection:
+  contact_email: ""                           # optional; added to the User-Agent only if filled in
+  user_agent: "GKMA-affordability-research/0.1 (University of Johannesburg)"
+  min_delay_seconds: 4.0                       # between requests to one host
+  max_pages_per_run: 200
+  cache_dir: "data/raw/_http_cache"
+  collection_window:                           # fixed window, report in paper
+    start: "2026-10-01"
+    end: "2026-12-31"
+
+  portals:
+    jiji:
+      permission: "terms_permit"               # checked 2026-09-22; see docs
+      consent_reference: ""
+      categories:
+        - houses-apartments-for-rent
+        - houses-apartments-for-sale
+        - land-and-plots-for-sale
+      region_slugs: []                         # empty = national feed, filtered to GKMA later
+    red:                                       # realestatedatabase.net (+ lamudi.co.ug, same backend)
+      permission: "researcher_authorised"      # terms prohibit copying without consent
+      consent_reference: "2026-09-23: researcher instructed collection to proceed; written consent from Zillion Technologies (RED) being sought in parallel (docs/letter_template.md)"
+      # RED's sitemap is stale (max code 233811, ~Oct 2025); crawl walks codes instead.
+      latest_code: 256100                      # newest code seen live (binary search, 2026-09-23)
+      latest_code_date: "2026-09-23"
+      min_code: 233000                         # ~1 Oct 2025 by the Wayback code-date calibration
+      sitemap: "https://www.realestatedatabase.net/SiteMap4RealEstateDatabase.xml"
+      feed_csv: ""                             # path to the extract RED sends you, if they do
+    upc:                                       # ugandapropertycentre.com
+      permission: "researcher_authorised"      # terms ban automated access without consent
+      consent_reference: "2026-09-23: researcher instructed full collection; written consent from Dilmak Solutions Ventures (UPC) being sought in parallel"
+      sitemap: "https://ugandapropertycentre.com/sitemaps/sitemap_listings_1.txt"
+
+# ---------------------------------------------------------------------------
+# Cleaning
+# ---------------------------------------------------------------------------
+cleaning:
+  # UGX per USD. Use the Bank of Uganda mid-rate for the month of listing;
+  # data/external/bou_usd_ugx_monthly.csv overrides this fallback if present.
+  usd_ugx_fallback: 3700
+  fx_table: "data/external/bou_usd_ugx_monthly.csv"
+  decimal_m2: 40.4686                          # 1 decimal = 1/100 acre = 435.6 sq ft
+  # Plausibility bounds (UGX). Records outside are flagged, not silently dropped.
+  bounds:
+    rent_month: [50000, 60000000]
+    sale: [5000000, 30000000000]
+    land_per_decimal: [500000, 1500000000]
+  dedup:
+    title_similarity: 88                       # rapidfuzz token_set_ratio
+    price_tolerance: 0.005                     # 0.5 % (estates list near-identical units at near-identical prices)
+    date_window_days: 60
+
+# ---------------------------------------------------------------------------
+# Study area and geography
+# ---------------------------------------------------------------------------
+geography:
+  gkma_districts: ["Kampala", "Wakiso", "Mukono"]
+  gkma_fringe_districts: ["Mpigi", "Buikwe", "Luwero"]
+  # Admin boundaries: UBOS "Uganda administrative boundaries as of 17-08-2018"
+  # (HDX, CC0): parishes 2016, sub-counties 2017. Built by the setup step from
+  # data/external/boundaries/ubos_2018/. The newer HDX COD-AB (2020) stops at
+  # sub-county and has only the 5 divisions for Kampala.
+  parishes: "data/external/boundaries/uga_admin4_parishes.gpkg"
+  subcounties: "data/external/boundaries/uga_admin3_subcounties.gpkg"
+  parish_name_col: "PName2016"
+  subcounty_name_col: "SName2016"
+  district_name_col: "DName2016"
+  neighbourhood_lookup: "data/lookup/neighbourhood_lookup.csv"
+  # Island sub-counties whose parishes are mostly open lake (not part of the
+  # metropolitan housing market)
+  exclude_subcounties: ["Koome"]
+  map_level: "subcounty"                      # mapping unit: subcounty (main) | parish (supplementary)
+  min_listings_per_unit: 20                    # precision rule: below this an area is not mapped
+
+  points_of_interest:
+    cbd: [32.5825, 0.3136]                     # Constitutional Square (lon, lat)
+  # Expressway / bypass geometries are pulled from OSM by name; see covariates.py
+  corridors:
+    northern_bypass: "Northern Bypass"
+    entebbe_expressway: "Kampala-Entebbe Expressway"
+  # Overpass endpoint for OSM downloads. The main server rate-limits heavy
+  # queries; mirrors: https://overpass.kumi.systems/api  https://maps.mail.ru/osm/tools/overpass/api
+  overpass_url: "https://overpass.kumi.systems/api"
+  night_lights: "data/external/viirs_annual_2024_uganda.tif"
+  flood: "data/external/flood_hazard_gkma.gpkg"
+
+# ---------------------------------------------------------------------------
+# Income and construction cost
+# ---------------------------------------------------------------------------
+income:
+  # One row per spatial unit (district, or finer if UBOS provides it).
+  # Required columns: unit, median_monthly_income_ugx, households,
+  # and optionally lognormal sigma (income_log_sd) and survey rent median.
+  table: "data/external/unhs_income_by_unit.csv"
+  join_level: "parish"                         # district | parish (parish: scripts/00_parish_income.py)
+  parish_income: "data/external/parish_income.gpkg"
+  affordability_threshold: 0.30
+
+construction:
+  # Replacement cost per m² by house type (UGX, your own rates).
+  table: "data/external/replacement_cost_rates.csv"
+  # Assumed floor area per bedroom when floor area is missing (m²),
+  # used only for the implied land-value stage. State it; test sensitivity.
+  m2_per_bedroom: [25, 32, 40]
+  depreciation_default: 0.15
+
+# ---------------------------------------------------------------------------
+# Modelling
+# ---------------------------------------------------------------------------
+modelling:
+  spatial_cv_folds: 5
+  spatial_cv_block_km: 3
+  targets:
+    rent: "log_rent_month_ugx"
+    sale: "log_price_ugx"
+
+# ---------------------------------------------------------------------------
+# GKMA Housing Affordability Index (scripts/09_affordability_index.py)
+# ---------------------------------------------------------------------------
+affordability_index:
+  min_listings: 20                 # per area for an index value (precision rule)
+  mortgage:                        # base case from Ugandan evidence (see docs/manuscript, Table 3)
+    rate: "bou"                    # 12-month mean BoU weighted-average shilling lending rate (~18%); CAHF 2024: 16-22%
+    deposit: 0.30                  # HFB: loan-to-value up to 70% in Kampala (80% in its FAQ; 50% other towns)
+    term_years: 20                 # HFB: maximum 20 years residential; CAHF 2024: up to 25 years in the market
+    cap: 0.35                      # HFB: monthly repayment up to 35% of gross income (repayment-to-income cap)
+  residual_income:                 # Stone (2006) / Kutty (2005) residual-income test
+    poverty_line_ae_2019_20: 87000 # UBOS upper poverty line, UGX per adult equivalent per month (UNHS 2019/20, p. 18)
+    ae_per_person: 0.787           # adult equivalents per person: 76,136 / 96,774 (UNHS 2019/20 Tables 6.3 and 6.6)
+    housing_share: 0.174           # housing, water, electricity & fuels share of spending (UNHS 2019/20 Table 6.4), removed from the line

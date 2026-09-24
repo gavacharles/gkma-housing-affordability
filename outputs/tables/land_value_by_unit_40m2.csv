@@ -1,0 +1,80 @@
+unit_id,unit_name,DName2016,median_land_share,median_implied_land_per_decimal,n_houses,share_negative,median_landonly_per_decimal,n_land
+Wakiso/Gombe Division,Gombe Division,Wakiso,0.205216,2295050.0,22.0,0.7283950617283951,1698841.5018496704,104.0
+Wakiso/Nabweru Division,Nabweru Division,Wakiso,,,,,,
+Wakiso/Kasangati Town Council,Kasangati Town Council,Wakiso,0.33768,5402880.0,83.0,0.4503311258278146,3151494.719656106,148.0
+Wakiso/Ndejje Division,Ndejje Division,Wakiso,0.6462113333333334,25482000.0,108.0,0.14285714285714285,10200000.0,80.0
+Wakiso/Division A,Division A,Wakiso,0.6006009696969696,22278651.42857143,48.0,0.12727272727272726,6273770.491803279,112.0
+Wakiso/Division B,Division B,Wakiso,,,,,,
+Wakiso/Kakiri,Kakiri,Wakiso,,,,1.0,,2.0
+Wakiso/Kakiri Town Council,Kakiri Town Council,Wakiso,,,4.0,0.5,1524601.3478138067,68.0
+Wakiso/Kasanje,Kasanje,Wakiso,,,1.0,0.6666666666666666,2003761.7714124317,27.0
+Mukono/Nakisunga,Nakisunga,Mukono,,,1.0,0.6666666666666666,958320.8471972499,11.0
+Mukono/Nagojje,Nagojje,Mukono,,,,,,
+Mukono/Kyampisi,Kyampisi,Mukono,,,3.0,0.5,1132561.0012331135,11.0
+Wakiso/Masuliita,Masuliita,Wakiso,,,,,,
+Wakiso/Masulita Town Council,Masulita Town Council,Wakiso,,,,1.0,,
+Wakiso/Mende,Mende,Wakiso,,,,,1655281.4633407043,6.0
+Wakiso/Namayumba Town Council,Namayumba Town Council,Wakiso,,,,1.0,,1.0
+Wakiso/Kyengera Town Council,Kyengera Town Council,Wakiso,0.50326,8018153.333333334,7.0,0.72,3375902.9844448576,10.0
+Wakiso/Wakiso,Wakiso,Wakiso,0.49645569620253166,10789200.0,9.0,0.6896551724137931,4356003.85089659,7.0
+Wakiso/Wakiso Town Council,Wakiso Town Council,Wakiso,0.456501052631579,8753600.0,213.0,0.40502793296089384,3136322.772645545,362.0
+Wakiso/Kira Division,Kira Division,Wakiso,0.5183127272727273,15776271.42857143,636.0,0.10799438990182328,8333333.333333333,471.0
+Wakiso/Kajjansi Town Council,Kajjansi Town Council,Wakiso,0.5772425531914893,20104320.0,293.0,0.06687898089171974,6201923.076923077,114.0
+Buikwe/Wakisi Division,Wakisi Division,Buikwe,,,,,,
+Mukono/Ntunda,Ntunda,Mukono,,,,,,
+Mpigi/Kammengo,Kammengo,Mpigi,,,,,,
+Mpigi/Mpigi Town Council,Mpigi Town Council,Mpigi,0.470144,2246537.1428571427,5.0,0.4444444444444444,871200.7701793181,64.0
+Mpigi/Muduuma,Muduuma,Mpigi,,,,,,
+Mpigi/Kiringente,Kiringente,Mpigi,,,,1.0,,
+Wakiso/Busukuma Division,Busukuma Division,Wakiso,0.08645517241379311,1323694.4444444445,10.0,0.3333333333333333,2221561.9639572613,30.0
+Mukono/Goma Division,Goma Division,Mukono,0.33768,4620000.0,119.0,0.32,4900000.0,142.0
+Mukono/Nabbaale,Nabbaale,Mukono,,,1.0,0.0,,
+Mukono/Seeta Namuganga,Seeta Namuganga,Mukono,,,,,,
+Buikwe/Buikwe,Buikwe,Buikwe,,,,,,
+Buikwe/Ssi-Bukunja,Ssi-Bukunja,Buikwe,,,,,,
+Buikwe/Ngogwe,Ngogwe,Buikwe,,,,,,
+Buikwe/Najja,Najja,Buikwe,,,,,,3.0
+Buikwe/Nyenga Division,Nyenga Division,Buikwe,,,,,,
+Wakiso/Namayumba,Namayumba,Wakiso,,,,,,
+Mukono/Kimenyedde,Kimenyedde,Mukono,,,,,,
+Luwero/Makulubita,Makulubita,Luwero,,,,1.0,,
+Luwero/Luwero,Luwero,Luwero,,,,,,3.0
+Luwero/Kikyusa,Kikyusa,Luwero,,,,,,
+Luwero/Zirobwe,Zirobwe,Luwero,,,,,,1.0
+Luwero/Katikamu,Katikamu,Luwero,,,,,,
+Luwero/Wobulenzi Town Council,Wobulenzi Town Council,Luwero,,,,,,
+Luwero/Bamunanika,Bamunanika,Luwero,,,,,,
+Luwero/Nyimbwa,Nyimbwa,Luwero,,,,,,
+Luwero/Kalagala,Kalagala,Luwero,,,4.0,0.3333333333333333,500000.0,8.0
+Luwero/Bombo Town Council,Bombo Town Council,Luwero,,,,1.0,150000.0,43.0
+Luwero/Butuntumula,Butuntumula,Luwero,,,,,,1.0
+Luwero/Kamira,Kamira,Luwero,,,,,,
+Mukono/Mpatta,Mpatta,Mukono,,,,,,
+Wakiso/Katabi  Town Council,Katabi  Town Council,Wakiso,0.4938,13771400.0,37.0,0.22916666666666666,6583333.333333334,72.0
+Luwero/Luwero Town Council,Luwero Town Council,Luwero,,,,,,
+Buikwe/Buikwe Town Council,Buikwe Town Council,Buikwe,,,,,,
+Buikwe/Kawolo Division,Kawolo Division,Buikwe,,,,,,
+Buikwe/Central Division,Central Division,Buikwe,,,,1.0,100000.0,5.0
+Buikwe/Najjembe Division,Najjembe Division,Buikwe,,,1.0,0.0,,2.0
+Buikwe/Njeru Division,Njeru Division,Buikwe,,,,,,
+Buikwe/Nkokonjeru Town Council,Nkokonjeru Town Council,Buikwe,,,,,,
+Mpigi/Buwama,Buwama,Mpigi,,,,,,
+Wakiso/Bussi,Bussi,Wakiso,,,,,,
+Mpigi/Kituntu,Kituntu,Mpigi,,,,,,
+Mpigi/Nkozi,Nkozi,Mpigi,,,,,,
+Mukono/Mpunge,Mpunge,Mukono,,,,,,
+Mukono/Nama,Nama,Mukono,,,,,,
+Mukono/Ntenjeru,Ntenjeru,Mukono,,,,,,
+Mukono/Central Division,Central Division,Mukono,0.28397837837837836,2430628.5714285714,65.0,0.5075757575757576,1834760.808688284,224.0
+Mukono/Kasawo,Kasawo,Mukono,,,,,,1.0
+Wakiso/Nansana Division,Nansana Division,Wakiso,0.40568607142857144,8754000.0,12.0,0.7894736842105263,5953205.262892007,6.0
+Wakiso/Bunamwaya Division,Bunamwaya Division,Wakiso,0.8064806428049671,61229200.0,43.0,0.0,18000000.0,19.0
+Wakiso/Masajja Division,Masajja Division,Wakiso,0.4925630769230769,19473000.0,16.0,0.5,6326923.076923077,32.0
+Wakiso/Bweyogerere Division,Bweyogerere Division,Wakiso,0.3978909090909091,7431555.555555556,28.0,0.17647058823529413,8733333.333333332,28.0
+Wakiso/Namugongo Division,Namugongo Division,Wakiso,0.52944,14648666.666666666,297.0,0.17955801104972377,9000000.0,209.0
+Mukono/Koome Island,Koome Island,Mukono,,,,,,
+Kampala/Kawempe Division,Kawempe Division,Kampala,0.5793733870967741,18753600.0,94.0,0.23577235772357724,15666666.666666668,98.0
+Kampala/Nakawa Division,Nakawa Division,Kampala,0.7421345555555556,34072869.56521739,448.0,0.07246376811594203,19801008.66451733,260.0
+Kampala/Makindye Division,Makindye Division,Kampala,0.7462781326781327,44648666.666666664,223.0,0.1220472440944882,30000000.0,95.0
+Kampala/Rubaga Division,Rubaga Division,Kampala,0.5754358974358975,20052160.0,50.0,0.18032786885245902,20606060.606060605,22.0
+Kampala/Central Division,Central Division,Kampala,0.6815759398496241,35620720.0,145.0,0.12121212121212122,4356003.85089659,123.0
