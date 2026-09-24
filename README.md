@@ -89,3 +89,7 @@ docs/                       portal assessment, data-request letter
 data/lookup/                neighbourhood gazetteer (needs your corrections)
 tests/                      parser tests with saved portal pages
 ```
+
+## Licence and citation
+
+Code: MIT (see `LICENSE`). Manuscript, figures and derived tables: CC BY 4.0. Third-party data keep their own terms (UBOS, Bank of Uganda; OpenStreetMap under ODbL). To cite, use `CITATION.cff` (GitHub shows a "Cite this repository" button).
