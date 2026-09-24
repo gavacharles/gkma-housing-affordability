@@ -42,23 +42,47 @@ https://gavacharles.github.io/kampala-affordability-explorer/#tour
 
 # LinkedIn post (2)
 
-**"Just move further out." Does it work in Kampala?**
+Every Kampala renter has heard it: "Just move further out."
+I tested that advice against 10,643 property listings. It helps. It doesn't solve it.
 
-I followed that advice with data: 10,643 online property listings, matched against the incomes of the households living in each area (UBOS Census 2024 and household survey).
+Here is the median monthly rent for a listed 1–2 bedroom home, against the median household income in each area:
 
-📍 Central Division, Kampala: the median 1–2 bedroom rent (UGX 1.5m) is almost twice the median household income. 99% priced out at 30% of income.
-📍 Kira Division, Wakiso: rent roughly equals the median household income. 91% priced out.
-📍 Goma Division, Mukono, the most affordable area measured: rent is down by almost three-quarters, income by only 15%. Still 79% priced out.
+1️⃣ Central Division, Kampala
+Rent UGX 1.5m · Income UGX 786k
+→ Rent is 191% of income. 99% of households priced out.
 
-Moving out helps. It doesn't close the gap. Even in the cheapest area, the typical rent takes about 60% of the typical household's income, twice the usual 30% benchmark.
+2️⃣ Kira Division, Wakiso
+Rent UGX 870k · Income UGX 879k
+→ Rent is 99% of income. 91% priced out.
 
-New post on why, and what it means for "affordable housing" 👇
-[link to Substack]
+3️⃣ Goma Division, Mukono, the most affordable area measured
+Rent UGX 400k · Income UGX 669k
+→ Rent is 60% of income. 79% priced out.
 
-Or take the journey on the interactive map:
-https://gavacharles.github.io/kampala-affordability-explorer/#tour
+From the centre to Goma, median rent falls 73%. Median income falls only 15%.
 
-#Kampala #Uganda #Housing #Affordability #UrbanPlanning #DataVisualization
+So moving out narrows the gap, but it never closes it. Even in the most affordable area, the typical household would need 60% of its income for the typical listed rent: twice the usual 30% benchmark.
+
+For "affordable housing", that is the lesson. Building further out isn't enough. What gets built has to be priced for the incomes of the people who live there.
+
+Where in Greater Kampala would you have looked next? 👇
+
+Map, full write-up and an interactive tour in the comments.
+
+(Priced out = could not afford the rent at 30% of income. Asking rents from online listings; household incomes modelled from UBOS Census 2024 and survey data. Part of my PhD research at the University of Johannesburg.)
+
+#Kampala #Uganda #AffordableHousing #UrbanPlanning
+
+**First comment (post straight after publishing):**
+
+📖 Full post: [link to Substack]
+🗺️ Take the same journey on the interactive map: https://gavacharles.github.io/kampala-affordability-explorer/#tour
+
+**Posting notes**
+- Attach `move_further_out_map_square.png` (or upload `affordability_tour.mp4`, which follows the same route).
+- The first two lines are what people see before "…see more"; they carry the hook, so keep them as they are.
+- Links sit in the first comment, because LinkedIn tends to show posts with outside links to fewer people.
+- Reply to early comments in the first hour; that is when LinkedIn decides how widely to show a post.
 
 ---
 
