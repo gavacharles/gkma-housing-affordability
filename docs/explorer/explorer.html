@@ -109,6 +109,13 @@ td.num, th.num { text-align: right; }
 .card .kv { display: grid; grid-template-columns: auto auto; gap: 2px 14px; font-size: 13.5px; font-variant-numeric: tabular-nums; }
 .card .kv span:nth-child(odd) { color: var(--muted); }
 .card .hero { font: 700 34px/1 var(--display); color: var(--accent); margin: 6px 0 2px; }
+@media (max-width: 700px) {
+  .mapcard { order: -1; padding: 12px; }
+  .card { position: static; max-width: none; margin-top: 10px; box-shadow: none; }
+  .card h2 { font-size: 23px; }
+  .card .hero { font-size: 28px; }
+  .stat .big { font-size: 38px; }
+}
 .outline { fill: none; stroke: var(--ink); stroke-width: 2.4; vector-effect: non-scaling-stroke; pointer-events: none; }
 .notes { margin-top: 26px; color: var(--muted); font-size: 13px; max-width: 95ch; display: grid; gap: 6px; }
 .notes p { margin: 0; }
@@ -184,7 +191,7 @@ td.num, th.num { text-align: right; }
         <div class="tip" id="tip" hidden></div>
         <div class="card" id="card" hidden aria-live="polite"></div>
       </div>
-      <div class="legend"><span>Households priced out</span><span>0%</span><span class="ramp"></span><span>100%</span><span>· thick lines: district boundaries</span></div>
+      <div class="legend"><span>Households priced out</span><span>0%</span><span class="ramp"></span><span>100%</span><span>· thick lines: district boundaries · hover or tap a parish for details</span></div>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Area</th><th class="num">Households</th><th class="num" id="th-cost">Monthly cost</th><th class="num">Priced out</th><th class="num" id="th-typ">Typical household</th></tr></thead>
@@ -315,7 +322,7 @@ function syncSliders() { for (const k of ["burden", "rate", "deposit", "term"]) 
 
 // tooltip
 const tip = $("tip"), box = $("mapbox");
-svg.addEventListener("mousemove", (e) => {
+function showTip(e) {
   const i = e.target.getAttribute && e.target.getAttribute("data-i");
   if (i == null) { tip.hidden = true; return; }
   const p = DATA.parishes[+i], r = box.getBoundingClientRect();
@@ -325,7 +332,9 @@ svg.addEventListener("mousemove", (e) => {
   const x = e.clientX - r.left, y = e.clientY - r.top;
   tip.style.left = Math.min(x + 14, r.width - tip.offsetWidth - 4) + "px";
   tip.style.top = Math.max(4, y - tip.offsetHeight - 10) + "px";
-});
+}
+svg.addEventListener("mousemove", showTip);
+svg.addEventListener("click", showTip);            // phones have no hover: tap a parish
 svg.addEventListener("mouseleave", () => (tip.hidden = true));
 
 // ---- tour
@@ -346,9 +355,16 @@ function flyTo(target, ms = 1400) {
   anim = requestAnimationFrame(step);
 }
 const card = $("card");
+const narrow = window.matchMedia("(max-width: 700px)");
+// on wide screens the card sits over the top-left of the map: frame the area in the lower right instead
+function framed(b) {
+  if (narrow.matches || (b[2] >= W - 1 && b[0] <= 0)) return b;
+  const k = 1.55;
+  return [b[0] - (k - 1) * b[2], b[1] - (k - 1) * b[3] * 0.8, b[2] * k, b[3] * k];
+}
 function showStop(i) {
   const s = DATA.tour[i];
-  flyTo(s.box);
+  flyTo(framed(s.box));
   outline.setAttribute("d", s.outline);
   card.hidden = false;
   card.innerHTML = `<div class="step">Stop ${i + 1} of ${DATA.tour.length}</div><h2>${s.name}</h2><div class="blurb">${s.blurb}</div>` +
@@ -372,6 +388,7 @@ function stopTour() {
 function playTour() {
   if (touring) { stopTour(); return; }
   touring = true; $("play").textContent = "■ Stop the tour";
+  if (narrow.matches) $("mapbox").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   st = { ...base, mode: "rent", test: "ratio", burden: 30, ref: "dist" }; syncSliders(); update();
   let i = 0;
   const next = () => {
