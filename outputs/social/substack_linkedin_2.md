@@ -64,7 +64,9 @@ https://gavacharles.github.io/kampala-affordability-explorer/#tour
 
 # Notes
 
-**Graphic for this post:** `move_further_out_square.png` (1080 × 1080, for LinkedIn) and `move_further_out_wide.png` (1600 × 900, for the top of the Substack post). Alt text: "Chart comparing, for Central Division, Kira Division and Goma Division, the rent a median household can afford at 30% of income with the median listed 1–2 bedroom rent: UGX 236,000 against 1.5 million, 264,000 against 870,000, and 201,000 against 400,000. Rent falls 73% and income 15%; the gap narrows but never closes."
+**Graphic for this post (map):** `move_further_out_map_square.png` (1080 × 1080, for LinkedIn) and `move_further_out_map_wide.png` (1600 × 900, for the top of the Substack post). Alt text: "Map of Greater Kampala tracing a route from Central Division to Kira Division to Goma Division. Median monthly rent of listed 1–2 bedroom homes against what each area's median household can afford at 30% of income: UGX 1.5 million against 236,000 (99% of households priced out); 870,000 against 264,000 (91%); 400,000 against 201,000 (79%). Median rent falls 73% and median income 15%; the gap narrows but never closes."
+
+The earlier chart versions (`move_further_out_square.png`, `move_further_out_wide.png`) show the same figures without a map.
 
 **Video option:** `affordability_tour.mp4` covers the same route (Central Division, Kira and Goma are stops 3, 5 and 7), so it works as the LinkedIn video and inside the Substack post. Upload it directly on LinkedIn and put the Substack link in the first comment.
 
