@@ -1,6 +1,6 @@
 # Supplementary Materials
 
-*Priced out of the formal market: A housing affordability index and spatial machine-learning analysis for Greater Kampala, Uganda*
+*Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning*
 
 ![Figure S1. Listings located in each parish (1–2 bedroom rentals and house/apartment sales). Listings are geocoded to neighbourhoods, so parish assignment is only as precise as the neighbourhood point.](../../outputs/maps/S1_listings_parish.png)
 

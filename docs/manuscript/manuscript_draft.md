@@ -1,4 +1,4 @@
-# Priced out of the formal market: A housing affordability index and spatial machine-learning analysis for Greater Kampala, Uganda
+# Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning
 
 [TO COMPLETE: Author names]¹ 
 ¹ [TO COMPLETE: Department], University of Johannesburg, Johannesburg, South Africa; corresponding author: [TO COMPLETE: e-mail]

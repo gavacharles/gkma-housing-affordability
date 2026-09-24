@@ -1,6 +1,6 @@
 # Priced out of the formal market: a housing affordability index for Greater Kampala
 
-Python workflow and manuscript for *"Priced out of the formal market: A housing affordability index and spatial machine-learning analysis for Greater Kampala, Uganda"* (PhD research, University of Johannesburg). It takes online property listings through cleaning, geocoding and spatial modelling to the GKMA Housing Affordability Index (rental, ownership, gap, burden-gradient and residual-income measures), publication maps and the manuscript.
+Python workflow and manuscript for *"Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning"* (PhD research, University of Johannesburg). It takes online property listings through cleaning, geocoding and spatial modelling to the GKMA Housing Affordability Index (rental, ownership, gap, burden-gradient and residual-income measures), publication maps and the manuscript.
 
 **Data in this repository.** Code, configuration, the neighbourhood gazetteer, small derived inputs (`data/external/*.csv`), aggregate result tables (`outputs/tables/`), figures (`outputs/maps/*.png`) and the manuscript (`docs/manuscript/`). Listing-level data (raw portal pages, cleaned listings) are **not** included: they contain third-party content, and portal consent was still being finalised. The paper uses a frozen dataset of 10,643 listings (24 September 2026) held locally in `data/paper_snapshot_2026-09-24/`.
 
