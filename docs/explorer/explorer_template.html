@@ -94,6 +94,11 @@ td.num, th.num { text-align: right; }
 .card .kv { display: grid; grid-template-columns: auto auto; gap: 2px 14px; font-size: 13.5px; font-variant-numeric: tabular-nums; }
 .card .kv span:nth-child(odd) { color: var(--muted); }
 .card .hero { font: 700 34px/1 var(--display); color: var(--accent); margin: 6px 0 2px; }
+.card .cmp { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin: 8px 0 10px; text-align: center; }
+.card .cmp div { border: 1px solid var(--faint); border-radius: 6px; padding: 4px 2px; }
+.card .cmp div.on { border-color: var(--ink); }
+.card .cmp b { display: block; font: 700 18px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.card .cmp span { font-size: 11px; color: var(--muted); }
 @media (max-width: 700px) {
   .mapcard { order: -1; padding: 12px; }
   .card { position: static; max-width: none; margin-top: 10px; box-shadow: none; }
@@ -111,7 +116,7 @@ td.num, th.num { text-align: right; }
   <header>
     <h1>Who can afford the housing on offer in Greater Kampala?</h1>
     <p>Each parish is shaded by the share of its households who could not afford the typical home listed online. Change the test, the share of income people can spend, or the mortgage terms, and the map and figures update.</p>
-    <div class="tourbar"><button class="play" id="play">▶ Play the tour</button><span class="tourhint">A 45-second tour of Greater Kampala, its districts, and the least and most affordable sub-counties.</span></div>
+    <div class="tourbar"><button class="play" id="play">▶ Play the tour</button><span class="tourhint">A 48-second tour of Greater Kampala, its districts, and the least and most affordable sub-counties. Move the income slider during the tour to change the threshold.</span></div>
   </header>
 
   <div class="grid">
@@ -150,7 +155,7 @@ td.num, th.num { text-align: right; }
           <div class="row"><label class="label" for="term">Term</label><output id="term-out"></output></div>
           <input type="range" id="term" min="5" max="30" step="1" value="20">
         </div>
-        <p class="hint">Defaults: Bank of Uganda average lending rate (12 months to July 2026); Housing Finance Bank terms (30% deposit, 20 years, repayments up to 35% of income).</p>
+        <p class="hint">Defaults: Bank of Uganda average lending rate (12 months to July 2026); a 30% deposit and 20-year term, in line with Housing Finance Bank's lending (loans of up to 70–80% of value, up to 20 years, repayments up to 35% of income).</p>
       </div>
       <div>
         <div class="label" id="lbl-ref">Compare households with</div>
@@ -166,7 +171,7 @@ td.num, th.num { text-align: right; }
     <div class="mapcard">
       <div class="stats" aria-live="polite">
         <div class="stat"><div class="big hot" id="s-share"></div><div class="cap" id="s-share-cap"></div></div>
-        <div class="stat"><div class="big" id="s-hh"></div><div class="cap">households priced out, of 1.96 million</div></div>
+        <div class="stat"><div class="big" id="s-hh"></div><div class="cap" id="s-hh-cap"></div></div>
         <div class="stat"><div class="big" id="s-typ"></div><div class="cap" id="s-typ-cap"></div></div>
       </div>
       <div class="mapbox" id="mapbox">
@@ -185,8 +190,8 @@ td.num, th.num { text-align: right; }
   </div>
 
   <div class="notes">
-    <p><b>What this shows.</b> The typical home is the median asking rent of 1–2 bedroom units, or the median asking price of houses and apartments, among 10,643 deduplicated online listings (Jiji, Real Estate Database, Uganda Property Centre; 2025–26). Parish incomes are modelled from UBOS UNHS 2019/20 medians and Census 2024 household wealth, uprated to 2026 prices, with lognormal income spread from UBOS Gini coefficients.</p>
-    <p><b>The two tests.</b> "Share of income": a household is priced out if the monthly cost exceeds the chosen share of its income. "Basic needs": it is priced out if, after paying the cost, it could not cover a minimum non-housing budget (UBOS upper poverty line of UGX 87,000 per adult equivalent per month in 2019/20, uprated; scaled by household size; housing share removed).</p>
+    <p><b>What this shows.</b> The typical home is the median asking rent of 1–2 bedroom units, or the median asking price of houses and apartments, among 10,643 deduplicated online listings (Jiji, Real Estate Database, Uganda Property Centre; 2025–26). Parish incomes are modelled from UBOS UNHS 2019/20 medians and Census 2024 household wealth, uprated to 2026 prices, with lognormal income spread from UBOS Gini coefficients. Shares are computed over the 93% of households in parishes that match the 2016 boundaries; household totals are from Census 2024 (excluding the Koome islands).</p>
+    <p><b>The two tests.</b> "Share of income": a household is priced out if the monthly cost exceeds the chosen share of its income. "Basic needs": it is priced out if, after paying the cost, it could not cover a minimum non-housing budget (UBOS upper poverty line of UGX 87,000 a month in 2019/20, uprated to 2026 and applied per adult equivalent, as in UBOS poverty measurement; scaled by household size; housing share of spending removed).</p>
     <p><b>Caveats.</b> Asking prices, not transaction prices; online listings cover the formal, titled market, not informal rentals. Parish values describe modelled household incomes, not listings located in each parish. From <i>Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning</i> (University of Johannesburg, 2026).</p>
   </div>
 </div>
@@ -255,7 +260,9 @@ function update() {
   const G = agg(() => true);
   $("s-share").textContent = pct(G.share);
   $("s-share-cap").textContent = `of GKMA households cannot afford the typical listed ${st.mode === "rent" ? "1–2 bedroom rental" : "house with a mortgage"}`;
-  $("s-hh").textContent = (G.share * G.hh / 1e6).toFixed(2) + " m";
+  const CEN = DATA.meta.census_hh;
+  $("s-hh").textContent = (G.share * CEN / 1e6).toFixed(2) + " m";
+  $("s-hh-cap").textContent = `households priced out, of ${(CEN / 1e6).toFixed(2)} million (Census 2024)`;
   if (st.test === "ratio") {
     $("s-typ").textContent = Math.round(100 * Hg / G.med) + "%";
     $("s-typ-cap").textContent = `of the median household's income would go on ${st.mode === "rent" ? "rent" : "repayments"} (${ugx(Hg)} a month)`;
@@ -272,7 +279,8 @@ function update() {
     const A = agg(pred), H = st.ref === "dist" ? cost(name) : Hg;
     const lo = A.med - H - A.nm;
     const typ = st.test === "ratio" ? Math.round(100 * H / A.med) + "%" : (lo < 0 ? "−" : "+") + ugx(Math.abs(lo));
-    return `<tr><td>${name}</td><td class="num">${A.hh.toLocaleString("en-GB")}</td><td class="num">${ugx(H)}</td>` +
+    const hhc = (DATA.areas[name] || {}).census_hh || A.hh;
+    return `<tr><td>${name}</td><td class="num">${hhc.toLocaleString("en-GB")}</td><td class="num">${ugx(H)}</td>` +
            `<td class="num">${pct(A.share)}<span class="bar" style="width:${Math.round(60 * A.share)}px"></span></td><td class="num">${typ}</td></tr>`;
   }).join("");
   // controls
@@ -295,6 +303,7 @@ function update() {
 
 const bind = (id, key, fn = Number) => $(id).addEventListener("input", (e) => { st[key] = fn(e.target.value); update(); });
 bind("burden", "burden"); bind("rate", "rate"); bind("deposit", "deposit"); bind("term", "term");
+$("burden").addEventListener("input", () => { if (touring && curStop != null) stopCard(curStop); });
 const tap = (id, patch) => $(id).addEventListener("click", () => { st = { ...st, ...patch() }; syncSliders(); update(); });
 tap("mode-rent", () => ({ mode: "rent", burden: st.mode === "rent" ? st.burden : 30 }));
 tap("mode-own", () => ({ mode: "own", burden: st.mode === "own" ? st.burden : 35 }));
@@ -345,23 +354,39 @@ function framed(b) {
   const k = 1.55;
   return [b[0] - (k - 1) * b[2], b[1] - (k - 1) * b[3] * 0.8, b[2] * k, b[3] * k];
 }
-function showStop(i) {
-  const s = DATA.tour[i];
-  flyTo(framed(s.box));
-  outline.setAttribute("d", s.outline);
-  card.hidden = false;
+let curStop = null;
+const p0 = (v) => Math.round(v * 100) + "%";
+function stopCard(i) {
+  const s = DATA.tour[i], b = st.burden, resid = st.test === "resid";
+  const hero = resid ? s.resid : s.grad[b];
+  const how = resid ? "could not rent it and still meet basic needs"
+                    : `could not rent it for ${b}% of their income or less`;
+  const cell = (label, v, on) => `<div class="${on ? "on" : ""}"><b>${p0(v)}</b><span>${label}</span></div>`;
   card.innerHTML = `<div class="step">Stop ${i + 1} of ${DATA.tour.length}</div><h2>${s.name}</h2><div class="blurb">${s.blurb}</div>` +
-    `<div class="hero">${(s.out * 100).toFixed(0)}% priced out</div><div class="blurb">of households, for the typical listed 1–2 bedroom rental</div>` +
+    `<div class="hero">${p0(hero)} priced out</div><div class="blurb">of households ${how}. Typical home: the median listed 1–2 bedroom rent in this area.</div>` +
+    `<div class="cmp">${cell("at 30%", s.grad[30], !resid && b === 30)}${cell("at 50%", s.grad[50], !resid && b === 50)}` +
+    `${cell("at 80%", s.grad[80], !resid && b === 80)}${cell("basic needs", s.resid, resid)}</div>` +
     `<div class="kv"><span>Median listed rent</span><span>${ugx(s.rent)} / month</span>` +
     `<span>Median household income</span><span>${ugx(s.income)} / month</span>` +
     `<span>Rental Affordability Index</span><span>${s.rai.toFixed(0)} <small>(100 = affordable)</small></span>` +
-    `<span>Households</span><span>${Math.round(s.hh).toLocaleString("en-GB")}</span></div>`;
+    `<span>Households (Census 2024)</span><span>${s.census_hh.toLocaleString("en-GB")}</span></div>`;
+}
+function showStop(i) {
+  const s = DATA.tour[i];
+  curStop = i;
+  flyTo(framed(s.box));
+  outline.setAttribute("d", s.outline);
+  card.hidden = false;
+  stopCard(i);
 }
 function endCard() {
+  curStop = null;
   flyTo(FULL);
   outline.setAttribute("d", "");
+  const o = DATA.own;
   card.innerHTML = `<div class="step">And buying?</div><h2>Nowhere comes close</h2>` +
-    `<div class="blurb">On typical Ugandan mortgage terms (about 18% interest, 30% deposit, 20 years), the Ownership Affordability Index is 3.7 for Greater Kampala. Even the most affordable sub-county to buy in, Nansana, scores 20 out of 100.</div>` +
+    `<div class="blurb">On typical Ugandan mortgage terms (about 18% interest, 30% deposit, 20 years, repayments up to 35% of income), the Ownership Affordability Index is ${o.oai.toFixed(1)} for Greater Kampala, where 100 would be affordable. Even the most affordable sub-county to buy in, ${o.best.name.split(",")[0]}, scores ${Math.round(o.best.oai)}.</div>` +
+    `<div class="blurb">Even if households spent 80% of their income on repayments, ${(o.own80 * 100).toFixed(1)}% could not buy the typical listed house.</div>` +
     `<div class="blurb">Use the controls to test your own assumptions.</div>`;
 }
 function stopTour() {
@@ -372,7 +397,7 @@ function playTour() {
   if (touring) { stopTour(); return; }
   touring = true; $("play").textContent = "■ Stop the tour";
   if (narrow.matches) $("mapbox").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-  st = { ...base, mode: "rent", test: "ratio", burden: 30, ref: "dist" }; syncSliders(); update();
+  st = { ...st, mode: "rent", burden: st.mode === "rent" ? st.burden : 30, ref: "dist" }; syncSliders(); update();
   let i = 0;
   const next = () => {
     if (!touring) return;
@@ -382,7 +407,8 @@ function playTour() {
   next();
 }
 $("play").addEventListener("click", playTour);
-document.querySelectorAll(".seg button, #reset").forEach((b) => b.addEventListener("click", () => { if (touring) stopTour(); }));
+document.querySelectorAll("#mode-rent, #mode-own, #ref-gkma, #ref-dist, #reset").forEach((b) => b.addEventListener("click", () => { if (touring) stopTour(); }));
+document.querySelectorAll("#test-ratio, #test-resid").forEach((b) => b.addEventListener("click", () => { if (touring && curStop != null) stopCard(curStop); }));
 
 syncSliders();
 update();

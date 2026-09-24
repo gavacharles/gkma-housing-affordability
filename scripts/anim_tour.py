@@ -81,15 +81,19 @@ for t in D["tour"]:
         outlines[t["key"]] = (geom, [])
 
 # caption card
-card = FancyBboxPatch((0.035, 0.66), 0.46, 0.31, boxstyle="round,pad=0.012,rounding_size=0.015",
+card = FancyBboxPatch((0.035, 0.605), 0.46, 0.365, boxstyle="round,pad=0.012,rounding_size=0.015",
                       transform=fig.transFigure, facecolor="white", edgecolor="#c3cad5", lw=1, zorder=20, alpha=0.96)
 fig.patches.append(card)
 T = {k: fig.text(0.06, y, "", fontsize=s, color=c, weight=w, zorder=21, va="top")
      for k, y, s, c, w in [("step", 0.955, 12, MUTED, "normal"), ("name", 0.93, 27, INK, "bold"),
                            ("blurb", 0.885, 14, MUTED, "normal"), ("hero", 0.852, 34, ACCENT, "bold"),
-                           ("sub", 0.797, 13, MUTED, "normal"), ("kv", 0.765, 14, MUTED, "normal"),
-                           ("kv2", 0.765, 14, INK, "bold")]}
+                           ("sub", 0.797, 13, MUTED, "normal"), ("kv", 0.705, 14, MUTED, "normal"),
+                           ("kv2", 0.705, 14, INK, "bold")]}
 T["kv2"].set_x(0.30)
+# comparison row: share priced out at 30%, 50%, 80% of income and under the basic-needs test
+CMP = [(fig.text(x, 0.772, "", fontsize=19, color=INK, weight="bold", zorder=21, va="top", ha="center"),
+        fig.text(x, 0.742, "", fontsize=11, color=MUTED, zorder=21, va="top", ha="center"))
+       for x in (0.105, 0.215, 0.325, 0.435)]
 fig.text(0.965, 0.02, "Share of households unable to afford their district's median listed 1–2 bedroom rent at 30% "
          "of income.\n10,643 online listings, 2025–26; modelled parish incomes (UBOS UNHS 2019/20, Census 2024).",
          fontsize=9.5, color=MUTED, ha="right", va="bottom", zorder=21,
@@ -105,6 +109,8 @@ def set_card(i):
     if i is None:                                          # closing card, worded as in the explorer
         for k in ("hero", "sub", "kv2"):
             T[k].set_text("")
+        for v, lab in CMP:
+            v.set_text(""), lab.set_text("")
         T["step"].set_text("AND BUYING?")
         T["name"].set_text("Nowhere comes close")
         T["blurb"].set_text(textwrap.fill(
@@ -112,17 +118,20 @@ def set_card(i):
             "Affordability Index is 3.7 for Greater Kampala. Even the most affordable sub-county to buy in, "
             "Nansana, scores 20 out of 100.", 50))
         T["blurb"].set_fontsize(15)
-        T["kv"].set_position((0.06, 0.725))
+        T["kv"].set_position((0.06, 0.70))
         T["kv"].set_text("Explore the map yourself:\ngavacharles.github.io/kampala-affordability-explorer")
         return
     T["blurb"].set_fontsize(14)
-    T["kv"].set_position((0.06, 0.765))
+    T["kv"].set_position((0.06, 0.705))
     t = D["tour"][i]
     T["step"].set_text(f"STOP {i + 1} OF {len(D['tour'])}")
     T["name"].set_text(t["name"])
     T["blurb"].set_text(t["blurb"])
     T["hero"].set_text(f"{t['out']:.0%} priced out")
-    T["sub"].set_text("of households, for the typical listed 1–2 bedroom rental")
+    T["sub"].set_text("of households at 30% of income (median 1–2 bedroom rent)")
+    for (v, lab), (val, name) in zip(CMP, [(t["grad"]["30"], "at 30%"), (t["grad"]["50"], "at 50%"),
+                                           (t["grad"]["80"], "at 80%"), (t["resid"], "basic needs")]):
+        v.set_text(f"{val:.0%}"), lab.set_text(name)
     T["kv"].set_text("Median listed rent\nMedian household income\nAffordability index")
     T["kv2"].set_text(f"UGX {t['rent']:,.0f} a month\nUGX {round(t['income'], -3):,.0f} a month\n"
                       f"{t['rai']:.0f} out of 100")
