@@ -64,6 +64,8 @@ https://gavacharles.github.io/kampala-affordability-explorer/#tour
 
 # Notes
 
+**For Substack:** use `move_further_out_map_substack.png` (1456 × 762). It is made at 1.91:1, the shape Substack uses for post previews in emails, the feed and shared links, so the title and figures are never cropped. Make it the first image in the post, and in the post's settings choose it as the social preview (thumbnail) image. Substack's square thumbnails on some screens can still trim the sides; the title stays on the left half, so it survives a centre crop better if you keep the image as is rather than re-cropping.
+
 **Graphic for this post (map):** `move_further_out_map_square.png` (1080 × 1080, for LinkedIn) and `move_further_out_map_wide.png` (1600 × 900, for the top of the Substack post). Alt text: "Map of Greater Kampala tracing a route from Central Division to Kira Division to Goma Division. Median monthly rent of listed 1–2 bedroom homes against what each area's median household can afford at 30% of income: UGX 1.5 million against 236,000 (99% of households priced out); 870,000 against 264,000 (91%); 400,000 against 201,000 (79%). Median rent falls 73% and median income 15%; the gap narrows but never closes."
 
 The earlier chart versions (`move_further_out_square.png`, `move_further_out_wide.png`) show the same figures without a map.

@@ -5,7 +5,7 @@ card per stop: median monthly rent of listed 1-2 bedroom homes, the rent the are
 median household can afford at 30% of income, and the share of households priced out.
 Other sub-counties are shown as outlines for context.
 
-  python scripts/social_move_further_out_map.py  ->  outputs/social/move_further_out_map_{square,wide}.png
+  python scripts/social_move_further_out_map.py  ->  outputs/social/move_further_out_map_{square,wide,substack}.png
 """
 import json
 
@@ -128,3 +128,79 @@ draw(1080, 1080, "move_further_out_map_square.png",
 draw(1600, 900, "move_further_out_map_wide.png",
      cards=[(0.05, 0.14), (0.05, 0.47), (0.715, 0.2)],
      extent=[32.42, 0.24, 32.89, 0.49], map_rect=[0.0, 0.1, 1.0, 0.68])
+
+
+# ---- Substack version: 1456 x 762 (1.91:1), the ratio Substack uses for post previews, so nothing is cropped.
+def draw_substack(name="move_further_out_map_substack.png", w=1456, h=762):
+    fig = plt.figure(figsize=(w / 100, h / 100), dpi=100, facecolor=BG)
+    # map on the right
+    ax = fig.add_axes([0.44, 0.0, 0.56, 1.0])
+    t = Transformer.from_crs("EPSG:4326", crs, always_xy=True)
+    (x0, x1), (y0, y1) = t.transform([32.53, 32.84], [0.26, 0.49])
+    pm._background(ax, (x0, y0, x1, y1))
+    ax.set_aspect("equal", adjustable="datalim")
+    pm.base()["land"].plot(ax=ax, facecolor="#eceae4", edgecolor="none", zorder=2)
+    sc.boundary.plot(ax=ax, color="#c9c6be", lw=0.6, zorder=3)
+    r = pm.base()["roads"]
+    r[r["kind"].isin(["northern_bypass", "expressway"])].plot(ax=ax, color="#8c8c8c", lw=1.2, zorder=4)
+    pm.base()["districts"].boundary.plot(ax=ax, color="#8a8f98", lw=0.8, zorder=4)
+    pts = []
+    for key, num, *_ in STOPS:
+        poly = sc[sc["key"] == key]
+        poly.plot(ax=ax, facecolor=RED, alpha=0.85, edgecolor=INK, lw=2, zorder=5)
+        c = poly.geometry.union_all().representative_point()
+        pts.append((c.x, c.y))
+        ax.scatter([c.x], [c.y], s=620, color="white", edgecolor=INK, lw=2, zorder=7)
+        ax.text(c.x, c.y, num, ha="center", va="center", fontsize=16, weight="bold", color=INK, zorder=8)
+    for (ax_, ay), (bx, by) in zip(pts, pts[1:]):
+        ax.annotate("", xy=(bx, by), xytext=(ax_, ay), zorder=6,
+                    arrowprops=dict(arrowstyle="-|>", color=INK, lw=2, ls=(0, (4, 3)), shrinkA=17, shrinkB=17,
+                                    mutation_scale=18))
+    lab = pm.base()["labels"]
+    for nm in ("Mukono", "Nansana", "Gayaza"):
+        rr = lab[(lab["label"] == nm) & (lab["level"] == "main")]
+        if len(rr):
+            x, y = rr.geometry.iloc[0].x, rr.geometry.iloc[0].y
+            if x0 < x < x1 and y0 < y < y1:
+                ax.text(x, y, nm, fontsize=11, color=MUTED, ha="center", va="center", zorder=6, style="italic")
+    ax.set_axis_off()
+    # left panel
+    fig.patches.append(FancyBboxPatch((0, 0), 0.44, 1, boxstyle="square,pad=0", transform=fig.transFigure,
+                                      facecolor=BG, edgecolor="none", zorder=1))
+    L = 0.035
+    fig.text(L, 0.9, "Just move further out?", fontsize=34, weight="bold", color=INK, va="top", zorder=2)
+    fig.text(L, 0.79, "Median monthly rent of listed 1–2 bedroom homes, against\nwhat each area's median household "
+             "can afford at 30%\nof income, moving out from Kampala's centre", fontsize=13.5, color=MUTED, va="top",
+             linespacing=1.35, zorder=2)
+    cols = [L, L + 0.165, L + 0.26, L + 0.35]
+    hy = 0.585
+    for x, txt in zip(cols, ["", "Median\nmonthly rent", "Affordable\n(30% of income)", "Priced\nout"]):
+        fig.text(x, hy, txt, fontsize=10.5, color=MUTED, va="bottom", linespacing=1.2, zorder=2)
+    fig.add_artist(plt.Line2D([L, 0.425], [hy - 0.012, hy - 0.012], color=FAINT, lw=1.2,
+                              transform=fig.transFigure))
+    for i, (key, num, nm, where) in enumerate(STOPS):
+        s = T[key]
+        y = hy - 0.05 - i * 0.095
+        fig.text(cols[0], y, f"{num}  {nm}", fontsize=14.5, weight="bold", color=INK, va="center", zorder=2)
+        fig.text(cols[0] + 0.022, y - 0.038, where.split(" · ")[0], fontsize=10.5, color=MUTED, va="center", zorder=2)
+        short = lambda v: f"{v / 1e6:.1f}m".replace(".0m", "m") if v >= 1e6 else f"{round(v, -3) / 1e3:.0f}k"  # noqa
+        fig.text(cols[1], y, f"UGX {short(s['rent'])}", fontsize=14.5, weight="bold", color=RED, va="center", zorder=2)
+        fig.text(cols[2], y, f"UGX {short(0.3 * s['income'])}", fontsize=14.5, weight="bold", color=BLUE,
+                 va="center", zorder=2)
+        fig.text(cols[3], y, f"{s['grad']['30']:.0%}", fontsize=14.5, weight="bold", color=INK, va="center", zorder=2)
+    rd = 1 - T[STOPS[2][0]]["rent"] / T[STOPS[0][0]]["rent"]
+    idr = 1 - T[STOPS[2][0]]["income"] / T[STOPS[0][0]]["income"]
+    fig.patches.append(FancyBboxPatch((L, 0.1), 0.39, 0.105, boxstyle="round,pad=0.006,rounding_size=0.012",
+                                      transform=fig.transFigure, facecolor=INK, edgecolor="none", zorder=2))
+    fig.text(L + 0.015, 0.1525, f"Median rent falls {rd:.0%}. Median income falls {idr:.0%}.\n"
+             "The gap narrows, but it never closes.", fontsize=14, weight="bold", color="white", va="center",
+             linespacing=1.35, zorder=3)
+    fig.text(L, 0.035, "Median asking rents, 10,643 online listings, 2025–26; modelled incomes (UBOS).\n"
+             "Sub-counties with at least 20 rental listings. Basemap © OpenStreetMap contributors.", fontsize=8.5,
+             color=MUTED, va="bottom", linespacing=1.3, zorder=2)
+    fig.savefig(p("outputs/social") / name, dpi=100, facecolor=BG)
+    plt.close(fig)
+    print("wrote", name)
+
+
+draw_substack()
