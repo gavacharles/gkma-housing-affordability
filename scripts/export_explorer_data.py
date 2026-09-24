@@ -62,9 +62,8 @@ for _, r in par.iterrows():
                          "sg": round(float(r["sigma"]), 4), "nm": round(float(r["nmin"])), "p": d})
 
 b = pm.base()
-box = gpd.GeoSeries.from_xy([x0, x1], [y0, y1], crs=crs).total_bounds
 from shapely.geometry import box as sbox  # noqa: E402
-frame = sbox(*box)
+frame = sbox(x0, y0, x1, y1)
 lake = "".join(path(gm.intersection(frame), tol=60) for gm in b["lake"].geometry if gm.intersects(frame))
 dist = "".join(path(gm.intersection(frame), tol=60) for gm in b["districts"].geometry if gm.intersects(frame))
 
@@ -76,9 +75,51 @@ for f, key in [("affordability_index_gkma.csv", None), ("affordability_index_dis
                                 "price": None if pd.isna(r["median_price"]) else float(r["median_price"]),
                                 "n_rent": int(r["n_rent"]), "n_sale": int(r["n_sale"])}
 
+# tour stops: zoom box (viewBox units), outline and the stop's own index values
+sc = gpd.read_file(p(g["subcounties"])).to_crs(crs)
+sc["area"] = sc[g["district_name_col"]].str.title() + "/" + sc[g["subcounty_name_col"]]
+dist_poly = sc.dissolve(g["district_name_col"]).reset_index()
+dist_poly["area"] = dist_poly[g["district_name_col"]].str.title()
+T = p("outputs/tables")
+idx = pd.concat([pd.read_csv(T / f"affordability_index_{lv}.csv") for lv in ("gkma", "district", "subcounty")])
+idx = idx.set_index("area")
+STOPS = [("GKMA", "Greater Kampala", "The whole metropolitan area"),
+         ("Kampala", "Kampala", "The capital city"),
+         ("Kampala/Central Division", "Central Division, Kampala", "The least affordable sub-county"),
+         ("Wakiso", "Wakiso", "The largest district, wrapping around the city"),
+         ("Wakiso/Kira Division", "Kira Division, Wakiso", "A fast-growing eastern suburb"),
+         ("Mukono", "Mukono", "The eastern district"),
+         ("Mukono/Goma Division", "Goma Division, Mukono", "The most affordable sub-county measured")]
+
+
+def vb(geom, pad=0.18):
+    a0, b0, a1, b1 = geom.bounds
+    w, h = a1 - a0, b1 - b0
+    side = max(w, h * 1000 / ((y1 - y0) * S)) * (1 + pad)
+    cx, cy = (a0 + a1) / 2, (b0 + b1) / 2
+    bx, by = (cx - side / 2 - x0) * S, (y1 - (cy + side * ((y1 - y0) / (x1 - x0)) / 2)) * S
+    if side * S >= 1000:                                   # district larger than the frame: show the whole map
+        return [0, 0, 1000, round((y1 - y0) * S)]
+    return [round(bx, 1), round(by, 1), round(side * S, 1), round(side * S * (y1 - y0) / (x1 - x0), 1)]
+
+
+tour = []
+for key, name, blurb in STOPS:
+    r = idx.loc[key]
+    if key == "GKMA":
+        geom, box_ = None, [0, 0, 1000, round((y1 - y0) * S)]
+    else:
+        src = dist_poly if "/" not in key else sc
+        geom = src[src["area"] == key].geometry.union_all()
+        geom = geom.intersection(frame) if geom is not None else None
+        box_ = vb(geom)
+    tour.append({"key": key, "name": name, "blurb": blurb, "box": box_, "outline": path(geom, tol=40) if geom else "",
+                 "rent": float(r["median_rent"]), "income": float(r["median_income"]), "rai": float(r["rai"]),
+                 "out": float(r["agi_rent"]), "hh": float(r["households"]), "n": int(r["n_rent"])})
+
 m = cfg["affordability_index"]["mortgage"]
 data = {"parishes": parishes, "lake": lake, "districts": dist,
-        "viewbox": [1000, round((y1 - y0) * S)], "areas": areas,
+        "viewbox": [1000, round((y1 - y0) * S)], "areas": areas, "tour": tour,
         "mortgage": {"rate": round(bou_lending_rate(), 4), "deposit": m["deposit"], "term": m["term_years"],
                      "cap": m["cap"]},
         "meta": {"listings": 10643, "cpi": cpi}}

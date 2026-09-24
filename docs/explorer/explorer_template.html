@@ -67,10 +67,10 @@ input[type=range]:disabled { opacity: .35; }
 .mapcard { background: var(--surface); border-radius: 10px; box-shadow: var(--shadow); border: 1px solid var(--faint); padding: 16px; display: grid; gap: 14px; }
 .mapbox { position: relative; }
 svg { width: 100%; height: auto; display: block; border-radius: 6px; background: var(--outside); }
-.par { stroke: var(--surface); stroke-width: .5; }
+.par { stroke: var(--surface); stroke-width: .5; vector-effect: non-scaling-stroke; }
 .par:hover { stroke: var(--ink); stroke-width: 1.6; }
 .lake { fill: var(--lake); stroke: var(--lake-edge); stroke-width: .6; }
-.dist { fill: none; stroke: var(--ink); stroke-width: 1.1; opacity: .55; pointer-events: none; }
+.dist { fill: none; stroke: var(--ink); stroke-width: 1.1; opacity: .55; pointer-events: none; vector-effect: non-scaling-stroke; }
 .tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; box-shadow: var(--shadow); min-width: 190px; }
 .tip b { display: block; font-size: 14px; }
 .tip .v { font-variant-numeric: tabular-nums; }
@@ -82,6 +82,19 @@ th { text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .05em;
 td { padding: 8px; border-bottom: 1px solid var(--faint); }
 td.num, th.num { text-align: right; }
 .bar { display: inline-block; height: 8px; border-radius: 2px; background: var(--accent); vertical-align: middle; margin-left: 8px; opacity: .8; }
+.tourbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+.play { font: 600 15px var(--body); background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 9px 18px; cursor: pointer; }
+.play:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tourhint { font-size: 13px; color: var(--muted); }
+.card { position: absolute; left: 12px; top: 12px; max-width: min(330px, 70%); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; box-shadow: var(--shadow); }
+.card[hidden] { display: none; }
+.card .step { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.card h2 { font: 700 26px/1.05 var(--display); margin: 2px 0 2px; }
+.card .blurb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.card .kv { display: grid; grid-template-columns: auto auto; gap: 2px 14px; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.card .kv span:nth-child(odd) { color: var(--muted); }
+.card .hero { font: 700 34px/1 var(--display); color: var(--accent); margin: 6px 0 2px; }
+.outline { fill: none; stroke: var(--ink); stroke-width: 2.4; vector-effect: non-scaling-stroke; pointer-events: none; }
 .notes { margin-top: 26px; color: var(--muted); font-size: 13px; max-width: 95ch; display: grid; gap: 6px; }
 .notes p { margin: 0; }
 @media (prefers-reduced-motion: no-preference) { .par { transition: fill .18s linear; } }
@@ -91,6 +104,7 @@ td.num, th.num { text-align: right; }
   <header>
     <h1>Who can afford the housing on offer in Greater Kampala?</h1>
     <p>Each parish is shaded by the share of its households who could not afford the typical home listed online. Change the test, the share of income people can spend, or the mortgage terms, and the map and figures update.</p>
+    <div class="tourbar"><button class="play" id="play">▶ Play the tour</button><span class="tourhint">A 45-second tour of Greater Kampala, its districts, and the least and most affordable sub-counties.</span></div>
   </header>
 
   <div class="grid">
@@ -151,6 +165,7 @@ td.num, th.num { text-align: right; }
       <div class="mapbox" id="mapbox">
         <svg id="map" role="img" aria-label="Map of Greater Kampala parishes shaded by the share of households priced out"></svg>
         <div class="tip" id="tip" hidden></div>
+        <div class="card" id="card" hidden aria-live="polite"></div>
       </div>
       <div class="legend"><span>Households priced out</span><span>0%</span><span class="ramp"></span><span>100%</span><span>· thick lines: district boundaries</span></div>
       <div class="tablewrap">
@@ -216,6 +231,8 @@ const paths = DATA.parishes.map((p, i) => {
   svg.append(e); return e;
 });
 svg.append(mk("path", { d: DATA.districts, class: "dist", "fill-rule": "evenodd" }));
+const outline = mk("path", { d: "", class: "outline", "fill-rule": "evenodd" });
+svg.append(outline);
 let shares = [];
 
 function update() {
@@ -294,6 +311,63 @@ svg.addEventListener("mousemove", (e) => {
 });
 svg.addEventListener("mouseleave", () => (tip.hidden = true));
 
+// ---- tour
+const FULL = [0, 0, W, Hh];
+let vbox = FULL.slice(), touring = false, timer = null, anim = null;
+const setVB = (b) => { vbox = b; svg.setAttribute("viewBox", b.join(" ")); };
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function flyTo(target, ms = 1400) {
+  cancelAnimationFrame(anim);
+  if (reduce) { setVB(target); return; }
+  const from = vbox.slice(), t0 = performance.now();
+  const ease = (t) => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const step = (now) => {
+    const t = Math.min(1, (now - t0) / ms), e = ease(t);
+    setVB(from.map((v, i) => v + (target[i] - v) * e));
+    if (t < 1) anim = requestAnimationFrame(step);
+  };
+  anim = requestAnimationFrame(step);
+}
+const card = $("card");
+function showStop(i) {
+  const s = DATA.tour[i];
+  flyTo(s.box);
+  outline.setAttribute("d", s.outline);
+  card.hidden = false;
+  card.innerHTML = `<div class="step">Stop ${i + 1} of ${DATA.tour.length}</div><h2>${s.name}</h2><div class="blurb">${s.blurb}</div>` +
+    `<div class="hero">${(s.out * 100).toFixed(0)}% priced out</div><div class="blurb">of households, for the typical listed 1–2 bedroom rental</div>` +
+    `<div class="kv"><span>Median listed rent</span><span>${ugx(s.rent)} / month</span>` +
+    `<span>Median household income</span><span>${ugx(s.income)} / month</span>` +
+    `<span>Rental Affordability Index</span><span>${s.rai.toFixed(0)} <small>(100 = affordable)</small></span>` +
+    `<span>Households</span><span>${Math.round(s.hh).toLocaleString("en-GB")}</span></div>`;
+}
+function endCard() {
+  flyTo(FULL);
+  outline.setAttribute("d", "");
+  card.innerHTML = `<div class="step">And buying?</div><h2>Nowhere comes close</h2>` +
+    `<div class="blurb">On typical Ugandan mortgage terms (about 18% interest, 30% deposit, 20 years), the Ownership Affordability Index is 3.7 for Greater Kampala. Even the most affordable sub-county to buy in, Nansana, scores 20 out of 100.</div>` +
+    `<div class="blurb">Use the controls to test your own assumptions.</div>`;
+}
+function stopTour() {
+  touring = false; clearTimeout(timer); $("play").textContent = "▶ Play the tour";
+  outline.setAttribute("d", ""); card.hidden = true; flyTo(FULL, 800);
+}
+function playTour() {
+  if (touring) { stopTour(); return; }
+  touring = true; $("play").textContent = "■ Stop the tour";
+  st = { ...base, mode: "rent", test: "ratio", burden: 30, ref: "dist" }; syncSliders(); update();
+  let i = 0;
+  const next = () => {
+    if (!touring) return;
+    if (i < DATA.tour.length) { showStop(i); i += 1; timer = setTimeout(next, i === 1 ? 5200 : 5600); }
+    else { endCard(); timer = setTimeout(() => { if (touring) stopTour(); }, 9000); }
+  };
+  next();
+}
+$("play").addEventListener("click", playTour);
+document.querySelectorAll(".seg button, #reset").forEach((b) => b.addEventListener("click", () => { if (touring) stopTour(); }));
+
 syncSliders();
 update();
+if (location.hash === "#tour") setTimeout(playTour, 700);
 </script>
