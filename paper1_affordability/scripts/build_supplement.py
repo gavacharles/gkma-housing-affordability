@@ -1,14 +1,15 @@
 """Supplementary Materials (Figures S1-S5, Tables S1-S5) from the outputs.
 
-  python scripts/build_supplement.py  ->  docs/manuscript/supplementary.md
+  python paper1_affordability/scripts/build_supplement.py  ->  docs/manuscript/supplementary.md
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
-T = ROOT / "outputs/tables"
-OUT = ROOT / "docs/manuscript/supplementary.md"
+ROOT = Path(__file__).resolve().parents[2]
+T = ROOT / "paper1_affordability/outputs/tables"
+OUT = ROOT / "paper1_affordability/docs/manuscript/supplementary.md"
 AREAS = ["GKMA", "Kampala", "Wakiso", "Mukono"]
 
 

@@ -4,7 +4,7 @@
   18_income_calibration     chart: UNHS 2019/20 sub-region median income vs Census 2024 wealth
   tables/income_inputs.csv  sub-region medians, Gini, sigma and CPI factor used in the paper
 
-  python scripts/fig_income.py [--out outputs]
+  python paper1_affordability/scripts/fig_income.py [--out outputs]
 """
 import json
 
@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import norm
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.config import p
 from gkma.viz import pubmaps as maps

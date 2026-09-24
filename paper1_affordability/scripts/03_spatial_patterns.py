@@ -3,6 +3,7 @@
 Outputs: study area map, median choropleths (rent/bedroom, sale price,
 land price per decimal), LISA cluster maps, Moran's I table.
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 import geopandas as gpd
 from gkma.analysis.spatial_stats import moran_lisa, unit_medians

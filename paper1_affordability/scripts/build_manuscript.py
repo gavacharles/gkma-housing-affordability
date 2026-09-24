@@ -1,20 +1,21 @@
 """Number citations in order of first appearance (MDPI style) and append the
 reference list.
 
-  python scripts/build_manuscript.py
+  python paper1_affordability/scripts/build_manuscript.py
   -> docs/manuscript/manuscript_draft.md
 
 Citation keys in the source look like [@key] or [@key1; @key2]. Every key must
 exist in REFS; unknown keys stop the build. Entries marked VERIFY need a check
 of the bibliographic details before submission.
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "docs/manuscript/manuscript_source.md"
-OUT = ROOT / "docs/manuscript/manuscript_draft.md"
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "paper1_affordability/docs/manuscript/manuscript_source.md"
+OUT = ROOT / "paper1_affordability/docs/manuscript/manuscript_draft.md"
 
 REFS = {
     "unhabitat2011": "UN-Habitat. *Affordable Land and Housing in Africa*; Adequate Housing Series, Vol. 3; United Nations Human Settlements Programme: Nairobi, Kenya, 2011.",

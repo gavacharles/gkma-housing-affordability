@@ -1,6 +1,6 @@
 """Convert the compiled Markdown manuscript and supplement to Word (.docx).
 
-  python scripts/build_docx.py
+  python paper1_affordability/scripts/build_docx.py
   -> docs/manuscript/manuscript.docx, docs/manuscript/supplementary.docx
 
 Handles the subset of Markdown the manuscript uses: headings, paragraphs with
@@ -8,6 +8,7 @@ Handles the subset of Markdown the manuscript uses: headings, paragraphs with
 ![caption](image) figures. Figures are inserted at 16 cm width with the
 caption below; table captions (bold paragraphs starting "Table") stay above.
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import re
 from pathlib import Path
 
@@ -18,8 +19,8 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-ROOT = Path(__file__).resolve().parents[1]
-MS = ROOT / "docs/manuscript"
+ROOT = Path(__file__).resolve().parents[2]
+MS = ROOT / "paper1_affordability/docs/manuscript"
 
 
 def add_runs(par, text, size=None):

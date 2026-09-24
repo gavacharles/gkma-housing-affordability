@@ -1,6 +1,7 @@
 """Common CLI for analysis stages: --data (processed dir) and --out (outputs dir)."""
 import argparse
 import json
+import os
 
 import _common  # noqa: F401
 import geopandas as gpd
@@ -15,7 +16,7 @@ from gkma.viz import pubmaps as maps
 def setup(description: str):
     ap = argparse.ArgumentParser(description=description)
     ap.add_argument("--data", default="data/processed")
-    ap.add_argument("--out", default="outputs")
+    ap.add_argument("--out", default=os.environ.get("GKMA_OUT", "outputs"))   # a paper's _paper.py sets GKMA_OUT
     a, _ = ap.parse_known_args()
     out = p(a.out)
     for sub in ("maps", "tables", "models"):

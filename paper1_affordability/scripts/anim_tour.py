@@ -5,7 +5,7 @@ most affordable sub-counties, with a caption card of each stop's index values.
 Parishes are shaded by the share of households unable to afford the median
 listed 1-2 bedroom rent of their district at 30% of income.
 
-  python scripts/anim_tour.py  ->  outputs/animations/affordability_tour.mp4
+  python paper1_affordability/scripts/anim_tour.py  ->  outputs/animations/affordability_tour.mp4
 Run scripts/export_explorer_data.py first (tour stops and area medians).
 """
 import json
@@ -21,6 +21,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import FancyBboxPatch
 from scipy.stats import norm
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 from gkma.config import load_config, p
 from gkma.viz import pubmaps as pm
@@ -34,11 +35,11 @@ except ImportError:
 
 plt.rcParams["font.family"] = ["Arial", "Helvetica", "DejaVu Sans"]
 INK, MUTED, ACCENT = "#1f1f1f", "#5a5a5a", "#9b1030"
-OUT = p("outputs/animations")
+OUT = p("paper1_affordability/outputs/animations")
 cfg = load_config()
 g = cfg["geography"]
 crs = cfg["project"]["crs_projected"]
-D = json.loads(p("outputs/interactive/explorer_data.json").read_text())
+D = json.loads(p("paper1_affordability/outputs/interactive/explorer_data.json").read_text())
 x0, y0, x1, y1 = pm._extent("main")
 S = 1000 / (x1 - x0)
 

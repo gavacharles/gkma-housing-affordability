@@ -5,13 +5,14 @@ the rent the area's median household can afford at 30% of income against the
 median listed 1-2 bedroom rent. Figures from outputs/interactive/explorer_data.json
 (the explorer's tour stops, which reproduce the paper's index).
 
-  python scripts/social_move_further_out.py  ->  outputs/social/move_further_out_{square,wide}.png
+  python paper1_affordability/scripts/social_move_further_out.py  ->  outputs/social/move_further_out_{square,wide}.png
 """
 import json
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 from gkma.config import p
 
@@ -19,7 +20,7 @@ plt.rcParams["font.family"] = ["Arial", "Helvetica", "DejaVu Sans"]
 INK, MUTED, FAINT = "#1d2330", "#5b6474", "#d9dee6"
 RED, BLUE, BG = "#9b1030", "#1f5fa8", "#f5f7f9"
 
-D = json.loads(p("outputs/interactive/explorer_data.json").read_text())
+D = json.loads(p("paper1_affordability/outputs/interactive/explorer_data.json").read_text())
 T = {t["key"]: t for t in D["tour"]}
 STOPS = [("Kampala/Central Division", "Central Division", "Kampala · the city centre"),
          ("Wakiso/Kira Division", "Kira Division", "Wakiso · north-east suburb"),
@@ -93,7 +94,7 @@ def draw(w, h, name):
     if wide:
         fig.text(0.94, 0.94, "10,643 online listings, 2025–26\nmodelled incomes (UBOS)", fontsize=10, color=MUTED,
                  ha="right", va="top", linespacing=1.4)
-    fig.savefig(p("outputs/social") / name, dpi=100, facecolor=BG)
+    fig.savefig(p("paper1_affordability/outputs/social") / name, dpi=100, facecolor=BG)
     plt.close(fig)
     print("wrote", name)
 

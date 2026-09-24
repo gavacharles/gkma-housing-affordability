@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.config import p
 from gkma.viz import pubmaps as maps

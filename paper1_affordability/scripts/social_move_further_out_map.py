@@ -5,7 +5,7 @@ card per stop: median monthly rent of listed 1-2 bedroom homes, the rent the are
 median household can afford at 30% of income, and the share of households priced out.
 Other sub-counties are shown as outlines for context.
 
-  python scripts/social_move_further_out_map.py  ->  outputs/social/move_further_out_map_{square,wide,substack}.png
+  python paper1_affordability/scripts/social_move_further_out_map.py  ->  outputs/social/move_further_out_map_{square,wide,substack}.png
 """
 import json
 
@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import ConnectionPatch, FancyBboxPatch
 from pyproj import Transformer
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _common  # noqa: F401
 from gkma.config import load_config, p
 from gkma.viz import pubmaps as pm
@@ -23,7 +24,7 @@ INK, MUTED, FAINT, RED, BLUE, BG = "#1d2330", "#5b6474", "#d9dee6", "#9b1030", "
 cfg = load_config()
 g = cfg["geography"]
 crs = cfg["project"]["crs_projected"]
-D = json.loads(p("outputs/interactive/explorer_data.json").read_text())
+D = json.loads(p("paper1_affordability/outputs/interactive/explorer_data.json").read_text())
 T = {t["key"]: t for t in D["tour"]}
 
 sc = gpd.read_file(p(g["subcounties"])).to_crs(crs)
@@ -117,7 +118,7 @@ def draw(w, h, name, cards, extent, map_rect, labels=("Entebbe", "Mukono", "Nans
              "(UBOS UNHS 2019/20, Census 2024). Figures are for sub-counties with at least 20 rental "
              "listings. Basemap © OpenStreetMap contributors.", fontsize=8.5, color=MUTED,
              va="bottom", wrap=True)
-    fig.savefig(p("outputs/social") / name, dpi=100, facecolor=BG)
+    fig.savefig(p("paper1_affordability/outputs/social") / name, dpi=100, facecolor=BG)
     plt.close(fig)
     print("wrote", name)
 
@@ -198,7 +199,7 @@ def draw_substack(name="move_further_out_map_substack.png", w=1456, h=762):
     fig.text(L, 0.035, "Median asking rents, 10,643 online listings, 2025–26; modelled incomes (UBOS).\n"
              "Sub-counties with at least 20 rental listings. Basemap © OpenStreetMap contributors.", fontsize=8.5,
              color=MUTED, va="bottom", linespacing=1.3, zorder=2)
-    fig.savefig(p("outputs/social") / name, dpi=100, facecolor=BG)
+    fig.savefig(p("paper1_affordability/outputs/social") / name, dpi=100, facecolor=BG)
     plt.close(fig)
     print("wrote", name)
 

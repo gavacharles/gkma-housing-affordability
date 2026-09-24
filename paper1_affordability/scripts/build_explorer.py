@@ -1,25 +1,26 @@
 """Build the affordability explorer from its template and data.
 
-  python scripts/build_explorer.py [--site-url URL]
+  python paper1_affordability/scripts/build_explorer.py [--site-url URL]
   -> docs/explorer/explorer.html   standalone page (open in a browser; GitHub Pages index)
      docs/explorer/preview.png     1200 x 630 link-preview image for social media
 
 Run scripts/export_explorer_data.py and scripts/anim_affordability.py first.
 """
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import argparse
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parents[1]
-EXP = ROOT / "docs/explorer"
+ROOT = Path(__file__).resolve().parents[2]
+EXP = ROOT / "paper1_affordability/docs/explorer"
 ap = argparse.ArgumentParser()
 ap.add_argument("--site-url", default="https://gavacharles.github.io/kampala-affordability-explorer/")
 a = ap.parse_args()
 
 tpl = (EXP / "explorer_template.html").read_text(encoding="utf-8")
 tpl = tpl.split("-->", 1)[1].lstrip() if tpl.startswith("<!--") else tpl
-data = (ROOT / "outputs/interactive/explorer_data.json").read_text(encoding="utf-8")
+data = (ROOT / "paper1_affordability/outputs/interactive/explorer_data.json").read_text(encoding="utf-8")
 body = tpl.replace("__DATA__", data)
 
 TITLE = "Who can afford the housing on offer in Greater Kampala?"
@@ -48,7 +49,7 @@ page = page.replace("<div class=\"wrap\">", "</head>\n<body>\n<div class=\"wrap\
 (EXP / "explorer.html").write_text(page, encoding="utf-8")
 
 # ---- 1200 x 630 link-preview image
-still = Image.open(ROOT / "outputs/animations/priced_out_threshold_still.png").convert("RGB")
+still = Image.open(ROOT / "paper1_affordability/outputs/animations/priced_out_threshold_still.png").convert("RGB")
 w, h = still.size
 mp = still.crop((int(0.17 * w), int(0.215 * h), int(0.83 * w), int(0.835 * h)))
 mp = mp.resize((int(630 * mp.width / mp.height), 630))
@@ -73,4 +74,4 @@ d.text((x, 472), "Even at 80% of income: 78% priced out", font=fr, fill="#9b1030
 d.text((x, 540), "Interactive map  ·  change the assumptions  ·  play the tour", font=fs, fill="#5b6474")
 d.text((x, 566), "10,643 online listings, 2025–26; modelled incomes (UBOS)", font=fs, fill="#5b6474")
 img.save(EXP / "preview.png", optimize=True)
-print("wrote docs/explorer/explorer.html, docs/explorer/preview.png")
+print("wrote paper1_affordability/docs/explorer/explorer.html and preview.png")

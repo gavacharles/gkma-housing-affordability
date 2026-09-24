@@ -5,6 +5,7 @@ m2_per_bedroom scenario in config.yaml and validates against land-only listings.
 """
 import pandas as pd
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.analysis.land_value import implied_land_value, land_value_by_unit, validation_stats
 from gkma.config import load_config

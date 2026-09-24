@@ -7,6 +7,7 @@ sensitivity (±20 %) on the income distribution.
 """
 import pandas as pd
 
+import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import _stage
 from gkma.analysis.affordability import affordability_by_unit, household_weighted_summary
 from gkma.viz import pubmaps as maps
