@@ -38,6 +38,7 @@ Housing policy in Uganda has relied on national figures—the housing deficit, m
 
 - `docs/manuscript/`: the paper and its supplementary materials
 - `outputs/maps/` and `outputs/tables/`: figures and aggregate results
+- `docs/explorer/explorer.html`: an interactive map of who can afford the typical listed home (download and open in a browser; it works offline)
 - `src/` and `scripts/`: the data pipeline and analysis code
 - `docs/pipeline.md`: setup, workflow and technical notes
 
