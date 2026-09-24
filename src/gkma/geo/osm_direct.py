@@ -24,6 +24,14 @@ out;""",
 (way["natural"="wetland"]({S},{W},{N},{E});
  relation["natural"="wetland"]({S},{W},{N},{E}););
 out geom tags;""",
+    # Rail (paper 2): passenger stations/halts and the railway lines themselves
+    "rail_stations": f"""[out:json][timeout:180];
+(node["railway"~"^(station|halt|stop)$"]({S},{W},{N},{E});
+ node["public_transport"="station"]["train"="yes"]({S},{W},{N},{E}););
+out;""",
+    "rail_lines": f"""[out:json][timeout:300];
+way["railway"~"^(rail|light_rail|narrow_gauge|construction|proposed)$"]({S},{W},{N},{E});
+out geom tags;""",
     "roads": f"""[out:json][timeout:300];
 way["highway"~"^(motorway|trunk|primary|secondary|tertiary|motorway_link|trunk_link|primary_link)$"]({S},{W},{N},{E});
 out geom tags;""",
@@ -60,6 +68,7 @@ def fetch(name: str) -> gpd.GeoDataFrame:
             continue
         rows.append({"osmid": e["id"], "element": e["type"], "name": t.get("name"),
                      "amenity": t.get("amenity"), "highway": t.get("highway"), "ref": t.get("ref"),
+                     "railway": t.get("railway"), "usage": t.get("usage"), "service": t.get("service"),
                      "geometry": geom})
     return gpd.GeoDataFrame(rows, crs="EPSG:4326")
 
