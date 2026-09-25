@@ -157,3 +157,17 @@ Planned specification: log price on neighbourhood fixed effects (absorbing each 
 | Rents | +0.076 (se 0.213, p = 0.72) | −0.008 (p = 0.97) |
 
 Caveats before this is a result: only 8 treated points (inference needs a wild cluster bootstrap), 2017 sample still partial, listing mix differs between periods, and 2020 is needed to check that the change came after opening rather than before.
+
+## Full 2017 archive and the before–after estimate (26 September 2026)
+
+- 2017 archive complete: 7,860 pages (99.7% parsed; captured April–November 2017) → 7,202 clean listings at 104 neighbourhood points (`data/processed/listings_archive_2017.gpkg`). 2020 archive (8,513 pages) collecting.
+- `scripts/04_did.py` → `outputs/tables/did_results.csv`: RED listings, points present before and after, point and period fixed effects, hedonic controls; cluster-robust t and wild cluster bootstrap p-values (null imposed, Webb weights, 1,999 draws).
+
+| 2017 → 2025–26 | Estimate | Cluster t | Wild bootstrap p | Points (treated) |
+|---|---|---|---|---|
+| Sales: within 15 min of Expressway access | +0.280 (≈ +32%) | 3.24 | 0.076 | 77 (11) |
+| Sales: log travel time to access | −0.195 | −3.12 | 0.031 | 77 |
+| Rents: within 15 min | +0.018 | 0.10 | 0.878 | 67 (7) |
+| Rents: log travel time | −0.027 | −0.16 | 0.884 | 67 |
+
+Sale prices rose more near the Expressway's access points after it opened; rents did not. Next: add 2020 (does the change appear after opening, and is it already there by 2020?), check pre-2017 trends are not available (no earlier archive), and test sensitivity to the 15-minute threshold and to listing mix.
