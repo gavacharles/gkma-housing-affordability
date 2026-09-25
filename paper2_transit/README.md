@@ -142,3 +142,18 @@ Open decisions: (1) adopt the reframing; (2) confirm the commuter-rail stops fro
 Planned specification: log price on neighbourhood fixed effects (absorbing each area's fixed affluence, including the Entebbe Road corridor's), period effects, and period × Expressway access, with hedonic controls, RED listings only for comparability across periods, prices deflated by CPI. The Expressway effect is identified from how prices changed near its access points after opening, relative to other corridors.
 
 **Commuter-rail termini (URC, checked 25 September 2026).** URC's passenger-services page: "URC currently operates passenger trains between Kampala to Mukono." Termini are Kampala and Mukono; Namanve is the turn-back point for the shorter trips. The two URC pages give different times (schedules page: 06:30, 08:15, 17:30, 19:30; passenger-services page: 06:40, 07:45, 17:30, 18:50) — four trips a day either way. Neither page, nor OpenStreetMap, gives the location of Mukono station; it stays approximate in `urc_commuter_stations.gpkg` (32.7626 E, 0.3293 N, on the line nearest Mukono town). Sources: https://urc.go.ug/schedules/, https://urc.go.ug/service/passenger-services/
+
+## Archive cleaning and a first before–after estimate (25 September 2026, evening)
+
+- 2021 dropped: the "after" periods are 2020 (archive) and 2025–26 (current data). Collection continues for 2017, then 2020.
+- `scripts/01_clean_archive.py` maps archived pages to the shared raw schema and runs the shared cleaning pipeline unchanged (`gkma.clean.pipeline.run` now accepts supplied raw records). First 2,359 archived 2017 records (captured April–June 2017) → 2,175 clean listings, all located (98% exact gazetteer matches), on 42 neighbourhood points; 41 of these are also in the current RED data. Median 1–2 bedroom rent 2017: UGX 700,000.
+- Treatment coverage: 8 shared points within 15 minutes of an Expressway access point (222 listings in 2017, 346 in 2025–26); 33 comparison points.
+
+**Preliminary estimate** (RED only; neighbourhood-point fixed effects; hedonic controls; clustered by point; partial 2017 sample):
+
+| | Post × within 15 min of Expressway access | Post × ln travel time to access |
+|---|---|---|
+| Sale prices | +0.313 (se 0.071, p < 0.001) ≈ +37% | −0.268 (se 0.101, p = 0.008) |
+| Rents | +0.076 (se 0.213, p = 0.72) | −0.008 (p = 0.97) |
+
+Caveats before this is a result: only 8 treated points (inference needs a wild cluster bootstrap), 2017 sample still partial, listing mix differs between periods, and 2020 is needed to check that the change came after opening rather than before.
