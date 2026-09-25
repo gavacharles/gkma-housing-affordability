@@ -126,3 +126,17 @@ Open decisions: (1) adopt the reframing; (2) confirm the commuter-rail stops fro
 2. Speed-assumption sensitivity (`--speed-scale 0.7` and `1.3`).
 3. Spatial Durbin model and MGWR at neighbourhood level; rents versus sales.
 4. Value-capture illustration: land-value uplift implied by the Expressway estimates, compared with toll revenue.
+
+## Corridor tests and the before–after design (25 September 2026)
+
+**Corridor confounding** (`scripts/03_corridor.py` → `outputs/tables/corridor_models.csv`, `corridor_placebo.csv`):
+- Adding distance to the old Entebbe Road removes the Expressway effect (rents −0.25 → +0.12; sales −0.36 → 0.00); the old road takes it over (sales −0.30, p < 0.05).
+- Placebo radials (Jinja, Bombo/Gulu, Gayaza, Hoima, Masaka, Fort Portal roads) carry no premium, and the Expressway term stays significant beside each of them — except beside the Entebbe Road.
+- Within sectors around the CBD (8 wedges) the Expressway term remains significant (rents −1.05, sales −0.23; with CBD-time bands −0.61 and −0.30).
+- The two roads run about 2 km apart; their distances correlate at 0.79 across neighbourhood points, and only 32 points lie within 5 km of the Expressway.
+- Conclusion: the premium is real and specific to the south-western Entebbe corridor, but a cross-section cannot tell the Expressway (2018) from the old Entebbe Road.
+- Speed assumptions do not matter: results are the same with speeds 30% lower or higher (`corridor_models_speed0.7.csv`, `_speed1.3.csv`).
+
+**Before–after design (in progress).** The Internet Archive holds 7,860 distinct RED listing pages captured in 2017 — before the Expressway opened in June 2018 — and about 8,600 (2020) and 25,000 (2021) afterwards. The 2017 pages parse cleanly (location, district, bedrooms, type, rent or price, furnishing, description): `src/gkma/collect/red_archive.py`, `scripts/00_collect_archive.py` → `data/raw/red_archive/`. Collection runs at one page every 1.5 s.
+
+Planned specification: log price on neighbourhood fixed effects (absorbing each area's fixed affluence, including the Entebbe Road corridor's), period effects, and period × Expressway access, with hedonic controls, RED listings only for comparability across periods, prices deflated by CPI. The Expressway effect is identified from how prices changed near its access points after opening, relative to other corridors.
