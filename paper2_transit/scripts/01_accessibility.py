@@ -8,10 +8,12 @@ listings are located it computes:
   tt_cbd_min          travel time to the CBD (Constitutional Square)
   tt_expressway_min   travel time to the nearest Entebbe Expressway access point
   tt_bypass_min       travel time to the nearest Northern Bypass access point
-  tt_rail_min         travel time to the nearest mapped rail station
+  tt_rail_min         travel time to the nearest commuter-rail station on the URC schedule
+                      (Kampala, Namanve, Mukono)
   acc_ntl_{30,45,60}  night-time radiance reachable within 30/45/60 minutes
-                      (cumulative-opportunity accessibility; night lights proxy
-                      economic activity, as no jobs data exist at this scale)
+  acc_jobs_{T}_{w}    jobs reachable within T = 30/45/60 minutes, with each division's or
+                      district's COBE employment spread over its grid cells by w =
+                      bld (building footprint area), ntl (night lights) or mix (both)
 
 Speeds (km/h) are assumptions for typical daytime congestion, varied in
 sensitivity runs with --speed-scale.
@@ -89,7 +91,8 @@ def snap(pt):
 poi = cfg["geography"]["points_of_interest"]
 to_xy = lambda lonlat: gpd.GeoSeries([Point(lonlat)], crs="EPSG:4326").to_crs(crs).iloc[0]  # noqa: E731
 cbd_node, cbd_walk = snap(to_xy(poi["cbd"]))
-stations = gpd.read_file(p("data/external/osm/rail_stations.gpkg")).to_crs(crs)
+stations = gpd.read_file(p("data/external/rail/urc_commuter_stations.gpkg")).to_crs(crs)
+stations = stations[stations["on_urc_schedule"].astype(bool)]
 rail_nodes = [snap(g)[0] for g in stations.geometry]
 exp_nodes, byp_nodes = access_nodes("expressway"), access_nodes("bypass")
 print(f"expressway access points: {len(exp_nodes)}, bypass access points: {len(byp_nodes)}, stations: {len(rail_nodes)}")
@@ -118,14 +121,36 @@ with rasterio.open(p(nl_path)) as src:
 if nodata is not None:
     arr[arr == nodata] = 0
 arr[~np.isfinite(arr) | (arr < 0)] = 0
-rows, cols = np.nonzero(arr > 0)
+with rasterio.open(p("data/external/buildings/building_grid.tif")) as bsrc:   # same grid as the night lights
+    bld = bsrc.read(1, window=win).astype(float)
+rows, cols = np.nonzero((arr > 0) | (bld > 0))
 lon, lat = rasterio.transform.xy(tr, rows, cols)
 cells = gpd.GeoSeries.from_xy(lon, lat, crs="EPSG:4326").to_crs(crs)
 cd, ci = tree.query(np.c_[cells.x, cells.y])
 cell_node = [tuple(nodes[i]) for i in ci]
 cell_walk = cd / 1000 / ACCESS_KMH * 60
 cell_val = arr[rows, cols]
-print(f"night-light cells: {len(cell_val):,}")
+cell_bld = bld[rows, cols]
+print(f"grid cells with lights or buildings: {len(cell_val):,}")
+
+# jobs per cell: COBE employment of each Kampala division / GKMA district spread by weights
+g_ = cfg["geography"]
+sc = gpd.read_file(p(g_["subcounties"])).to_crs(crs)
+sc["unit"] = np.where(sc[g_["district_name_col"]].str.title() == "Kampala", sc[g_["subcounty_name_col"]],
+                      sc[g_["district_name_col"]].str.title())
+units = sc.dissolve("unit").reset_index()[["unit", "geometry"]]
+cell_unit = gpd.sjoin(gpd.GeoDataFrame(geometry=cells.values, crs=crs), units, how="left",
+                      predicate="within")["unit"].groupby(level=0).first().reindex(range(len(cells))).values
+jobs_tab = pd.read_csv(p("data/external/ubos/cobe/cobe_employment_gkma.csv")).set_index("unit")["jobs_2019_20"]
+cell_jobs = {}
+for wname, w in {"bld": cell_bld, "ntl": cell_val, "mix": np.sqrt(cell_bld * cell_val)}.items():
+    jobs = np.zeros(len(cells))
+    for u_, total in jobs_tab.items():
+        m_ = cell_unit == u_
+        if m_.any() and w[m_].sum() > 0:
+            jobs[m_] = total * w[m_] / w[m_].sum()
+    cell_jobs[wname] = jobs
+print("jobs allocated:", {k: f"{v.sum():,.0f}" for k, v in cell_jobs.items()}, f"(COBE total {jobs_tab.sum():,})")
 
 # origins: the distinct neighbourhood points where listings are located
 L = gpd.read_file(p("data/processed/listings.gpkg"))
@@ -145,6 +170,8 @@ for i, r in pts.iterrows():
            "tt_rail_min": walk + t_rail.get(n0, np.nan)}
     for T in (30, 45, 60):
         rec[f"acc_ntl_{T}"] = float(cell_val[reach <= T].sum())
+        for wname, jobs in cell_jobs.items():
+            rec[f"acc_jobs_{T}_{wname}"] = float(jobs[reach <= T].sum())
     rows_out.append(rec)
 out = pd.DataFrame(rows_out)
 g4326 = pts.to_crs("EPSG:4326")

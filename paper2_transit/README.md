@@ -1,12 +1,40 @@
-# Paper 2 — Transit access and housing prices in Greater Kampala
+# Paper 2 — Paying for access in a paratransit city
 
-**Working title:** Is Transit Access Capitalised in an Informal Housing Market? Evidence from Online Listings in Greater Kampala
+**Working title:** Paying for access in a paratransit city: road accessibility, the Entebbe Expressway and housing prices in Greater Kampala
 
 **Target journals:** Journal of Transport Geography; Cities; Transport Policy; Land Use Policy (check current quartiles).
 
+**Status (25 September 2026):** framing adopted. The original transit-capitalisation plan is kept below for reference; the feasibility findings explain the change.
+
 This paper reuses the shared pipeline at the project root: listing collection, cleaning, deduplication, geocoding, census and income data, and the OpenStreetMap layers. Paper-specific scripts go in `scripts/` (start each with `import _paper`), results in `outputs/`, and the manuscript in `docs/manuscript/`.
 
-## Plan
+## Adopted design
+
+**Framing.** In Greater Kampala most trips are made by minibus taxi and boda-boda on the road network, and the commuter rail runs four trips a day between Kampala, Namanve and Mukono (URC schedule, https://urc.go.ug/schedules/). The transport variable that can shape housing prices is therefore access by road. The tolled, limited-access Entebbe Expressway and the open Northern Bypass provide the central contrast; rail enters as a value-capture scenario.
+
+**Research questions**
+1. Is road-network accessibility — travel time to the CBD and access to jobs — priced into rents and sale prices?
+2. Is a tolled, limited-access expressway priced differently from an open bypass, and does the premium follow access to its interchanges?
+3. How do these effects differ between rents and sales, and across the city?
+4. What do the estimates imply for affordability and for value capture on the Expressway and on future rail or bus rapid transit corridors?
+
+**Data**
+
+| Layer | Source | Script |
+|---|---|---|
+| Listings (10,643) | Shared pipeline, paper-1 snapshot | — |
+| Road network, Expressway and Bypass access points | OpenStreetMap | `01_accessibility.py` |
+| Commuter-rail stations | URC schedule (Kampala, Namanve, Mukono); OSM station nodes; Mukono located approximately on the line | `data/external/rail/urc_commuter_stations.gpkg` |
+| Jobs | UBOS COBE 2019/20 sub-region totals split by COBE 2010/11 division and district shares | `00_jobs_totals.py` |
+| Building footprints | Microsoft Global Building Footprints (2026 release) | download in `data/external/buildings/ms/` |
+| Economic activity | NASA Black Marble night lights 2024 (shared) | — |
+
+**Accessibility measures.** Network travel time (congested speeds by road class, with sensitivity runs) to the CBD, Expressway and Bypass access points and stations; cumulative access to jobs within 30/45/60 minutes, with jobs allocated within each division or district by building footprint area and, as alternatives, by night lights or both.
+
+**Models.** Hedonic OLS clustered by neighbourhood point; spatial Durbin model; multiscale GWR; gradient-boosting with SHAP as a comparison. Robustness: speed assumptions, jobs-allocation variants, distance bands, placebo corridors, listing-quality filters, and controls for the Entebbe Road corridor's affluence.
+
+## Original plan (superseded)
+
 
 ### 1. Introduction
 Most studies of how transit access is priced into property values come from the Global North and China. They assume formal transit and formal housing markets. Greater Kampala has neither in the usual sense: a nascent commuter rail service, a transport system dominated by minibus taxis and boda-bodas, and a largely informal rental market.
@@ -81,3 +109,20 @@ They share one spatial pipeline (geocoding, the OpenStreetMap network, animation
 **Paying for access in a paratransit city: road accessibility, the Entebbe Expressway and housing prices in Greater Kampala.** Access by road (the network that taxis and boda-bodas use) replaces rail-station proximity; the tolled, limited-access Expressway against the open Northern Bypass becomes the central comparison; rail enters as a value-capture scenario rather than an estimated effect.
 
 Open decisions: (1) adopt the reframing; (2) confirm the commuter-rail stops from Uganda Railways' timetable; (3) choose the jobs proxy (night lights now; building footprints or a business census if available); (4) handle the Entebbe Road corridor, a high-value area on its own (paper 1 LISA), so the Expressway effect is not simply the corridor's affluence.
+
+## Progress (25 September 2026)
+
+- **Rail:** URC's schedule lists one commuter service, Kampala–Namanve–Mukono, four trips a day; no intermediate stops are named. `data/external/rail/urc_commuter_stations.gpkg` holds Kampala and Namanve (OSM), Mukono (approximate: the point on the railway nearest Mukono town centre, 2.7 km from it; to be confirmed), and Namboole (in OSM, not on the schedule).
+- **Jobs:** `data/external/ubos/cobe/cobe_employment_gkma.csv` — 1,409,073 jobs in GKMA units (Central Division 428,236; Wakiso 307,505), from COBE 2019/20 totals and 2010/11 shares.
+- **Buildings:** 1,461,188 Microsoft footprints (149.6 km²) summed on the night-light grid (`data/external/buildings/building_grid.tif`).
+- **Job access:** jobs reachable in 30/45/60 minutes, three allocation variants, added to `neighbourhood_accessibility.csv`.
+
+**Findings so far**
+- Job access is almost the same variable as travel time to the CBD (Spearman −0.93 to −0.95), and the three allocation variants agree (0.994). In this monocentric city, "access to jobs" and "access to the centre" cannot be separated; the proxy choice does not change results.
+- Travel time to Expressway access points is priced into rents (about −0.48) and sale prices (about −0.34), p < 0.01 in every variant, with job access and the wealth index controlled. The Northern Bypass is not priced.
+
+**Next steps**
+1. Separate the Expressway effect from the Entebbe Road corridor's affluence: control for access to the old Entebbe Road, compare neighbourhoods with similar CBD travel times but different Expressway access, and run placebo corridors.
+2. Speed-assumption sensitivity (`--speed-scale 0.7` and `1.3`).
+3. Spatial Durbin model and MGWR at neighbourhood level; rents versus sales.
+4. Value-capture illustration: land-value uplift implied by the Expressway estimates, compared with toll revenue.
