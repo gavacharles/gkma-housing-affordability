@@ -64,9 +64,13 @@ def derive_measures(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def run(use_nominatim: bool = False, with_covariates: bool = True, out_dir: str | Path = "data/processed"):
+def run(use_nominatim: bool = False, with_covariates: bool = True, out_dir: str | Path = "data/processed",
+        raw: pd.DataFrame | None = None, out_name: str = "listings.gpkg"):
+    """Clean raw records into analysis-ready points. By default reads every raw snapshot and writes
+    data/processed/listings.gpkg; pass `raw` (RAW_COLUMNS schema) and `out_name` to clean another set,
+    e.g. archived listings, with exactly the same steps."""
     steps = StepLog()
-    raw = steps("raw records (all snapshots)", load_raw())
+    raw = steps("raw records (all snapshots)", load_raw() if raw is None else raw)
 
     df = normalise_prices(raw)
     df = normalise_sizes(df)
@@ -88,7 +92,8 @@ def run(use_nominatim: bool = False, with_covariates: bool = True, out_dir: str 
     before = df
     df = deduplicate(df)
     steps("after de-duplication", df)
-    dedup_report(before, df).to_csv(out / "dedup_report.csv")
+    stem = out_name.rsplit(".", 1)[0]
+    dedup_report(before, df).to_csv(out / ("dedup_report.csv" if stem == "listings" else f"{stem}_dedup_report.csv"))
 
     gdf = points_gdf(df)
     gdf = steps("inside GKMA study area", gdf[in_study_area(gdf)])
@@ -105,7 +110,7 @@ def run(use_nominatim: bool = False, with_covariates: bool = True, out_dir: str 
     for c in gdf.columns:
         if gdf[c].dtype == object and c != "geometry":
             gdf[c] = gdf[c].astype("string")
-    gdf.to_file(out / "listings.gpkg", driver="GPKG")
-    steps.frame().to_csv(out / "cleaning_log.csv", index=False)
-    log.info("wrote %s", out / "listings.gpkg")
+    gdf.to_file(out / out_name, driver="GPKG")
+    steps.frame().to_csv(out / ("cleaning_log.csv" if stem == "listings" else f"{stem}_cleaning_log.csv"), index=False)
+    log.info("wrote %s", out / out_name)
     return gdf
