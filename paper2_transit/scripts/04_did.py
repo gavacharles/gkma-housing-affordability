@@ -1,7 +1,7 @@
 """Before-after (difference-in-differences) estimate of the Entebbe Expressway premium (paper 2).
 
 RED listings only, for comparability: archived 2017 (before the June 2018 opening), archived
-2020 when available, and current 2025-26. Neighbourhood points present before and after;
+2020, and current 2025-26 (the full RED crawl, data/processed/listings_current_full.gpkg). Neighbourhood points present before and after;
 point fixed effects absorb each area's fixed level (including the Entebbe Road corridor's),
 period effects absorb city-wide change. Treatment: within 15 minutes of an Expressway access
 point (and, as a continuous alternative, log travel time to it).
@@ -24,8 +24,10 @@ WEBB = np.array([-np.sqrt(1.5), -1, -np.sqrt(.5), np.sqrt(.5), 1, np.sqrt(1.5)])
 COLS = ["listing_type", "ptype", "bedrooms", "bathrooms", "f_furnished", "rent_month_ugx", "price_ugx", "geometry"]
 
 frames = []
+CURRENT = "listings_current_full.gpkg" if (p("data/processed") / "listings_current_full.gpkg").exists() \
+    else "listings.gpkg"                   # full RED crawl for paper 2; paper-1 snapshot as a fallback
 for period, f in [("2017", "listings_archive_2017.gpkg"), ("2020", "listings_archive_2020.gpkg"),
-                  ("2025", "listings.gpkg")]:
+                  ("2025", CURRENT)]:
     path = p("data/processed") / f
     if not path.exists():
         continue
