@@ -54,7 +54,7 @@ raw = pd.DataFrame({
     "bathrooms_raw": src["bathrooms"],
     "size_raw": src["plot_size"].fillna(src["size"]),
     "size_unit_raw": None,
-    "tenure_raw": None,
+    "tenure_raw": src["tenure"] if "tenure" in src else None,             # 2020 layout only
     "furnishing_raw": src["furnished"].map({"Yes": "Furnished", "No": "Unfurnished"}),
     "listed_by": None,
     "agent_key": None,

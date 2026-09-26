@@ -30,7 +30,9 @@ UA = {"User-Agent": "GKMA-housing-research/0.1 (University of Johannesburg; hist
 FIELDS = ["Code", "District", "Location", "Bedrooms", "Bathrooms", "Levels", "Furnished", "Type", "Size",
           "Plot Size", "Rent", "Price", "Title"]
 COLUMNS = ["code", "capture_timestamp", "capture_year", "url"] + \
-    [f.lower().replace(" ", "_") for f in FIELDS] + ["description", "headline"]
+    [f.lower().replace(" ", "_") for f in FIELDS if f != "Code"] + ["tenure", "status", "description", "headline",
+                                                                    "layout", "spec_text"]
+WORDS = {w: str(i) for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
 
 
 def cdx_index(year: int) -> pd.DataFrame:
@@ -60,9 +62,41 @@ def _text(html: str) -> str:
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", t))).strip()
 
 
+def _num(v):
+    v = (v or "").strip().lower()
+    return WORDS.get(v, v) if v else None
+
+
+def parse_quick_summary(t: str) -> dict | None:
+    """2020-21 layout: 'QUICK SUMMARY Code: .. Location: .. District: .. Price: .. Category: ..
+    BedRooms: five Bathrooms: one Size 25 Decimals Tenure .. Status For sale Agent .. DESCRIPTION ..'.
+    The agent's name is not kept."""
+    m = re.search(r"QUICK SUMMARY(.*?)DESCRIPTION(.*?)(Send this property|Tell a friend|Email this|Related|$)", t,
+                  flags=re.I)
+    if not m:
+        return None
+    q, desc = m.group(1), m.group(2)
+    g = lambda pat: (re.search(pat, q, flags=re.I) or [None, None])[1]  # noqa: E731
+    status = g(r"Status\s+(For\s+\w+)")
+    price = g(r"Price:\s*(.*?)\s+Category:")
+    cat = g(r"Category:\s*(.*?)\s+(?:BedRooms:|Bathrooms:|Size\b|Tenure\b|Status\b)")
+    is_sale = bool(status and "sale" in status.lower())
+    return {"location": g(r"Location:\s*(.*?)\s+District:"), "district": g(r"District:\s*(.*?)\s+Price:"),
+            "type": (cat or "") + (" Sale" if is_sale else ""),
+            "bedrooms": _num(g(r"BedRooms:\s*(\w+)")), "bathrooms": _num(g(r"Bathrooms:\s*(\w+)")),
+            "size": g(r"Size\s+(.*?)\s+Tenure"), "tenure": g(r"Tenure\s+(.*?)\s+Status"), "status": status,
+            "price": price if is_sale else None, "rent": None if is_sale else price,
+            "description": redact(desc.strip()[:3000]), "layout": "quick_summary_2020",
+            "spec_text": redact(q.strip()[:1500])}
+
+
 def parse_archived(html: str) -> dict:
-    """Parse the specification block and description of an archived (2017-21) RED page."""
+    """Parse an archived RED page: 2017 'PROPERTY SPECIFICATIONS' or 2020-21 'QUICK SUMMARY' layout."""
     t = _text(html)
+    qs = parse_quick_summary(t)
+    if qs is not None:
+        qs["spec_text"] = re.sub(r"Agent\s+\S+", "Agent [removed]", qs["spec_text"])
+        return qs
     m = re.search(r"PROPERTY SPECIFICATIONS(.*?)(PROPERTY DETAILS|$)", t, flags=re.I)
     spec = m.group(1) if m else ""
     out = {}
@@ -74,6 +108,8 @@ def parse_archived(html: str) -> dict:
     out["description"] = redact(d.group(1).strip()[:3000]) if d else None
     h = re.search(r"(\d+\s*bedroom[^.>]{0,80}?(?:for rent|for sale)[^,>]{0,60})", t, flags=re.I)
     out["headline"] = h.group(1).strip() if h else None
+    out["layout"] = "specifications_2017" if spec else None
+    out["spec_text"] = redact(spec.strip()[:1500]) if spec else None
     return out
 
 
