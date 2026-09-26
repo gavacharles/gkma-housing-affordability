@@ -187,3 +187,19 @@ Sale prices rose more near the Expressway's access points after it opened; rents
 The sale-price effect is of similar size to the earlier estimate but weaker in the continuous form once the larger 2025–26 sample is used. 2020 (collecting) will add the intermediate period.
 
 **Data safety:** the project sits in iCloud Drive with Optimise Mac Storage on; macOS offloaded `red_crawl.csv` and the 2017 archive (restored with `brctl download`). Keep the folder downloaded.
+
+## Three-period before–after result (26 September 2026, evening)
+
+- 2020 archive complete: 8,513 pages (all parsed; captured August–December 2020) → 8,016 clean listings at 232 points (`data/processed/listings_archive_2020.gpkg`). Accessibility now covers 322 points.
+- DiD with 2017 (pre), 2020 and 2025–26 (post), RED only, points present before and after (88 points for sales, 12 treated; 82 for rents, 11 treated):
+
+| Relative to 2017 | Sales: within 15 min of Expressway access | Rents: within 15 min |
+|---|---|---|
+| 2020 | +0.259 (≈ +30%); cluster t 3.30; wild bootstrap p = 0.020 | −0.103; p = 0.133 |
+| 2025–26 | +0.212 (≈ +24%); cluster t 3.57; wild bootstrap p = 0.079 | −0.107; p = 0.697 |
+
+Log travel time to the access points (continuous) is not significant in either period (sales p = 0.41 and 0.21): the premium is concentrated in the immediate catchment rather than declining smoothly with travel time.
+
+**Reading:** sale prices within 15 minutes of the Expressway's access points rose about 30% more than elsewhere between 2017 and 2020, two years after the June 2018 opening, and the premium persists in 2025–26. Rents did not respond. With one pre-period, parallel pre-trends cannot be tested directly.
+
+**Next:** placebo treatments (catchments of other radial roads; the 15–30 minute band as a dose test), sensitivity to the 15-minute threshold and to listing mix (bedroom and property-type composition), then the value-capture calculation and the manuscript.
