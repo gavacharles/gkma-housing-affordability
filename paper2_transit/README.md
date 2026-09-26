@@ -171,3 +171,19 @@ Caveats before this is a result: only 8 treated points (inference needs a wild c
 | Rents: log travel time | −0.027 | −0.16 | 0.884 | 67 |
 
 Sale prices rose more near the Expressway's access points after it opened; rents did not. Next: add 2020 (does the change appear after opening, and is it already there by 2020?), check pre-2017 trends are not available (no earlier archive), and test sensitivity to the 15-minute threshold and to listing mix.
+
+## Complete current data (26 September 2026)
+
+- `scripts/01_clean_current.py`: all raw snapshots including the full RED crawl → `data/processed/listings_current_full.gpkg`, 20,389 listings (15,775 RED) at 219 neighbourhood points (27,421 raw records). Paper 1's frozen dataset is unchanged.
+- Accessibility recomputed for all 235 neighbourhood points used in paper 2 (current + archives).
+- DiD, 2017 → 2025–26 with the full current RED data (`outputs/tables/did_results.csv`):
+
+| | Estimate | Cluster t | Wild bootstrap p | Points (treated) |
+|---|---|---|---|---|
+| Sales: within 15 min of Expressway access | +0.231 (≈ +26%) | 3.76 | 0.060 | 83 (11) |
+| Sales: log travel time to access | −0.098 | −1.45 | 0.167 | 83 |
+| Rents: within 15 min | −0.082 | −0.77 | 0.776 | 75 (8) |
+
+The sale-price effect is of similar size to the earlier estimate but weaker in the continuous form once the larger 2025–26 sample is used. 2020 (collecting) will add the intermediate period.
+
+**Data safety:** the project sits in iCloud Drive with Optimise Mac Storage on; macOS offloaded `red_crawl.csv` and the 2017 archive (restored with `brctl download`). Keep the folder downloaded.
