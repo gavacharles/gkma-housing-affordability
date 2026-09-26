@@ -153,7 +153,13 @@ for wname, w in {"bld": cell_bld, "ntl": cell_val, "mix": np.sqrt(cell_bld * cel
 print("jobs allocated:", {k: f"{v.sum():,.0f}" for k, v in cell_jobs.items()}, f"(COBE total {jobs_tab.sum():,})")
 
 # origins: the distinct neighbourhood points where listings are located
-L = gpd.read_file(p("data/processed/listings.gpkg"))
+# every neighbourhood point used in paper 2: full current listings plus the archived periods
+parts = []
+for f_ in ["listings_current_full.gpkg", "listings_archive_2017.gpkg", "listings_archive_2020.gpkg", "listings.gpkg"]:
+    if (p("data/processed") / f_).exists():
+        parts.append(gpd.read_file(p("data/processed") / f_)[["listing_type", "geometry"]])
+L = pd.concat(parts, ignore_index=True)
+L = gpd.GeoDataFrame(L, geometry="geometry", crs=parts[0].crs)
 L["pt"] = L.geometry.to_wkt()
 pts = L.groupby("pt").agg(n_listings=("pt", "size"), n_rent=("listing_type", lambda s: (s == "rent").sum()),
                          n_sale=("listing_type", lambda s: (s == "sale").sum()),
