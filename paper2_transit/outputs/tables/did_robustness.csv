@@ -1,0 +1,59 @@
+check,market,treatment,period,coef,se,t,p_boot,n,points,treated_points
+threshold 10 min,sale,near10,2020,0.3302,0.1392,2.3716,0.2262,10909,88,7
+threshold 10 min,sale,near10,2025,0.2749,0.1228,2.2383,0.2693,10909,88,7
+threshold 20 min,sale,near20,2020,0.1643,0.116,1.4158,0.2372,10909,88,22
+threshold 20 min,sale,near20,2025,0.1176,0.1114,1.0563,0.3463,10909,88,22
+threshold 25 min,sale,near25,2020,0.082,0.1158,0.7085,0.4975,10909,88,30
+threshold 25 min,sale,near25,2025,0.0864,0.1038,0.8325,0.4454,10909,88,30
+dose,sale,band0_15,2020,0.2299,0.0895,2.5698,0.0511,10909,88,12
+dose,sale,band15_30,2020,-0.1233,0.1308,-0.9428,0.3874,10909,88,30
+dose,sale,band0_15,2025,0.1892,0.0596,3.1737,0.0781,10909,88,12
+dose,sale,band15_30,2025,-0.0999,0.1101,-0.907,0.4164,10909,88,30
+placebo jinja road,sale,pl_jinja_road,2020,0.0565,0.1954,0.2892,0.8118,10909,88,20
+placebo jinja road,sale,pl_jinja_road,2025,-0.104,0.1648,-0.6312,0.6326,10909,88,20
+placebo bombo road,sale,pl_bombo_road,2020,0.2896,0.3515,0.8239,0.7518,10909,88,10
+placebo bombo road,sale,pl_bombo_road,2025,-0.1633,0.3786,-0.4313,0.7508,10909,88,10
+placebo gayaza road,sale,pl_gayaza_road,2020,-0.0871,0.0698,-1.2479,0.3524,10909,88,7
+placebo gayaza road,sale,pl_gayaza_road,2025,-0.0675,0.0637,-1.06,0.2593,10909,88,7
+placebo hoima road,sale,pl_hoima_road,2020,0.7306,0.2084,3.5061,0.6246,10909,88,5
+placebo hoima road,sale,pl_hoima_road,2025,0.4752,0.2102,2.2612,0.6927,10909,88,5
+placebo masaka road,sale,pl_masaka_road,2020,0.3219,0.3375,0.954,0.6947,10909,88,3
+placebo masaka road,sale,pl_masaka_road,2025,0.2795,0.2916,0.9585,0.6897,10909,88,3
+placebo fortportal road,sale,pl_fortportal_road,2020,-0.3223,0.1633,-1.9732,0.3173,10909,88,2
+placebo fortportal road,sale,pl_fortportal_road,2025,-0.3485,0.128,-2.7223,0.3203,10909,88,2
+placebo entebbe road,sale,pl_entebbe_road,2020,-0.0281,0.2576,-0.1089,0.9319,10909,88,11
+placebo entebbe road,sale,pl_entebbe_road,2025,-0.1234,0.2466,-0.5004,0.7808,10909,88,11
+mix: trimmed 5-95%,sale,near15,2020,0.1854,0.1025,1.8087,0.1321,9923,88,12
+mix: trimmed 5-95%,sale,near15,2025,0.2055,0.074,2.7759,0.0641,9923,88,12
+mix: 1-4 bedrooms,sale,near15,2020,0.1688,0.0783,2.1554,0.0731,8612,86,12
+mix: 1-4 bedrooms,sale,near15,2025,0.0485,0.0881,0.5504,0.6977,8612,86,12
+mix: houses only,sale,near15,2020,0.2074,0.0807,2.571,0.022,9482,87,12
+mix: houses only,sale,near15,2025,0.2105,0.0656,3.2071,0.0821,9482,87,12
+threshold 10 min,rent,near10,2020,0.0111,0.0414,0.2692,0.8448,10347,82,6
+threshold 10 min,rent,near10,2025,0.0388,0.0653,0.5939,0.7467,10347,82,6
+threshold 20 min,rent,near20,2020,-0.1587,0.0463,-3.4293,0.01,10347,82,21
+threshold 20 min,rent,near20,2025,-0.1917,0.0818,-2.343,0.2492,10347,82,21
+threshold 25 min,rent,near25,2020,-0.0769,0.044,-1.7478,0.0981,10347,82,29
+threshold 25 min,rent,near25,2025,0.0569,0.1132,0.5027,0.6807,10347,82,29
+dose,rent,band0_15,2020,-0.0908,0.0425,-2.1347,0.1632,10347,82,11
+dose,rent,band15_30,2020,0.0288,0.042,0.6859,0.5045,10347,82,29
+dose,rent,band0_15,2025,-0.1059,0.1174,-0.902,0.6717,10347,82,11
+dose,rent,band15_30,2025,0.0041,0.085,0.0477,0.951,10347,82,29
+placebo jinja road,rent,pl_jinja_road,2020,0.0356,0.0505,0.7047,0.4975,10347,82,19
+placebo jinja road,rent,pl_jinja_road,2025,-0.1613,0.0634,-2.5437,0.03,10347,82,19
+placebo bombo road,rent,pl_bombo_road,2020,-0.1595,0.0854,-1.8674,0.2563,10347,82,7
+placebo bombo road,rent,pl_bombo_road,2025,-0.0283,0.1677,-0.1685,0.8569,10347,82,7
+placebo gayaza road,rent,pl_gayaza_road,2020,-0.0198,0.0897,-0.2208,0.8629,10347,82,8
+placebo gayaza road,rent,pl_gayaza_road,2025,0.1346,0.1132,1.1894,0.3203,10347,82,8
+placebo hoima road,rent,pl_hoima_road,2020,-0.1848,0.0362,-5.1028,0.1662,10347,82,5
+placebo hoima road,rent,pl_hoima_road,2025,-0.1481,0.1097,-1.3498,0.6887,10347,82,5
+placebo masaka road,rent,pl_masaka_road,2020,-0.417,0.027,-15.4475,0.0861,10347,82,3
+placebo masaka road,rent,pl_masaka_road,2025,-0.0719,0.131,-0.549,0.7658,10347,82,3
+placebo fortportal road,rent,pl_fortportal_road,2020,0.0,,,0.0,10347,82,1
+placebo fortportal road,rent,pl_fortportal_road,2025,0.0,0.0,86.9301,0.1892,10347,82,1
+placebo entebbe road,rent,pl_entebbe_road,2020,-0.2959,0.0656,-4.509,0.011,10347,82,10
+placebo entebbe road,rent,pl_entebbe_road,2025,-0.1003,0.0581,-1.7263,0.1822,10347,82,10
+mix: trimmed 5-95%,rent,near15,2020,-0.113,0.049,-2.3071,0.2462,9586,81,10
+mix: trimmed 5-95%,rent,near15,2025,-0.1417,0.1302,-1.0878,0.7467,9586,81,10
+mix: 1-4 bedrooms,rent,near15,2020,-0.1209,0.0637,-1.8968,0.2422,9634,82,11
+mix: 1-4 bedrooms,rent,near15,2025,-0.1402,0.0946,-1.481,0.6406,9634,82,11
