@@ -203,3 +203,27 @@ Log travel time to the access points (continuous) is not significant in either p
 **Reading:** sale prices within 15 minutes of the Expressway's access points rose about 30% more than elsewhere between 2017 and 2020, two years after the June 2018 opening, and the premium persists in 2025–26. Rents did not respond. With one pre-period, parallel pre-trends cannot be tested directly.
 
 **Next:** placebo treatments (catchments of other radial roads; the 15–30 minute band as a dose test), sensitivity to the 15-minute threshold and to listing mix (bedroom and property-type composition), then the value-capture calculation and the manuscript.
+
+## Robustness of the before–after result (27 September 2026)
+
+`scripts/05_did_robustness.py` → `outputs/tables/did_robustness.csv` (wild cluster bootstrap p, 999 draws). Sale prices, relative to 2017:
+
+| Check | 2020 | 2025–26 | Treated points |
+|---|---|---|---|
+| Main: within 15 min (04_did) | +0.259 (p = 0.02) | +0.212 (p = 0.08) | 12 |
+| Dose: 0–15 min | +0.230 (p = 0.05) | +0.189 (p = 0.08) | 12 |
+| Dose: 15–30 min | −0.123 (p = 0.39) | −0.100 (p = 0.42) | 30 |
+| Within 10 min | +0.330 (p = 0.23) | +0.275 (p = 0.27) | 7 |
+| Within 20 min | +0.164 (p = 0.24) | +0.118 (p = 0.35) | 22 |
+| Within 25 min | +0.082 (p = 0.50) | +0.086 (p = 0.45) | 30 |
+| Houses only | +0.207 (p = 0.02) | +0.211 (p = 0.08) | 12 |
+| Prices trimmed 5–95% | +0.185 (p = 0.13) | +0.206 (p = 0.06) | 12 |
+| 1–4 bedrooms | +0.169 (p = 0.07) | +0.048 (p = 0.70) | 12 |
+| Placebo: old Entebbe Road beyond the Expressway catchment | −0.028 (p = 0.93) | −0.123 (p = 0.78) | 11 |
+| Placebos: Jinja, Bombo/Gulu, Gayaza, Hoima, Masaka roads | all p ≥ 0.26 | all p ≥ 0.26 | 3–20 |
+
+(Fort Portal Road placebo dropped: 1–2 treated points.)
+
+**Reading.** The sale-price rise is confined to the immediate Expressway catchment, fades with distance (10 → 25 minutes), survives houses-only and trimmed samples, and does not appear around other radial roads or the old Entebbe Road beyond the catchment — so it is attributable to the Expressway rather than the corridor. Significance depends on the catchment definition (clear at 15 minutes, imprecise at 10 with 7 points, absent at 20–25): the paper should present the dose pattern and state this. Rents show no Expressway premium; rents near the old Entebbe Road outside the catchment fell relative to elsewhere by 2020 (−0.296, p = 0.01), consistent with traffic diverting to the Expressway.
+
+**Next:** value-capture calculation (sale-price uplift in the catchment × housing stock, against toll revenue), figures (event-style chart; catchment map), then the manuscript.
