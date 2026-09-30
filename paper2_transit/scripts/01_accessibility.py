@@ -32,6 +32,7 @@ from scipy.spatial import cKDTree
 from shapely.geometry import Point
 
 import _paper  # noqa: F401  (shared pipeline + paper-2 outputs)
+from _network import ACCESS_KMH as ACCESS, RoadNetwork
 from gkma.config import load_config, p
 
 ap = argparse.ArgumentParser()
@@ -40,68 +41,19 @@ a = ap.parse_args()
 
 cfg = load_config()
 crs = cfg["project"]["crs_projected"]
-SPEED = {"motorway": 70, "motorway_link": 30, "trunk": 25, "trunk_link": 20, "primary": 22, "primary_link": 18,
-         "secondary": 20, "tertiary": 18}                      # km/h, congested daytime (assumption)
-BYPASS_SPEED = 40                                                # Northern Bypass: congested, frequent junctions
-ACCESS_KMH = 12                                                  # from a neighbourhood point to the network (boda/walk)
-
-roads = gpd.read_file(p("data/external/osm/roads.gpkg")).to_crs(crs)
-roads["kind"] = np.where(roads["name"].fillna("").str.contains("Expressway", case=False), "expressway",
-                         np.where(roads["name"].fillna("").str.contains("Northern Bypass", case=False), "bypass",
-                                  roads["highway"]))
-
-
-def key(xy):
-    return (round(xy[0], 1), round(xy[1], 1))
-
-
-G = nx.Graph()
-node_kinds = {}
-for _, r in roads.iterrows():
-    geoms = [r.geometry] if r.geometry.geom_type == "LineString" else list(r.geometry.geoms)
-    v = (BYPASS_SPEED if r["kind"] == "bypass" else SPEED.get(r["highway"], 18)) * a.speed_scale
-    for geom in geoms:
-        cs = list(geom.coords)
-        for u, w in zip(cs[:-1], cs[1:]):
-            ku, kw = key(u), key(w)
-            d = float(np.hypot(w[0] - u[0], w[1] - u[1]))
-            t = d / 1000 / v * 60                                # minutes
-            if G.has_edge(ku, kw):
-                t = min(t, G[ku][kw]["t"])
-            G.add_edge(ku, kw, t=t)
-        for c in cs:
-            node_kinds.setdefault(key(c), set()).add(r["kind"])
-# keep the largest connected component (fragments of the tertiary network are dropped)
-G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
-nodes = np.array(list(G.nodes))
-tree = cKDTree(nodes)
+net = RoadNetwork(speed_scale=a.speed_scale)
+G, nodes, tree, snap = net.G, net.nodes, net.tree, net.snap
+ACCESS_KMH = ACCESS
 print(f"graph: {G.number_of_nodes():,} nodes, {G.number_of_edges():,} edges")
-
-
-def access_nodes(kind):
-    """Nodes where a motorway of this kind meets any other road (its access points)."""
-    return [n for n in G.nodes if kind in node_kinds.get(n, set()) and len(node_kinds[n]) > 1]
-
-
-def snap(pt):
-    d, i = tree.query([pt.x, pt.y])
-    return tuple(nodes[i]), d / 1000 / ACCESS_KMH * 60           # node, access minutes
-
-
 poi = cfg["geography"]["points_of_interest"]
 to_xy = lambda lonlat: gpd.GeoSeries([Point(lonlat)], crs="EPSG:4326").to_crs(crs).iloc[0]  # noqa: E731
 cbd_node, cbd_walk = snap(to_xy(poi["cbd"]))
 stations = gpd.read_file(p("data/external/rail/urc_commuter_stations.gpkg")).to_crs(crs)
 stations = stations[stations["on_urc_schedule"].astype(bool)]
 rail_nodes = [snap(g)[0] for g in stations.geometry]
-exp_nodes, byp_nodes = access_nodes("expressway"), access_nodes("bypass")
+exp_nodes, byp_nodes = net.access_nodes("expressway"), net.access_nodes("bypass")
 print(f"expressway access points: {len(exp_nodes)}, bypass access points: {len(byp_nodes)}, stations: {len(rail_nodes)}")
-
-
-def nearest_time(targets):
-    """Multi-source Dijkstra from a set of targets: minutes from every node to the nearest target."""
-    return nx.multi_source_dijkstra_path_length(G, set(targets), weight="t")
-
+nearest_time = net.nearest_time
 
 t_exp, t_byp, t_rail = nearest_time(exp_nodes), nearest_time(byp_nodes), nearest_time(rail_nodes)
 t_cbd = nx.single_source_dijkstra_path_length(G, cbd_node, weight="t")
