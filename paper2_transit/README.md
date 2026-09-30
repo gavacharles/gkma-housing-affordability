@@ -227,3 +227,16 @@ Log travel time to the access points (continuous) is not significant in either p
 **Reading.** The sale-price rise is confined to the immediate Expressway catchment, fades with distance (10 → 25 minutes), survives houses-only and trimmed samples, and does not appear around other radial roads or the old Entebbe Road beyond the catchment — so it is attributable to the Expressway rather than the corridor. Significance depends on the catchment definition (clear at 15 minutes, imprecise at 10 with 7 points, absent at 20–25): the paper should present the dose pattern and state this. Rents show no Expressway premium; rents near the old Entebbe Road outside the catchment fell relative to elsewhere by 2020 (−0.296, p = 0.01), consistent with traffic diverting to the Expressway.
 
 **Next:** value-capture calculation (sale-price uplift in the catchment × housing stock, against toll revenue), figures (event-style chart; catchment map), then the manuscript.
+
+## Value capture (30 September 2026)
+
+`scripts/06_value_capture.py` → `outputs/tables/value_capture.csv`. Road-network code moved to `scripts/_network.py` (shared by 01 and 06; accessibility output verified identical).
+
+- Catchment: 18 parishes within 15 minutes of an Expressway access point; 167,599 households (Census 2024, matched parishes).
+- Listed houses in the catchment (RED 2025–26): 608; lower quartile UGX 300m, median UGX 600m.
+- Share of today's value attributable to the Expressway: 1 − e^(−β), β = 0.19–0.26 → UGX 57m (lower quartile, β = 0.21) to UGX 115m (median) per home.
+- Total uplift, with 10%, 25% or 50% of the stock resembling the listed formal homes: UGX 0.87–11.5 trillion across all combinations; with β = 0.21, UGX 0.96–9.6 trillion.
+- Toll revenue: about UGX 4bn a month in 2026 (≈ UGX 48bn a year); UGX 192bn since January 2022 (Daily Monitor, 25 August 2026, https://www.monitor.co.ug/uganda/news/national/entebbe-expressway-toll-revenue-rises-to-shs4b-a-month-5569914).
+- The uplift equals 18 to 239 years of current toll revenue; the most conservative case (10% of stock, lower-quartile value, β = 0.19) is about UGX 0.87 trillion, 18 years. A 1% annual rate on the uplift would raise UGX 8.7–115bn a year.
+
+Caveats: asking prices; the formal-stock share is an assumption (listings cover the formal market only); households approximate dwellings; the catchment uses parish representative points.
