@@ -1,0 +1,13 @@
+area,terms,median_income,median_price,price_oai_100,price_ratio
+GKMA,"base (18.3%, 20 yrs, 30% deposit)",546925.551,470000000.0,17463420.0029,0.0372
+GKMA,"concessional (8%, 25 yrs, 30% deposit)",546925.551,470000000.0,35431073.9541,0.0754
+GKMA,"concessional, 10% deposit (8%, 25 yrs)",546925.551,470000000.0,27557501.9643,0.0586
+Kampala,"base (18.3%, 20 yrs, 30% deposit)",870719.4287,956000000.0,27802210.1223,0.0291
+Kampala,"concessional (8%, 25 yrs, 30% deposit)",870719.4287,956000000.0,56407173.5531,0.059
+Kampala,"concessional, 10% deposit (8%, 25 yrs)",870719.4287,956000000.0,43872246.0969,0.0459
+Mukono,"base (18.3%, 20 yrs, 30% deposit)",406975.2742,210000000.0,12994785.3629,0.0619
+Mukono,"concessional (8%, 25 yrs, 30% deposit)",406975.2742,210000000.0,26364778.5562,0.1255
+Mukono,"concessional, 10% deposit (8%, 25 yrs)",406975.2742,210000000.0,20505938.8771,0.0976
+Wakiso,"base (18.3%, 20 yrs, 30% deposit)",586520.1799,420000000.0,18727682.8137,0.0446
+Wakiso,"concessional (8%, 25 yrs, 30% deposit)",586520.1799,420000000.0,37996103.5496,0.0905
+Wakiso,"concessional, 10% deposit (8%, 25 yrs)",586520.1799,420000000.0,29552524.9831,0.0704

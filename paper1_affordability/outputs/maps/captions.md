@@ -125,3 +125,15 @@
 
 ## 00_conceptual_framework
 **Conceptual framework of the study.** Theoretical lenses (T1–T5) inform the determinants of asking prices and rents, the decomposition into land and structure, and the affordability gap. Online listings observe the formal, titled segment of the market, which conditions all observed outcomes. Sources: Authors' elaboration.
+
+## 27_income_position
+**Share of households who could afford the median listed home.** Rent at 30% of income (1–2 bedroom homes); ownership on the base mortgage terms (18.3%, 30% deposit, 20 years, 35% repayment cap). Household incomes are the household-weighted mixture of parish lognormal distributions. Areas with at least 20 qualifying listings; values below 0.001% are drawn at 0.001%. Sources: Listings (RED, Jiji, Uganda Property Centre); modelled parish incomes (UNHS 2019/20, Census 2024).
+
+## 28_key_workers
+**Key workers' earnings against the incomes needed to rent or buy the median listed home.** Dashed lines: income needed to rent the median listed 1–2 bedroom home at 30% of income (cheapest sub-county with at least 20 listings, Wakiso, GKMA, Kampala). Solid lines: income needed to buy the cost-floor 2-bedroom home at 8% over 25 years, and the GKMA median listed house on base mortgage terms. Survey medians (NLFS 2021) uprated by the headline CPI (×1.262). * Public-service scales reported in the press; to be checked against the Ministry of Public Service circulars. Sources: UBOS National Labour Force Survey 2021; Ministry of Public Service salary structures FY2025/26–2026/27 (as reported); listings (RED, Jiji, Uganda Property Centre); modelled parish incomes.
+
+## 25_what_it_takes
+**What it would take for the median household to buy.** (a) GKMA Ownership Affordability Index for the median listed home (UGX 470 million) at other prices and interest rates, with a 30% deposit, 20-year term and 35% repayment cap; free land removes the median land share (56%, 32 m² per bedroom). (b) Cumulative policy ladder; each bar keeps the changes above it. Cost-floor homes are built at CAHF benchmark cost (UGX 1.95 million/m²) on a 50 × 50 ft plot at the lower-quartile sub-county land price (UGX 2.1 million per decimal), with no developer margin. Sources: Listings (RED, Jiji, Uganda Property Centre); modelled parish incomes (UNHS 2019/20, Census 2024); Bank of Uganda lending rate; CAHF (2020) construction costs indexed with the UBOS CIPI.
+
+## 26_cost_floor
+**Share of households who could buy a minimal formal home at cost, by sub-county.** A home built at CAHF benchmark construction cost on a 50 × 50 ft plot (5.74 decimals) at the sub-county's median asking land price, with no developer margin, financed at 18.3% over 20 years with a 30% deposit and a 35% repayment cap. Sub-counties with at least 20 land listings. Sources: Land listings (RED, Jiji, Uganda Property Centre); CAHF (2020) construction costs indexed with the UBOS CIPI; modelled parish incomes (UNHS 2019/20, Census 2024); Bank of Uganda lending rate.

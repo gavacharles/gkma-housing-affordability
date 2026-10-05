@@ -5,8 +5,8 @@ project:
   random_seed: 42
   raw_dir: demo/raw
 collection:
-  contact_email: ""                           # optional; added to the User-Agent only if filled in
-  user_agent: "GKMA-affordability-research/0.1 (University of Johannesburg)"
+  contact_email: ''
+  user_agent: GKMA-affordability-research/0.1 (University of Johannesburg)
   min_delay_seconds: 4.0
   max_pages_per_run: 200
   cache_dir: data/raw/_http_cache
@@ -23,13 +23,18 @@ collection:
       - land-and-plots-for-sale
       region_slugs: []
     red:
-      permission: not_granted
-      consent_reference: ''
+      permission: researcher_authorised
+      consent_reference: '2026-09-23: researcher instructed collection to proceed;
+        written consent from Zillion Technologies (RED) being sought in parallel (docs/letter_template.md)'
+      latest_code: 256100
+      latest_code_date: '2026-09-23'
+      min_code: 233000
       sitemap: https://www.realestatedatabase.net/SiteMap4RealEstateDatabase.xml
       feed_csv: ''
     upc:
-      permission: not_granted
-      consent_reference: ''
+      permission: researcher_authorised
+      consent_reference: '2026-09-23: researcher instructed full collection; written
+        consent from Dilmak Solutions Ventures (UPC) being sought in parallel'
       sitemap: https://ugandapropertycentre.com/sitemaps/sitemap_listings_1.txt
 cleaning:
   usd_ugx_fallback: 3700
@@ -64,10 +69,10 @@ geography:
   subcounty_name_col: SName2016
   district_name_col: DName2016
   neighbourhood_lookup: data/lookup/neighbourhood_lookup.csv
-  # Island sub-counties whose parishes are mostly open lake (not part of the
-  # metropolitan housing market)
-  exclude_subcounties: ["Koome"]
-  min_listings_per_unit: 5
+  exclude_subcounties:
+  - Koome
+  map_level: subcounty
+  min_listings_per_unit: 20
   points_of_interest:
     cbd:
     - 32.5825
@@ -75,11 +80,13 @@ geography:
   corridors:
     northern_bypass: Northern Bypass
     entebbe_expressway: Kampala-Entebbe Expressway
+  overpass_url: https://overpass.kumi.systems/api
   night_lights: data/external/viirs_annual_2024_uganda.tif
   flood: data/external/flood_hazard_gkma.gpkg
 income:
   table: demo/external/income_SYNTHETIC.csv
-  join_level: district
+  join_level: parish
+  parish_income: data/external/parish_income.gpkg
   affordability_threshold: 0.3
 construction:
   table: demo/external/rates_SYNTHETIC.csv
@@ -94,3 +101,14 @@ modelling:
   targets:
     rent: log_rent_month_ugx
     sale: log_price_ugx
+affordability_index:
+  min_listings: 20
+  mortgage:
+    rate: bou
+    deposit: 0.3
+    term_years: 20
+    cap: 0.35
+  residual_income:
+    poverty_line_ae_2019_20: 87000
+    ae_per_person: 0.787
+    housing_share: 0.174

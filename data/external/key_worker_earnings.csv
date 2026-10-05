@@ -1,0 +1,12 @@
+occupation,group,monthly_gross_ugx,price_year,uprate_to_2026,source,verify
+"Elementary occupations (median, Uganda)",survey,122000,2021,cpi,"UBOS NLFS 2021 Main Report, Table 5.9 (cash and in-kind, all paid employees in elementary occupations)",no
+"Informal-sector employee (median, Uganda)",survey,240000,2021,cpi,"UBOS NLFS 2021 Main Report, Table 5.9 (cash and in-kind, informal employment)",no
+"Paid employee (median, Kampala)",survey,300000,2021,cpi,"UBOS NLFS 2021 Main Report, Table A5.4 (cash and in-kind, Kampala sub-region)",no
+"Public-sector employee (median, Uganda)",survey,560000,2021,cpi,"UBOS NLFS 2021 Main Report, Table 5.9 (cash and in-kind, public institutions)",no
+"Formal-sector employee (median, Uganda)",survey,612000,2021,cpi,"UBOS NLFS 2021 Main Report, Table 5.9 (cash and in-kind, formal employment)",no
+"Police constable",public scale,583000,2026,none,"FY2025/26 salary structure, reported by Nile Post (Ministry of Public Service circular): constables raised from UGX 466,000 to 583,000",yes
+"Primary teacher (Grade III)",public scale,700000,2026,none,"FY2026/27 salary review (effective 1 July 2026), The Independent, 6 July 2026: education assistants raised from about UGX 500,000",yes
+"Primary head teacher",public scale,1500000,2026,none,"FY2026/27 salary review, The Independent, 6 July 2026",yes
+"Secondary teacher, arts graduate",public scale,2000000,2026,none,"FY2026/27 salary review, The Independent, 6 July 2026 (arts education officers, approximately)",yes
+"Secondary teacher, science graduate",public scale,4000000,2026,none,"FY2026/27 salary review, The Independent, 6 July 2026 (science teachers, more than UGX 4 million)",yes
+"Assistant commissioner (senior civil servant)",public scale,6500000,2026,none,"FY2026/27 salary review, The Independent, 6 July 2026",yes

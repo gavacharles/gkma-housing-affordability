@@ -5,6 +5,8 @@ See src/gkma/geo/census.py for the method. Writes
                                       modelled median income (UGX/month, 2019/20 prices)
   data/external/parish_income.gpkg    GKMA parishes joined to the 2016 parish polygons
   data/external/parish_income_calibration.csv / .json   sub-region fit
+
+Without the census workbook, only the polygon join is redone, from the committed CSV.
 """
 import json
 import re
@@ -17,20 +19,24 @@ from rapidfuzz import fuzz, process
 from gkma.config import load_config, p
 from gkma.geo.census import UNHS_MEDIAN_2019_20, parish_income_model, parse_census
 
-df = parse_census()                                   # every parish in Uganda
-d, info = parish_income_model(df)
-d.to_csv(p("data/external/parish_income.csv"), index=False)
-cal = d.groupby("subregion").apply(lambda g: pd.Series({
-    "households": g["households"].sum(),
-    "wealth_mean": g["wealth_mean"].iloc[0],
-    "unhs_median": UNHS_MEDIAN_2019_20[g.name],
-    "check_hh_weighted_geomean": float((g["median_income_2019_20"].pipe(lambda s: s.clip(lower=1)).apply(lambda x: __import__("math").log(x)) * g["households"]).sum() / g["households"].sum()),
-}))
-cal["check_hh_weighted_geomean"] = cal["check_hh_weighted_geomean"].map(lambda x: round(__import__("math").exp(x)))
-cal.to_csv(p("data/external/parish_income_calibration.csv"))
-json.dump(info, open(p("data/external/parish_income_calibration.json"), "w"), indent=2)
-print(json.dumps(info, indent=2))
-print(cal.round(2).to_string())
+if p("data/external/ubos/harvest/NPHC-2024-Subcounty-Profiles-Excel-Tables.xlsx").exists():
+    df = parse_census()                                   # every parish in Uganda
+    d, info = parish_income_model(df)
+    d.to_csv(p("data/external/parish_income.csv"), index=False)
+    cal = d.groupby("subregion").apply(lambda g: pd.Series({
+        "households": g["households"].sum(),
+        "wealth_mean": g["wealth_mean"].iloc[0],
+        "unhs_median": UNHS_MEDIAN_2019_20[g.name],
+        "check_hh_weighted_geomean": float((g["median_income_2019_20"].pipe(lambda s: s.clip(lower=1)).apply(lambda x: __import__("math").log(x)) * g["households"]).sum() / g["households"].sum()),
+    }))
+    cal["check_hh_weighted_geomean"] = cal["check_hh_weighted_geomean"].map(lambda x: round(__import__("math").exp(x)))
+    cal.to_csv(p("data/external/parish_income_calibration.csv"))
+    json.dump(info, open(p("data/external/parish_income_calibration.json"), "w"), indent=2)
+    print(json.dumps(info, indent=2))
+    print(cal.round(2).to_string())
+else:                                                 # census workbook not downloaded: reuse the committed model
+    d = pd.read_csv(p("data/external/parish_income.csv"))
+    print("census workbook missing: joining the committed parish_income.csv to the polygons")
 
 # GKMA parishes -> 2016 polygons (same matching rule as 00_prepare_census.py)
 g = load_config()["geography"]
