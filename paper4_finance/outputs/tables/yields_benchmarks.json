@@ -1,0 +1,12 @@
+{
+  "lending_rate": 0.1829326706318531,
+  "tbill_364": 0.13107102733672366,
+  "inflation_12m": 0.04137428786214725,
+  "rppi_cagr": 0.01682207739296948,
+  "rppi_1y": 0.06391776412317607,
+  "cpi_cagr_same_period": 0.039475392083910155,
+  "rppi_period": "2015-07 to 2026-04",
+  "gkma_gross_yield": 0.06,
+  "median_subcounty_yield": 0.048882352941176474,
+  "gkma_total_return": 0.07682207739296948
+}

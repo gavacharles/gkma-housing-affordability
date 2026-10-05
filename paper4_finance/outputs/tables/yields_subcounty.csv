@@ -1,0 +1,17 @@
+unit_id,rent_per_bed,n_rent,DName2016,price_per_bed,n_sale,gross_yield,price_to_annual_rent
+Wakiso/Kasangati Town Council,350000.0,56.0,Wakiso,72916666.66667,152.0,0.0576,17.36111
+Wakiso/Ndejje Division,650000.0,41.0,Wakiso,212500000.0,127.0,0.03671,27.24359
+Wakiso/Division A,1248750.0,21.0,Wakiso,172666666.66667,55.0,0.08679,11.52263
+Wakiso/Wakiso Town Council,500000.0,57.0,Wakiso,88125000.0,360.0,0.06809,14.6875
+Wakiso/Kira Division,587500.0,424.0,Wakiso,141666666.66667,713.0,0.04976,20.09456
+Mukono/Goma Division,300000.0,63.0,Mukono,83333333.33333,176.0,0.0432,23.14815
+Wakiso/Katabi  Town Council,795000.0,21.0,Wakiso,110000000.0,48.0,0.08673,11.5304
+Mukono/Central Division,250000.0,20.0,Mukono,60000000.0,132.0,0.05,20.0
+Wakiso/Bunamwaya Division,625000.0,32.0,Wakiso,396428571.42857,43.0,0.01892,52.85714
+Wakiso/Bweyogerere Division,400000.0,49.0,Wakiso,100000000.0,34.0,0.048,20.83333
+Wakiso/Namugongo Division,450000.0,436.0,Wakiso,130000000.0,364.0,0.04154,24.07407
+Kampala/Kawempe Division,700000.0,214.0,Kampala,137500000.0,124.0,0.06109,16.36905
+Kampala/Nakawa Division,1110000.0,934.0,Kampala,300000000.0,483.0,0.0444,22.52252
+Kampala/Makindye Division,750000.0,553.0,Kampala,300000000.0,255.0,0.03,33.33333
+Kampala/Rubaga Division,490000.0,53.0,Kampala,141666666.66667,62.0,0.04151,24.09297
+Kampala/Central Division,2220000.0,389.0,Kampala,296000000.0,167.0,0.09,11.11111

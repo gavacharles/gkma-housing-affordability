@@ -48,6 +48,8 @@ header p { margin: 0; color: var(--muted); max-width: 70ch; }
 .seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .seg button { font: 500 14px var(--body); padding: 8px 6px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
+.seg.three { grid-template-columns: 1fr 1fr 1fr; }
+.seg.three button { font-size: 13px; }
 .seg button[aria-pressed="true"] { background: var(--control); color: var(--control-ink); }
 .seg button:focus-visible, input:focus-visible, .reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
@@ -144,8 +146,21 @@ td.num, th.num { text-align: right; }
       </div>
       <div class="mortgage" id="mortgage" hidden>
         <div>
+          <div class="label" id="lbl-policy">What would it take?</div>
+          <div class="seg three" aria-labelledby="lbl-policy">
+            <button id="pol-today" aria-pressed="true">Today</button>
+            <button id="pol-land" aria-pressed="false">Free land</button>
+            <button id="pol-floor" aria-pressed="false">Cost-floor home</button>
+          </div>
+          <p class="hint" id="pol-hint"></p>
+        </div>
+        <div>
+          <div class="row"><label class="label" for="price">Price of the home</label><output id="price-out"></output></div>
+          <input type="range" id="price" min="5" max="100" step="1" value="100">
+        </div>
+        <div>
           <div class="row"><label class="label" for="rate">Interest rate</label><output id="rate-out"></output></div>
-          <input type="range" id="rate" min="10" max="25" step="0.1" value="18.3">
+          <input type="range" id="rate" min="3" max="25" step="0.1" value="18.3">
         </div>
         <div>
           <div class="row"><label class="label" for="deposit">Deposit</label><output id="deposit-out"></output></div>
@@ -198,9 +213,10 @@ td.num, th.num { text-align: right; }
 
 <script>
 const DATA = __DATA__;
+const POLICY = __POLICY__;
 const $ = (id) => document.getElementById(id);
 const base = { mode: "rent", test: "ratio", burden: 30, rate: Math.round(DATA.mortgage.rate * 1000) / 10,
-               deposit: DATA.mortgage.deposit * 100, term: DATA.mortgage.term, ref: "gkma" };
+               deposit: DATA.mortgage.deposit * 100, term: DATA.mortgage.term, ref: "gkma", price: 100 };
 let st = { ...base };
 
 // normal CDF (Abramowitz & Stegun 7.1.26)
@@ -224,7 +240,7 @@ const pct = (v) => (v * 100 >= 99.95 ? ">99.9" : (v * 100).toFixed(1)) + "%";
 function cost(area) {
   const a = DATA.areas[area] || DATA.areas.GKMA;
   const src = (st.mode === "rent" ? a.rent : a.price) == null ? DATA.areas.GKMA : a;
-  return st.mode === "rent" ? src.rent : payment(src.price, st.rate / 100, st.deposit / 100, st.term);
+  return st.mode === "rent" ? src.rent : payment(src.price * st.price / 100, st.rate / 100, st.deposit / 100, st.term);
 }
 function share(p, H) {
   const q = st.test === "ratio" ? H / (st.burden / 100) : H + p.nm;
@@ -289,6 +305,15 @@ function update() {
   $("rate-out").textContent = st.rate.toFixed(1) + "%";
   $("deposit-out").textContent = st.deposit + "%";
   $("term-out").textContent = st.term + " years";
+  $("price-out").textContent = st.price + "% · " + ugx(DATA.areas.GKMA.price * st.price / 100);
+  const landP = Math.round(100 * (1 - POLICY.land_share)), floorP = Math.round(100 * POLICY.floor_price / DATA.areas.GKMA.price);
+  for (const [id, on] of [["pol-today", st.price === 100], ["pol-land", st.price === landP], ["pol-floor", st.price === floorP]])
+    $(id).setAttribute("aria-pressed", String(on));
+  $("pol-hint").textContent = st.price === landP
+    ? `The median listed home without its land: land is about ${Math.round(100 * POLICY.land_share)}% of house prices.`
+    : st.price === floorP
+      ? `A 2-bedroom, 50 m² home built at benchmark cost on a 50 × 50 ft plot at the lower-quartile land price, no developer margin (${ugx(POLICY.floor_price)}).`
+      : "Set the price, then try a lower interest rate or a longer term.";
   $("mortgage").hidden = st.mode !== "own";
   $("mode-hint").textContent = st.mode === "rent"
     ? `Median listed 1–2 bedroom rent: ${ugx(DATA.areas.GKMA.rent)} a month (GKMA).`
@@ -302,7 +327,7 @@ function update() {
 }
 
 const bind = (id, key, fn = Number) => $(id).addEventListener("input", (e) => { st[key] = fn(e.target.value); update(); });
-bind("burden", "burden"); bind("rate", "rate"); bind("deposit", "deposit"); bind("term", "term");
+bind("burden", "burden"); bind("rate", "rate"); bind("deposit", "deposit"); bind("term", "term"); bind("price", "price");
 $("burden").addEventListener("input", () => { if (touring && curStop != null) stopCard(curStop); });
 const tap = (id, patch) => $(id).addEventListener("click", () => { st = { ...st, ...patch() }; syncSliders(); update(); });
 tap("mode-rent", () => ({ mode: "rent", burden: st.mode === "rent" ? st.burden : 30 }));
@@ -310,7 +335,10 @@ tap("mode-own", () => ({ mode: "own", burden: st.mode === "own" ? st.burden : 35
 tap("test-ratio", () => ({ test: "ratio" })); tap("test-resid", () => ({ test: "resid" }));
 tap("ref-gkma", () => ({ ref: "gkma" })); tap("ref-dist", () => ({ ref: "dist" }));
 tap("reset", () => ({ ...base, mode: st.mode, burden: st.mode === "own" ? 35 : 30 }));
-function syncSliders() { for (const k of ["burden", "rate", "deposit", "term"]) $(k).value = st[k]; }
+tap("pol-today", () => ({ price: 100 }));
+tap("pol-land", () => ({ price: Math.round(100 * (1 - POLICY.land_share)) }));
+tap("pol-floor", () => ({ price: Math.round(100 * POLICY.floor_price / DATA.areas.GKMA.price) }));
+function syncSliders() { for (const k of ["burden", "rate", "deposit", "term", "price"]) $(k).value = st[k]; }
 
 // tooltip
 const tip = $("tip"), box = $("mapbox");

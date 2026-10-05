@@ -4,7 +4,7 @@
   -> docs/explorer/explorer.html   standalone page (open in a browser; GitHub Pages index)
      docs/explorer/preview.png     1200 x 630 link-preview image for social media
 
-Run scripts/export_explorer_data.py and scripts/anim_affordability.py first.
+Run scripts/export_explorer_data.py, anim_affordability.py and 12_what_it_takes.py first.
 """
 import _paper  # noqa: F401  (shared pipeline + paper-1 outputs)
 import argparse
@@ -21,7 +21,15 @@ a = ap.parse_args()
 tpl = (EXP / "explorer_template.html").read_text(encoding="utf-8")
 tpl = tpl.split("-->", 1)[1].lstrip() if tpl.startswith("<!--") else tpl
 data = (ROOT / "paper1_affordability/outputs/interactive/explorer_data.json").read_text(encoding="utf-8")
-body = tpl.replace("__DATA__", data)
+import json  # noqa: E402
+
+import pandas as pd  # noqa: E402
+
+T = ROOT / "paper1_affordability/outputs/tables"
+lad = pd.read_csv(T / "what_it_takes_ladder.csv").query("area == 'GKMA'").set_index("step")
+policy = {"land_share": float(pd.read_csv(T / "land_value_scenarios.csv").set_index("m2_per_bedroom").loc[32, "median_land_share"]),
+          "floor_price": float(lad.loc[5, "price"])}                 # cost-floor 2-bedroom home (12_what_it_takes.py)
+body = tpl.replace("__DATA__", data).replace("__POLICY__", json.dumps(policy))
 
 TITLE = "Who can afford the housing on offer in Greater Kampala?"
 DESC = ("97.5% of households in Greater Kampala cannot afford the typical listed 1–2 bedroom rental at 30% of "
@@ -48,8 +56,12 @@ page = head + body
 page = page.replace("<div class=\"wrap\">", "</head>\n<body>\n<div class=\"wrap\">", 1) + "\n</body>\n</html>\n"
 (EXP / "explorer.html").write_text(page, encoding="utf-8")
 
-# ---- 1200 x 630 link-preview image
-still = Image.open(ROOT / "paper1_affordability/outputs/animations/priced_out_threshold_still.png").convert("RGB")
+# ---- 1200 x 630 link-preview image (needs the animation still; otherwise keep the existing preview)
+STILL = ROOT / "paper1_affordability/outputs/animations/priced_out_threshold_still.png"
+if not STILL.exists():
+    print("wrote explorer.html; preview.png kept (animation still not found)")
+    raise SystemExit
+still = Image.open(STILL).convert("RGB")
 w, h = still.size
 mp = still.crop((int(0.17 * w), int(0.215 * h), int(0.83 * w), int(0.835 * h)))
 mp = mp.resize((int(630 * mp.width / mp.height), 630))
