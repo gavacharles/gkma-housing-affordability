@@ -1,55 +1,24 @@
-# Priced out of the formal market
+# gkma-housing-affordability
 
-**A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning**
-
-This project measures how affordable the housing on offer in the Greater Kampala Metropolitan Area (GKMA) is to the households who live there, and where. It is part of PhD research at the University of Johannesburg.
-
-## Why it matters
-
-Housing policy in Uganda has relied on national figures—the housing deficit, mortgage penetration, average rents—that cannot show where in the city housing is priced beyond what local households earn, or by how much. This project builds that evidence at metropolitan, district and sub-county level from sources that are open and can be updated.
-
-## What the project does
-
-- **Collects and cleans online property listings** from three Ugandan portals (Jiji, Real Estate Database and Uganda Property Centre): 10,643 deduplicated rentals, houses and land plots, located to neighbourhoods across Kampala, Wakiso, Mukono and the surrounding districts.
-- **Links them to published statistics**: the 2024 Population and Housing Census, the Uganda National Household Survey 2019/20, Bank of Uganda lending rates and prices, OpenStreetMap and NASA night-time lights.
-- **Models what drives prices and rents** with hedonic and geographically weighted regression and with machine learning (random forest, XGBoost, LightGBM) tested by spatial cross-validation and interpreted with SHAP.
-- **Builds the GKMA Housing Affordability Index**, which compares the typical listed home with the incomes of the households in the same area:
-  - a Rental Affordability Index and an Ownership Affordability Index adapted to Ugandan mortgage terms;
-  - the share of households priced out, across housing-cost burdens from 10% to 80% of income;
-  - a residual-income test of whether households could pay for the home and still meet their basic needs.
-- **Estimates the land share of house prices** by subtracting the cost of the building from asking prices.
-
-## Main findings
-
-- Online listings show an almost entirely titled, formal housing market, concentrated in better-off neighbourhoods.
-- Prices and rents are strongly clustered; location and neighbourhood status matter more than the building itself.
-- The median household earns about 18% of the income needed to rent the typical listed one- to two-bedroom home, and about 4% of that needed to buy the typical listed house with a mortgage.
-- The typical listed rent would push about three in five households below the poverty line.
-- Land accounts for about half or more of house prices.
-
-## Research questions
-
-1. How are housing prices and rents distributed across the GKMA, and where do they cluster?
-2. What drives them, and how do those effects vary across the city, including land tenure and title?
-3. How well do machine-learning models predict prices compared with hedonic models, once validated spatially?
-4. How affordable is the housing on offer, for renting and for ownership, and where is the gap widest?
-
-## Papers
-
-This repository holds one shared data pipeline and the papers built on it:
-
-- **Paper 1 — [`paper1_affordability/`](paper1_affordability/):** *Priced out of the formal market: A housing affordability index for Greater Kampala, Uganda, from online listings and spatial machine learning.* The findings above come from this paper.
-- **Paper 2 — [`paper2_transit/`](paper2_transit/) (in planning):** *Is transit access capitalised in an informal housing market? Evidence from online listings in Greater Kampala.*
+Python pipeline, analysis scripts, results and manuscripts for a housing affordability index and spatial machine-learning analysis of Greater Kampala, Uganda, built from online property listings, census, income and map data.
 
 ## Repository contents
 
-- `src/`, `scripts/` (stages 00–02) and `config.yaml`: the shared pipeline for collecting, cleaning and locating listings and preparing census, income and map data
-- `paper1_affordability/`: paper 1's analysis scripts, results, manuscript and interactive explorer
-- `paper2_transit/`: paper 2's plan and, as it develops, its scripts and results
-- `docs/pipeline.md`: setup, workflow and technical notes
+| Path | What it is |
+|---|---|
+| `src/gkma/` | Shared package: listing parsers, cleaning and location, affordability index, hedonic, household, land-value and machine-learning analysis |
+| `scripts/` | Pipeline stages 00–02: boundaries, census, income, macro, construction costs, basemap, night lights, gazetteer and listing preparation |
+| `config.yaml` | Pipeline configuration |
+| `paper1_affordability/` | Paper 1 analysis scripts, results, manuscript and interactive explorer (`docs/explorer/`) |
+| `paper2_transit/`, `paper3_access/`, `paper4_finance/` | Later studies: plans, scripts and outputs (tables and maps) |
+| `data/external/` | Small public inputs (exchange rates, census by parish, CPI uplift, earnings, income), with a README |
+| `demo/` | Demo configuration with synthetic income and rates (`*_SYNTHETIC.csv`) for running without private inputs |
+| `docs/` | Pipeline notes (`pipeline.md`), portal assessment, letter template |
+| `tests/` | Parser, payment-terms and supply tests |
+| `requirements.txt`, `requirements-lock.txt` | Dependencies (loose and pinned) |
 
-Listing-level data are not included, because they contain third-party content from the portals.
+Listing-level data are not included, because they contain third-party content from the listing portals. Setup and workflow are in [`docs/pipeline.md`](docs/pipeline.md).
 
 ## Licence and citation
 
-The code is released under the MIT licence and the manuscript, figures and derived tables under CC BY 4.0 (see `LICENSE`). Third-party data keep their own terms. To cite this work, use the "Cite this repository" button or `CITATION.cff`.
+Code: MIT. Manuscripts, figures and derived tables: CC BY 4.0 (see `LICENSE`). Third-party data keep their own terms. Cite with the "Cite this repository" button or `CITATION.cff`.
