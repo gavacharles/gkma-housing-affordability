@@ -41,3 +41,21 @@ tests/fixtures/
 
 # Word versions of the manuscript stay local
 *.docx
+
+# Paper drafts and write-ups are kept private (moved 2026-11-20)
+/docs/manuscript/
+/paper1_affordability/docs/manuscript/
+/outputs/social/*.md
+/paper1_affordability/outputs/social/*.md
+/outputs/social/*.txt
+/paper1_affordability/outputs/social/*.txt
+/outputs/social/*.docx
+/paper1_affordability/outputs/social/*.docx
+/outputs/social/*.doc
+/paper1_affordability/outputs/social/*.doc
+/outputs/social/*.pdf
+/paper1_affordability/outputs/social/*.pdf
+/outputs/social/*.pptx
+/paper1_affordability/outputs/social/*.pptx
+/outputs/social/*.tex
+/paper1_affordability/outputs/social/*.tex
