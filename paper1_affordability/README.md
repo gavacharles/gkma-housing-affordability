@@ -4,7 +4,7 @@
 
 - `scripts/`: analysis stages 03–11, figures, animations, social graphics, the interactive explorer, and the manuscript builds. Each script starts with `import _paper`, which loads the shared pipeline and sets this folder's `outputs/` as the output location.
 - `outputs/`: tables, maps, animations, social graphics and explorer data.
-- `docs/manuscript/`: the manuscript (source, compiled draft, Word versions kept locally) and supplement.
+- `docs/manuscript/`: the manuscript and supplement, built locally by the pipeline and kept private until publication.
 - `docs/explorer/`: the interactive explorer (public copy: https://gavacharles.github.io/kampala-affordability-explorer/).
 
 Reproduce the paper on the frozen dataset (10,643 listings, `data/paper_snapshot_2026-09-24`):
